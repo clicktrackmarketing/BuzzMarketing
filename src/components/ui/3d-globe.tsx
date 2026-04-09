@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useMemo, useState, useCallback, Suspense } from "react";
+import React, { useRef, useMemo, useState, useCallback, Suspense, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, Html, useTexture } from "@react-three/drei";
 import * as THREE from "three";
@@ -482,15 +482,51 @@ export function Globe3D({
     [config],
   );
 
+  const [contextLost, setContextLost] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const onLost = (e: Event) => {
+      e.preventDefault();
+      setContextLost(true);
+    };
+    const onRestored = () => setContextLost(false);
+
+    canvas.addEventListener("webglcontextlost", onLost);
+    canvas.addEventListener("webglcontextrestored", onRestored);
+    return () => {
+      canvas.removeEventListener("webglcontextlost", onLost);
+      canvas.removeEventListener("webglcontextrestored", onRestored);
+    };
+  }, []);
+
+  if (contextLost) {
+    return (
+      <div
+        className={cn(
+          "relative flex h-[500px] w-full items-center justify-center",
+          className,
+        )}
+      >
+        <span className="text-sm text-white/40">
+          3D globe paused to save resources.
+        </span>
+      </div>
+    );
+  }
+
   return (
     <div className={cn("relative h-[500px] w-full", className)}>
       <Canvas
         gl={{
           antialias: true,
           alpha: true,
-          powerPreference: "high-performance",
+          powerPreference: "default",
         }}
-        dpr={[1, 2]}
+        dpr={[1, 1.5]}
         camera={{
           fov: 45,
           near: 0.1,
@@ -499,6 +535,9 @@ export function Globe3D({
         }}
         style={{
           background: mergedConfig.backgroundColor || "transparent",
+        }}
+        onCreated={({ gl }) => {
+          canvasRef.current = gl.domElement;
         }}
       >
         <Suspense fallback={<LoadingFallback />}>

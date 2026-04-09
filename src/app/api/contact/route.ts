@@ -4,26 +4,75 @@ import {
   contactFormSchema,
 } from "@/lib/contact-form-schema";
 
-/** GoHighLevel (LeadConnector) inbound webhook — server-side only. */
 const GHL_WEBHOOK_URL =
   "https://services.leadconnectorhq.com/hooks/A4GV6zKNQKT5XMvVrKIu/webhook-trigger/8900d39e-111d-4117-b898-31d8b13ff3d6";
 
+function log(
+  level: "info" | "warn" | "error",
+  message: string,
+  data?: Record<string, unknown>,
+) {
+  const entry = {
+    ts: new Date().toISOString(),
+    route: "POST /api/contact",
+    level,
+    message,
+    ...data,
+  };
+  const json = JSON.stringify(entry);
+  if (level === "error") console.error(json);
+  else if (level === "warn") console.warn(json);
+  else console.log(json);
+}
+
 export async function POST(request: Request) {
+  const requestId = crypto.randomUUID().slice(0, 8);
+
+  log("info", "Incoming contact form submission", { requestId });
+
   let body: unknown;
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ message: "Invalid JSON body" }, { status: 400 });
+    log("warn", "Invalid JSON body", { requestId });
+    return NextResponse.json(
+      { message: "Invalid JSON body" },
+      { status: 400 },
+    );
   }
+
+  const bodyKeys =
+    typeof body === "object" && body !== null ? Object.keys(body) : [];
+  log("info", "Parsed request body", { requestId, fields: bodyKeys });
 
   const parsed = contactFormSchema.safeParse(body);
   if (!parsed.success) {
-    const message =
-      parsed.error.issues[0]?.message ?? "Validation failed";
-    return NextResponse.json({ message, issues: parsed.error.issues }, { status: 400 });
+    const issues = parsed.error.issues.map((i) => ({
+      path: i.path,
+      message: i.message,
+    }));
+    log("warn", "Validation failed", { requestId, issues });
+    return NextResponse.json(
+      {
+        message: parsed.error.issues[0]?.message ?? "Validation failed",
+        issues,
+      },
+      { status: 400 },
+    );
   }
 
+  log("info", "Validation passed", {
+    requestId,
+    email: parsed.data.email,
+    service: parsed.data.service,
+  });
+
   const payload = buildContactPayload(parsed.data);
+
+  log("info", "Built GHL payload, sending to webhook", {
+    requestId,
+    payloadKeys: Object.keys(payload),
+  });
 
   try {
     const res = await fetch(GHL_WEBHOOK_URL, {
@@ -32,9 +81,14 @@ export async function POST(request: Request) {
       body: JSON.stringify(payload),
     });
 
+    const responseText = await res.text().catch(() => "<unreadable>");
+
     if (!res.ok) {
-      const text = await res.text().catch(() => "");
-      console.error("GHL webhook error", res.status, text);
+      log("error", "GHL webhook returned error", {
+        requestId,
+        status: res.status,
+        response: responseText.slice(0, 500),
+      });
       return NextResponse.json(
         {
           message:
@@ -44,9 +98,18 @@ export async function POST(request: Request) {
       );
     }
 
+    log("info", "GHL webhook accepted", {
+      requestId,
+      status: res.status,
+      response: responseText.slice(0, 300),
+    });
+
     return NextResponse.json({ ok: true as const });
   } catch (err) {
-    console.error("Contact webhook request failed", err);
+    log("error", "GHL webhook request failed (network)", {
+      requestId,
+      error: String(err),
+    });
     return NextResponse.json(
       {
         message:

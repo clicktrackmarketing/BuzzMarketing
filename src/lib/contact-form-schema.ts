@@ -130,8 +130,10 @@ export function buildContactPayload(values: ContactFormValues) {
   return {
     firstName: values.firstName,
     lastName: values.lastName,
+    name: `${values.firstName} ${values.lastName}`,
     email: values.email,
     phone: values.phone,
+    companyName: values.businessName,
     businessName: values.businessName,
     goals: values.selectedGoals,
     goalsText: values.selectedGoals.join("; "),

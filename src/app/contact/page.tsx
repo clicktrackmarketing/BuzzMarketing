@@ -279,6 +279,7 @@ export default function ContactPage() {
                               <input
                                 id="firstName"
                                 name="firstName"
+                                required
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
                                 className={inputClass}
@@ -295,6 +296,7 @@ export default function ContactPage() {
                               <input
                                 id="lastName"
                                 name="lastName"
+                                required
                                 value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}
                                 className={inputClass}
@@ -313,6 +315,7 @@ export default function ContactPage() {
                               id="email"
                               name="email"
                               type="email"
+                              required
                               value={email}
                               onChange={(e) => setEmail(e.target.value)}
                               className={inputClass}
@@ -330,6 +333,7 @@ export default function ContactPage() {
                               id="phone"
                               name="phone"
                               type="tel"
+                              required
                               value={phone}
                               onChange={(e) => setPhone(e.target.value)}
                               className={inputClass}
@@ -346,6 +350,7 @@ export default function ContactPage() {
                             <input
                               id="businessName"
                               name="businessName"
+                              required
                               value={businessName}
                               onChange={(e) => setBusinessName(e.target.value)}
                               className={inputClass}
@@ -500,6 +505,7 @@ export default function ContactPage() {
                             <select
                               id="service"
                               name="service"
+                              required
                               value={service}
                               onChange={(e) => setService(e.target.value)}
                               className={inputClass}
