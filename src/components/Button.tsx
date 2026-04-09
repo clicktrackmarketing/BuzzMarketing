@@ -12,6 +12,7 @@ interface ButtonProps {
   onClick?: () => void;
   type?: "button" | "submit";
   arrow?: boolean;
+  disabled?: boolean;
 }
 
 export function Button({
@@ -22,9 +23,10 @@ export function Button({
   onClick,
   type = "button",
   arrow = false,
+  disabled = false,
 }: ButtonProps) {
   const base =
-    "inline-flex items-center justify-center gap-2 rounded-full font-semibold text-sm transition-all cursor-pointer";
+    "inline-flex items-center justify-center gap-2 rounded-full font-semibold text-sm transition-all cursor-pointer disabled:pointer-events-none disabled:opacity-45";
 
   const variants = {
     primary:
@@ -66,6 +68,7 @@ export function Button({
       {...motionProps}
       onClick={onClick}
       type={type}
+      disabled={disabled}
       className={`group ${cls}`}
     >
       {content}

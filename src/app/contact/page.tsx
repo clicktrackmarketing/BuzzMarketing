@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   motion,
   AnimatePresence,
@@ -13,28 +13,13 @@ import { Button } from "@/components/Button";
 import { HeroVideoBackground } from "@/components/HeroVideoBackground";
 import { AmbientOrbs } from "@/components/AmbientOrbs";
 import { TextShimmer } from "@/components/TextShimmer";
-
-const GOALS = [
-  "Generate More Leads",
-  "Increase Brand Awareness",
-  "Drive Foot Traffic",
-  "Grow Online Sales",
-  "Build Social Media Following",
-  "Improve SEO",
-  "Launch a New Product",
-  "Build Brand Credibility",
-  "Create Consistent Content",
-  "Automate Email",
-] as const;
-
-const SERVICES = [
-  "Social Media Management",
-  "Content Creation",
-  "Paid Advertising",
-  "SEO & Local Search",
-  "Email Marketing",
-  "Brand Strategy",
-] as const;
+import {
+  GOALS,
+  SERVICES,
+  contactFormSchema,
+  validateContactStep,
+  type ContactFormValues,
+} from "@/lib/contact-form-schema";
 
 const inputClass =
   "w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-sm text-white placeholder:text-white/30 focus:border-buzz-coral focus:outline-none focus:ring-2 focus:ring-buzz-coral/20 transition-all";
@@ -44,6 +29,8 @@ export default function ContactPage() {
   const [currentStep, setCurrentStep] = useState(1);
   const [direction, setDirection] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -58,6 +45,35 @@ export default function ContactPage() {
 
   const pct = Math.round((currentStep / 5) * 100);
 
+  useEffect(() => {
+    setFormError(null);
+  }, [
+    firstName,
+    lastName,
+    email,
+    phone,
+    businessName,
+    selectedGoals,
+    currentStrategy,
+    successVision,
+    service,
+    optionalMessage,
+  ]);
+
+  const buildValues = (): ContactFormValues =>
+    ({
+      firstName,
+      lastName,
+      email,
+      phone,
+      businessName,
+      selectedGoals,
+      currentStrategy,
+      successVision,
+      service,
+      optionalMessage,
+    }) as ContactFormValues;
+
   const toggleGoal = (g: string) => {
     setSelectedGoals((prev) =>
       prev.includes(g) ? prev.filter((x) => x !== g) : [...prev, g],
@@ -66,6 +82,13 @@ export default function ContactPage() {
 
   const goNext = () => {
     if (currentStep >= 5) return;
+    const step = currentStep as 1 | 2 | 3 | 4 | 5;
+    const result = validateContactStep(step, buildValues());
+    if (!result.ok) {
+      setFormError(result.message);
+      return;
+    }
+    setFormError(null);
     setDirection(1);
     setCurrentStep((s) => s + 1);
   };
@@ -76,9 +99,46 @@ export default function ContactPage() {
     setCurrentStep((s) => s - 1);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setFormError(null);
+
+    const values = buildValues();
+    const full = contactFormSchema.safeParse(values);
+    if (!full.success) {
+      setFormError(
+        full.error.issues[0]?.message ?? "Please check your answers",
+      );
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(full.data),
+      });
+      const data: unknown = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        const msg =
+          typeof data === "object" &&
+          data !== null &&
+          "message" in data &&
+          typeof (data as { message: unknown }).message === "string"
+            ? (data as { message: string }).message
+            : "Something went wrong. Please try again.";
+        setFormError(msg);
+        return;
+      }
+      setSubmitted(true);
+    } catch {
+      setFormError(
+        "Network error. Check your connection and try again, or call (720) 363-9754.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const slideX = prefersReduced ? 0 : 80;
@@ -178,7 +238,15 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} aria-busy={isSubmitting}>
+                  {formError ? (
+                    <p
+                      className="mb-6 rounded-xl border border-red-500/25 bg-red-500/10 px-4 py-3 text-sm text-red-200"
+                      role="alert"
+                    >
+                      {formError}
+                    </p>
+                  ) : null}
                   <div className="relative min-h-[min(320px,50vh)] overflow-hidden md:min-h-[340px]">
                     <AnimatePresence mode="wait">
                       {currentStep === 1 && (
@@ -476,7 +544,8 @@ export default function ContactPage() {
                           <button
                             type="button"
                             onClick={goBack}
-                            className="cursor-pointer text-sm font-medium text-white/40 underline-offset-4 transition-colors hover:text-buzz-coral hover:underline"
+                            disabled={isSubmitting}
+                            className="cursor-pointer text-sm font-medium text-white/40 underline-offset-4 transition-colors hover:text-buzz-coral hover:underline disabled:cursor-not-allowed disabled:opacity-40"
                           >
                             Back
                           </button>
@@ -485,12 +554,21 @@ export default function ContactPage() {
                         )}
                       </div>
                       {currentStep < 5 ? (
-                        <Button type="button" onClick={goNext} className="w-full sm:w-auto">
+                        <Button
+                          type="button"
+                          onClick={goNext}
+                          className="w-full sm:w-auto"
+                          disabled={isSubmitting}
+                        >
                           Continue
                         </Button>
                       ) : (
-                        <Button type="submit" className="w-full sm:w-auto">
-                          Submit
+                        <Button
+                          type="submit"
+                          className="w-full sm:w-auto"
+                          disabled={isSubmitting}
+                        >
+                          {isSubmitting ? "Sending…" : "Submit"}
                         </Button>
                       )}
                     </div>
