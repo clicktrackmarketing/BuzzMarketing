@@ -1,6 +1,6 @@
 import { HeroVideoBackground } from "@/components/HeroVideoBackground";
 
-/** San Diego hero video + tint for interior page heroes (matches home / about). */
+/** San Diego hero image + tint for interior page heroes (matches home / about). */
 export function HeroBackdrop() {
   return (
     <div className="pointer-events-none absolute inset-0">

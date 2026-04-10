@@ -10,73 +10,11 @@ import { TextShimmer } from "@/components/TextShimmer";
 import { AmbientOrbs } from "@/components/AmbientOrbs";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { NewsletterSection } from "@/components/NewsletterSection";
-
-const POSTS = [
-  {
-    slug: "san-diego-social-media-strategy-2026",
-    title: "Why San Diego Businesses Need a Social Media Strategy in 2026",
-    category: "Social Media",
-    readTime: "5 min",
-    date: "Mar 15, 2026",
-    excerpt:
-      "The digital landscape has shifted dramatically. Here's what local brands should prioritize this year.",
-    image: "/portfolio-1.jpg",
-  },
-  {
-    slug: "local-seo-small-business",
-    title: "Local SEO Tips That Actually Work for Small Businesses",
-    category: "SEO",
-    readTime: "7 min",
-    date: "Mar 8, 2026",
-    excerpt:
-      "Forget the generic advice. These are the tactics that move the needle for San Diego businesses.",
-    image: "/portfolio-2.jpg",
-  },
-  {
-    slug: "scroll-stopping-content-budget",
-    title: "How to Create Scroll-Stopping Content on a Budget",
-    category: "Content",
-    readTime: "4 min",
-    date: "Feb 28, 2026",
-    excerpt:
-      "You don't need a massive budget to create content that converts. Here's how to do it right.",
-    image: "/portfolio-3.jpg",
-  },
-  {
-    slug: "roi-social-media-marketing",
-    title: "The ROI of Social Media Marketing: What to Actually Expect",
-    category: "Strategy",
-    readTime: "6 min",
-    date: "Feb 20, 2026",
-    excerpt:
-      "Setting realistic expectations and measuring what matters—without vanity metrics.",
-    image: "/portfolio-4.jpg",
-  },
-  {
-    slug: "email-marketing-local-businesses",
-    title: "Email Marketing for Local Businesses: A Complete Guide",
-    category: "Email",
-    readTime: "8 min",
-    date: "Feb 12, 2026",
-    excerpt:
-      "How to build, segment, and nurture an email list that drives repeat revenue.",
-    image: "/portfolio-5.jpg",
-  },
-  {
-    slug: "san-diego-marketing-trends-2026",
-    title: "San Diego's Hottest Marketing Trends for 2026",
-    category: "Trends",
-    readTime: "5 min",
-    date: "Feb 5, 2026",
-    excerpt:
-      "What's working right now in America's Finest City—from short-form to local partnerships.",
-    image: "/portfolio-6.jpg",
-  },
-];
+import { BLOG_POSTS } from "@/data/blog-posts";
 
 export default function DigitalMarketingBlogPage() {
-  const featured = POSTS[0];
-  const rest = POSTS.slice(1);
+  const featured = BLOG_POSTS[0];
+  const rest = BLOG_POSTS.slice(1);
 
   return (
     <>
@@ -123,7 +61,7 @@ export default function DigitalMarketingBlogPage() {
         <div className="max-w-[1400px] mx-auto px-6 md:px-8">
           <FadeUp>
             <Link
-              href={`/digital-marketing-blog#${featured.slug}`}
+              href={`/digital-marketing-blog/${featured.slug}`}
               className="group block rounded-2xl overflow-hidden cursor-pointer"
             >
               <GlowCard variant="light">
@@ -131,7 +69,7 @@ export default function DigitalMarketingBlogPage() {
                   <div className="relative aspect-[16/10] lg:aspect-auto overflow-hidden">
                     <Image
                       src={featured.image}
-                      alt=""
+                      alt={featured.imageAlt}
                       fill
                       className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-[1.03]"
                       sizes="(max-width: 1024px) 100vw, 50vw"
@@ -155,7 +93,12 @@ export default function DigitalMarketingBlogPage() {
                       {featured.excerpt}
                     </p>
                     <div className="flex items-center justify-between">
-                      <time className="text-xs font-medium text-foreground/40">{featured.date}</time>
+                      <time
+                        className="text-xs font-medium text-foreground/40"
+                        dateTime={featured.dateIso}
+                      >
+                        {featured.date}
+                      </time>
                       <span className="inline-flex items-center gap-1 text-sm font-semibold text-buzz-coral group-hover:translate-x-1 transition-transform">
                         Read Article
                         <ArrowUpRight className="w-4 h-4" />
@@ -169,17 +112,22 @@ export default function DigitalMarketingBlogPage() {
 
           {/* BLOG GRID */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+            {rest.length === 0 ? (
+              <p className="col-span-full text-center text-buzz-slate text-sm md:text-base">
+                More articles are on the way—check back soon.
+              </p>
+            ) : null}
             {rest.map((post, i) => (
               <FadeUp key={post.slug} delay={i * 0.06}>
                 <Link
-                  href={`/digital-marketing-blog#${post.slug}`}
+                  href={`/digital-marketing-blog/${post.slug}`}
                   className="group block h-full cursor-pointer"
                 >
                   <GlowCard variant="light" className="h-full">
                     <div className="relative aspect-[16/10] w-full overflow-hidden">
                       <Image
                         src={post.image}
-                        alt=""
+                        alt={post.imageAlt}
                         fill
                         className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-[1.05]"
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -204,7 +152,7 @@ export default function DigitalMarketingBlogPage() {
                       <div className="flex items-center justify-between gap-3">
                         <time
                           className="text-xs font-medium text-foreground/40"
-                          dateTime={post.date}
+                          dateTime={post.dateIso}
                         >
                           {post.date}
                         </time>
