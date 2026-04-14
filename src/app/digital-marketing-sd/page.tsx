@@ -30,7 +30,7 @@ const FAQS = [
   },
   {
     q: "How much does social media management cost in San Diego?",
-    a: "Most engagements start around $1,500/month depending on platforms, posting frequency, and production needs. We'll scope it clearly after a discovery call.",
+    a: "Social packages start at $750/month (Starter Buzz) and scale through Growth ($2,000), Full ($3,000), and custom campaigns from $5,000/month depending on scope. We'll scope it clearly after a discovery call.",
   },
   {
     q: "Do you only work with San Diego businesses?",

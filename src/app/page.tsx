@@ -10,11 +10,11 @@ import {
   useReducedMotion,
 } from "framer-motion";
 import {
+  Compass,
   Megaphone,
   Camera,
-  Target,
-  Search,
-  Mail,
+  LayoutTemplate,
+  MapPinned,
   Palette,
   ChevronDown,
   MapPin,
@@ -39,40 +39,40 @@ import { InfiniteMarquee } from "@/components/InfiniteMarquee";
 
 const SERVICES = [
   {
+    icon: Compass,
+    image: "/service-brand.jpg",
+    title: "Strategy + Creative Direction",
+    desc: "Brand clarity, messaging, content direction, and a clear plan so you're not guessing.",
+  },
+  {
     icon: Megaphone,
     image: "/service-social.jpg",
     title: "Social Media Management",
-    desc: "Strategic content planning, community management, and growth across all platforms.",
+    desc: "Intentional posting and packages from Starter Buzz ($750/mo) through custom campaigns.",
   },
   {
     icon: Camera,
     image: "/service-content.jpg",
-    title: "Content Creation",
-    desc: "Professional photography, videography, and graphic design that stops the scroll.",
+    title: "Signature Content Shoot",
+    desc: "Two-day high-end photo and video with travel included - assets that last for months.",
   },
   {
-    icon: Target,
+    icon: LayoutTemplate,
     image: "/service-ads.jpg",
-    title: "Paid Advertising",
-    desc: "High-ROI Meta, Instagram, and Google ad campaigns built for conversions.",
+    title: "Website + Conversion Optimization",
+    desc: "Messaging, layout, trust signals, and UX so visitors take action on your site.",
   },
   {
-    icon: Search,
+    icon: MapPinned,
     image: "/service-seo.jpg",
-    title: "SEO & Local Search",
-    desc: "Dominate Google search results and get found by San Diego customers.",
-  },
-  {
-    icon: Mail,
-    image: "/service-email.jpg",
-    title: "Email Marketing",
-    desc: "Automated sequences and campaigns that nurture leads and drive revenue.",
+    title: "Google + Local Presence",
+    desc: "Visuals, reviews strategy, and credibility so you stand out where decisions are made.",
   },
   {
     icon: Palette,
-    image: "/service-brand.jpg",
-    title: "Brand Strategy",
-    desc: "Complete brand identity from logos and style guides to voice and positioning.",
+    image: "/service-email.jpg",
+    title: "Branding + Positioning",
+    desc: "Voice, visual direction, content strategy, and platform positioning with clarity.",
   },
 ];
 

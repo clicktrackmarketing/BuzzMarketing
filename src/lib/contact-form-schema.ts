@@ -14,12 +14,12 @@ export const GOALS = [
 ] as const;
 
 export const SERVICES = [
+  "Strategy + Creative Direction",
   "Social Media Management",
-  "Content Creation",
-  "Paid Advertising",
-  "SEO & Local Search",
-  "Email Marketing",
-  "Brand Strategy",
+  "Signature Content Shoot",
+  "Website + Conversion Optimization",
+  "Google + Local Presence",
+  "Branding + Positioning",
 ] as const;
 
 const GOAL_SET = new Set<string>(GOALS);

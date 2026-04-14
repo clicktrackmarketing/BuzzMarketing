@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
-  title: "Services",
+  title: "Marketing Services",
   description:
-    "From strategy to execution: social media, content creation, paid ads, SEO, email marketing, and brand strategy for San Diego brands that want to stand out.",
+    "Strategy, social media (Starter through Custom tiers), signature content shoots, website conversion, Google and local presence, and branding for high-trust brands.",
 };
 
 export default function ServicesLayout({

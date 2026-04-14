@@ -7,12 +7,12 @@ import { FadeUp } from "./FadeUp";
 import { AmbientOrbs } from "./AmbientOrbs";
 
 const SERVICE_LINKS = [
+  { href: "/services", label: "Strategy + Creative Direction" },
   { href: "/services", label: "Social Media Management" },
-  { href: "/services", label: "Content Creation" },
-  { href: "/services", label: "Paid Advertising" },
-  { href: "/services", label: "SEO & Local Search" },
-  { href: "/services", label: "Email Marketing" },
-  { href: "/services", label: "Brand Strategy" },
+  { href: "/services", label: "Signature Content Shoot" },
+  { href: "/services", label: "Website + Conversion Optimization" },
+  { href: "/services", label: "Google + Local Presence" },
+  { href: "/services", label: "Branding + Positioning" },
 ];
 
 const COMPANY_LINKS = [
