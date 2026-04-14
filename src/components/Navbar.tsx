@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -17,9 +16,8 @@ const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
   { href: "/about", label: "About" },
-  { href: "/digital-marketing-sd", label: "San Diego" },
+  { href: "/digital-marketing-sd", label: "Results" },
   { href: "/events", label: "Events" },
-  { href: "/testimonials-results-roi", label: "Results" },
   { href: "/digital-marketing-blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
 ];
@@ -70,15 +68,13 @@ export function Navbar() {
         }`}
       >
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8 h-[64px] md:h-[72px] flex items-center justify-between">
-          <Link href="/" className="flex-shrink-0 flex items-center">
-            <Image
-              src="/logo.png"
-              alt="The Buzz Marketing Co"
-              width={200}
-              height={48}
-              className="h-8 md:h-10 w-auto mix-blend-screen opacity-95 hover:opacity-100 transition-opacity"
-              priority
-            />
+          <Link
+            href="/"
+            className="flex flex-shrink-0 items-center outline-none focus-visible:ring-2 focus-visible:ring-buzz-coral/60 focus-visible:ring-offset-2 focus-visible:ring-offset-buzz-dark rounded-lg"
+          >
+            <span className="font-[family-name:var(--font-syne-var)] text-[15px] font-bold leading-tight tracking-tight text-white sm:text-base md:text-lg">
+              The Buzz Marketing Co
+            </span>
           </Link>
 
           <nav className="hidden lg:flex items-center gap-0.5">

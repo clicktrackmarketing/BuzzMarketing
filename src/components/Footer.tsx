@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, ArrowUp } from "lucide-react";
 import { FadeUp } from "./FadeUp";
@@ -17,14 +16,13 @@ const SERVICE_LINKS = [
 
 const COMPANY_LINKS = [
   { href: "/about", label: "About Us" },
-  { href: "/testimonials-results-roi", label: "Results" },
   { href: "/events", label: "Events" },
   { href: "/contact", label: "Contact" },
 ];
 
 const RESOURCE_LINKS = [
   { href: "/digital-marketing-blog", label: "Blog" },
-  { href: "/digital-marketing-sd", label: "San Diego Marketing" },
+  { href: "/digital-marketing-sd", label: "Results & San Diego" },
 ];
 
 function IgIcon({ className }: { className?: string }) {
@@ -73,8 +71,16 @@ const SOCIAL_LINKS = [
     label: "Facebook",
     icon: FbIcon,
   },
-  { href: "https://linkedin.com", label: "LinkedIn", icon: LiIcon },
-  { href: "https://youtube.com", label: "YouTube", icon: YtIcon },
+  {
+    href: "https://www.linkedin.com/company/the-buzz-marketing-co/",
+    label: "LinkedIn",
+    icon: LiIcon,
+  },
+  {
+    href: "https://www.youtube.com/@TheBuzzMarketingComany",
+    label: "YouTube",
+    icon: YtIcon,
+  },
 ];
 
 export function Footer() {
@@ -98,14 +104,13 @@ export function Footer() {
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-8 pt-20 pb-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
           <FadeUp variant="up" className="lg:col-span-2">
-            <Link href="/" className="inline-block">
-              <Image
-                src="/logo.png"
-                alt="The Buzz Marketing Co"
-                width={200}
-                height={48}
-                className="h-10 w-auto max-w-[200px] object-contain object-left mix-blend-screen opacity-95 hover:opacity-100 transition-opacity"
-              />
+            <Link
+              href="/"
+              className="inline-block outline-none focus-visible:ring-2 focus-visible:ring-buzz-coral/60 focus-visible:ring-offset-2 focus-visible:ring-offset-buzz-dark rounded-lg"
+            >
+              <span className="font-[family-name:var(--font-syne-var)] text-xl font-bold leading-tight tracking-tight text-white md:text-2xl">
+                The Buzz Marketing Co
+              </span>
             </Link>
             <p className="mt-5 text-white/50 text-sm leading-relaxed max-w-sm">
               San Diego&apos;s premier social media marketing agency. Building

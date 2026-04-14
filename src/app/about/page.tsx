@@ -107,7 +107,6 @@ export default function AboutPage() {
             className="font-[family-name:var(--font-syne-var)] text-[28px] sm:text-[40px] md:text-[52px] font-extrabold text-white leading-[1.08]"
           >
             About
-            <br />
             The Buzz Marketing Co
           </motion.h1>
           <motion.p
@@ -288,7 +287,7 @@ export default function AboutPage() {
                 </span>{" "}
                 for campaigns and behind-the-scenes from brands like yours.
               </p>
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
+              <div className="flex flex-wrap items-stretch justify-center gap-3">
                 <Button
                   href="https://www.instagram.com/thebuzzmarketingco"
                   variant="glow"
@@ -304,6 +303,22 @@ export default function AboutPage() {
                 >
                   <ExternalLink className="w-4 h-4 shrink-0" />
                   Facebook
+                </Button>
+                <Button
+                  href="https://www.linkedin.com/company/the-buzz-marketing-co/"
+                  variant="ghost"
+                  className="gap-2 border-foreground/15 bg-white/60 !py-3.5"
+                >
+                  <ExternalLink className="w-4 h-4 shrink-0" />
+                  LinkedIn
+                </Button>
+                <Button
+                  href="https://www.youtube.com/@TheBuzzMarketingComany"
+                  variant="ghost"
+                  className="gap-2 border-foreground/15 bg-white/60 !py-3.5"
+                >
+                  <ExternalLink className="w-4 h-4 shrink-0" />
+                  YouTube
                 </Button>
               </div>
               <p className="mt-8 text-buzz-slate text-sm">

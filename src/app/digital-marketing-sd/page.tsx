@@ -13,6 +13,54 @@ import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { AmbientOrbs } from "@/components/AmbientOrbs";
 import { GlowCard } from "@/components/GlowCard";
 import { TextShimmer } from "@/components/TextShimmer";
+import { CoralCTA } from "@/components/CoralCTA";
+
+const CASE_STUDIES = [
+  {
+    industry: "Healthcare",
+    client: "Coastal Smiles Dentistry",
+    summary:
+      "Complete digital transformation including social media management, content creation, and Google Ads.",
+    metrics: [
+      { value: "3x", label: "Engagement Rate" },
+      { value: "40%", label: "New Patient Growth" },
+      { value: "250%", label: "Google Views Increase" },
+    ],
+  },
+  {
+    industry: "Beauty",
+    client: "Glow Med Spa",
+    summary:
+      "Full-service marketing overhaul from branding to paid ads, resulting in record-breaking bookings.",
+    metrics: [
+      { value: "40%", label: "Booking Increase" },
+      { value: "5x", label: "Follower Growth" },
+      { value: "$12k+", label: "Revenue Added / mo" },
+    ],
+  },
+  {
+    industry: "Legal",
+    client: "Torres Law Group",
+    summary:
+      "Strategic content marketing and SEO campaign driving qualified leads and brand authority.",
+    metrics: [
+      { value: "200%", label: "Website Traffic" },
+      { value: "35+", label: "Leads / Month" },
+      { value: "4.2x", label: "ROAS" },
+    ],
+  },
+  {
+    industry: "Fitness",
+    client: "Pacific Fitness Co.",
+    summary:
+      "90-day social media blitz that built a thriving online community and drove member acquisition.",
+    metrics: [
+      { value: "10k+", label: "Followers in 90 Days" },
+      { value: "60%", label: "Member Acquisition" },
+      { value: "8x", label: "Engagement Rate" },
+    ],
+  },
+];
 
 const WHY_LOCAL = [
   "Deep San Diego market knowledge and neighborhood nuance",
@@ -124,7 +172,7 @@ export default function DigitalMarketingSdPage() {
                 className="inline-block"
               >
                 <Link
-                  href="https://www.google.com/maps"
+                  href="https://www.google.com/maps/place/The+Buzz+Marketing+Co./@46.423669,-129.9427085,3z/data=!4m8!3m7!1s0x6df99150e5c38703:0xb25e1d157465215e!8m2!3d46.423669!4d-129.9427086!9m1!1b1!16s%2Fg%2F11ydr_hc9l"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 rounded-full font-semibold text-sm px-7 py-3.5 border border-white/20 bg-white/[0.04] glassmorphism text-white hover:bg-white/[0.08] transition-all cursor-pointer"
@@ -172,8 +220,54 @@ export default function DigitalMarketingSdPage() {
         <div className="coral-divider" />
       </section>
 
-      {/* WHY LOCAL */}
+      {/* CASE STUDIES */}
       <section className="py-28 md:py-36 bg-warm-gray">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-8">
+          <div className="text-center mb-14">
+            <SectionEyebrow center>Case Studies</SectionEyebrow>
+            <FadeUp>
+              <h2 className="font-[family-name:var(--font-syne-var)] text-3xl md:text-4xl font-bold text-foreground">
+                Outcomes <TextShimmer as="span">by the Numbers</TextShimmer>
+              </h2>
+            </FadeUp>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {CASE_STUDIES.map((cs, i) => (
+              <FadeUp key={cs.client} delay={i * 0.08}>
+                <GlowCard variant="light" className="h-full">
+                  <div className="p-5 sm:p-8 md:p-10 flex flex-col h-full">
+                    <span className="inline-flex self-start rounded-full bg-buzz-coral/10 px-3 py-1 text-xs font-semibold text-buzz-coral mb-4">
+                      {cs.industry}
+                    </span>
+                    <h3 className="font-[family-name:var(--font-syne-var)] text-xl md:text-2xl font-bold text-foreground mb-4">
+                      {cs.client}
+                    </h3>
+                    <p className="text-buzz-slate text-sm md:text-base leading-relaxed mb-8 flex-1">
+                      {cs.summary}
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-buzz-border">
+                      {cs.metrics.map((m) => (
+                        <div key={m.label} className="text-center sm:text-left">
+                          <p className="font-[family-name:var(--font-syne-var)] text-2xl md:text-3xl font-bold text-gradient-coral leading-none mb-2">
+                            {m.value}
+                          </p>
+                          <p className="text-xs md:text-sm text-buzz-slate font-medium">
+                            {m.label}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </GlowCard>
+              </FadeUp>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* WHY LOCAL */}
+      <section className="py-28 md:py-36 bg-surface-light border-y border-buzz-border">
         <div className="max-w-[1400px] mx-auto px-6 md:px-8">
           <div className="text-center mb-14">
             <SectionEyebrow center>Local Advantage</SectionEyebrow>
@@ -310,6 +404,8 @@ export default function DigitalMarketingSdPage() {
           </FadeUp>
         </div>
       </section>
+
+      <CoralCTA />
     </>
   );
 }

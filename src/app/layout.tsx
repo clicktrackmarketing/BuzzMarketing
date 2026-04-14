@@ -92,6 +92,12 @@ export default function RootLayout({
               "@type": "City",
               name: "San Diego",
             },
+            sameAs: [
+              "https://www.instagram.com/thebuzzmarketingco",
+              "https://www.facebook.com/660987293768723",
+              "https://www.linkedin.com/company/the-buzz-marketing-co/",
+              "https://www.youtube.com/@TheBuzzMarketingComany",
+            ],
           }}
         />
         <Navbar />

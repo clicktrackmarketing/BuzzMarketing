@@ -7,45 +7,45 @@ import { GlowCard } from "./GlowCard";
 
 const TESTIMONIALS = [
   {
-    name: "Dr. Amanda Reyes",
-    title: "Coastal Smiles Dentistry",
+    name: "James Hickey",
+    title: "SD Networking & Events",
     quote:
-      "The Buzz completely transformed our online presence. We went from invisible to fully booked in under 90 days. Their team genuinely cares about your success.",
+      "Since working with Brittany, our social visibility has grown over 300%, and our events have consistently sold out. She understands how to create visibility that actually drives results.",
     rating: 5,
   },
   {
-    name: "Michael Torres",
-    title: "Torres Law Group",
+    name: "Samantha Pfeiffer",
+    title: "Realtor, Luxury Portfolio International",
     quote:
-      "Working with Brit and her team has been a game-changer. Our lead generation tripled and the quality of clients we attract has improved dramatically.",
+      "As a Realtor, I really struggle with my social media content and consistency along with website and all things technology. I am so excited that Better Buzz has relieved me of this burden and made my content look a million times better. I am so happy to find professionals I can trust that work with my vision and know how to grow my SEO and business. Highly recommend!",
     rating: 5,
   },
   {
-    name: "Jessica Lin",
-    title: "Glow Med Spa",
+    name: "Juan Chaves",
+    title: "Google Review",
     quote:
-      "From content to ads to strategy, The Buzz handles everything with such professionalism. Our bookings have increased 40% and our brand has never looked better.",
+      "Working with Better Buzz Marketing Co. has been a total game-changer for our business! Brittany\u2019s creativity, professionalism, and deep marketing knowledge have helped us connect with our audience in ways we never imagined. From stunning visuals to effective strategies, they truly deliver. Highly recommend for anyone looking to level up their brand!",
     rating: 5,
   },
   {
-    name: "Ryan Mitchell",
-    title: "Pacific Fitness Co.",
+    name: "Amber Bunch",
+    title: "Google Review",
     quote:
-      "The Buzz doesn't just post content - they build brands. In 90 days we gained over 10,000 followers and saw a real impact on member acquisition.",
+      "Brittany has a gift! She brings energy and dedication! The creativity is next-level, and she genuinely cares about the success of your business. I was so impressed with her dedication to the overall vision and her ideas. You\u2019re hard pressed to find another Brittany in this industry. 10 stars! \u2B50\uFE0F",
     rating: 5,
   },
   {
-    name: "Sarah Nakamura",
-    title: "Nakamura Real Estate",
+    name: "Dr. Wayne Myles, DDS",
+    title: "Dentist",
     quote:
-      "Every campaign is intentional and data-driven. The Buzz helped me stand out in the most competitive real estate market in San Diego.",
+      "I have worked with Brittany for several years. She is creative, efficient, and organized. She pushes the envelope on growth and development, which for me is paramount. If you have an opportunity to work with her, don\u2019t miss out.",
     rating: 5,
   },
   {
-    name: "David Kowalski",
-    title: "Pacific Auto Group",
+    name: "Leah Bush",
+    title: "Google Review",
     quote:
-      "Professional, creative, and results-focused. The Buzz Marketing Co is exactly what we needed to modernize our brand and connect with younger buyers.",
+      "Brittany is amazing to work with. She asked a lot of great questions to better understand our needs as a business and worked very hard to help us achieve the return we were looking for. We would recommend her to anyone looking to grow their business. Excellent service and AMAZING results!",
     rating: 5,
   },
 ];
@@ -67,7 +67,7 @@ export function TestimonialsSection() {
           </FadeUp>
           <FadeUp delay={0.1}>
             <a
-              href="https://www.google.com/maps"
+              href="https://www.google.com/maps/place/The+Buzz+Marketing+Co./@46.423669,-129.9427085,3z/data=!4m8!3m7!1s0x6df99150e5c38703:0xb25e1d157465215e!8m2!3d46.423669!4d-129.9427086!9m1!1b1!16s%2Fg%2F11ydr_hc9l"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 mt-6 px-5 py-2.5 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] transition-all cursor-pointer"
@@ -88,13 +88,18 @@ export function TestimonialsSection() {
           </FadeUp>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 items-stretch md:grid-cols-2 lg:grid-cols-3 gap-5">
           {TESTIMONIALS.map((t, i) => (
-            <FadeUp key={t.name} delay={i * 0.08} variant={i % 2 === 0 ? "up" : "scale"}>
-              <GlowCard variant="dark" className="h-full">
-                <div className="p-7 flex flex-col h-full">
-                  <Quote className="w-8 h-8 text-buzz-coral/25 mb-4" />
-                  <div className="flex gap-0.5 mb-4">
+            <FadeUp
+              key={t.name}
+              delay={i * 0.08}
+              variant={i % 2 === 0 ? "up" : "scale"}
+              className="h-full min-h-0"
+            >
+              <GlowCard variant="dark" className="h-full min-h-[280px] md:min-h-[320px]">
+                <div className="flex h-full min-h-0 flex-col p-7">
+                  <Quote className="w-8 h-8 shrink-0 text-buzz-coral/25 mb-4" />
+                  <div className="mb-4 flex shrink-0 gap-0.5">
                     {[...Array(t.rating)].map((_, j) => (
                       <Star
                         key={j}
@@ -102,13 +107,11 @@ export function TestimonialsSection() {
                       />
                     ))}
                   </div>
-                  <p className="text-white/65 text-sm leading-relaxed mb-6 flex-1">
+                  <p className="text-sm leading-relaxed text-white/65">
                     &ldquo;{t.quote}&rdquo;
                   </p>
-                  <div className="pt-4 border-t border-white/[0.06]">
-                    <p className="font-semibold text-sm text-white">
-                      {t.name}
-                    </p>
+                  <div className="mt-auto shrink-0 border-t border-white/[0.06] pt-4">
+                    <p className="text-sm font-semibold text-white">{t.name}</p>
                     <p className="text-xs text-white/40">{t.title}</p>
                   </div>
                 </div>
@@ -120,7 +123,7 @@ export function TestimonialsSection() {
         <FadeUp delay={0.5}>
           <div className="text-center mt-12">
             <a
-              href="https://www.google.com/maps"
+              href="https://www.google.com/maps/place/The+Buzz+Marketing+Co./@46.423669,-129.9427085,3z/data=!4m8!3m7!1s0x6df99150e5c38703:0xb25e1d157465215e!8m2!3d46.423669!4d-129.9427086!9m1!1b1!16s%2Fg%2F11ydr_hc9l"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm font-medium text-buzz-coral hover:underline cursor-pointer"
