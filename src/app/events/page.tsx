@@ -84,7 +84,7 @@ export default function EventsPage() {
           <FadeUp delay={0.16}>
             <p className="mt-6 text-white/50 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
               Mixers, workshops, and summits built for founders, marketers, and
-              operators who want real relationships—not just business cards.
+              operators who want real relationships - not just business cards.
             </p>
           </FadeUp>
         </div>

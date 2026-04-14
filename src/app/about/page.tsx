@@ -29,7 +29,7 @@ const DIFFERENTIATORS = [
   {
     icon: Search,
     title: "We don't do 'SEO.' We do Search Everywhere.",
-    body: "Google, Instagram, TikTok, YouTube, ChatGPT — your customers search everywhere. We optimize for all of them.",
+    body: "Google, Instagram, TikTok, YouTube, ChatGPT - your customers search everywhere. We optimize for all of them.",
   },
   {
     icon: Layers,
@@ -149,8 +149,8 @@ export default function AboutPage() {
               </FadeUp>
               <FadeUp delay={0.12}>
                 <p className="text-buzz-slate leading-relaxed mb-5">
-                  With over 20 years of marketing experience — from the days of
-                  Yellow Pages to today&apos;s algorithm-driven landscape —
+                  With over 20 years of marketing experience - from the days of
+                  Yellow Pages to today&apos;s algorithm-driven landscape  - 
                   I&apos;ve seen every evolution of marketing. What hasn&apos;t
                   changed is the core: understanding people and creating genuine
                   connections.
@@ -168,7 +168,7 @@ export default function AboutPage() {
                   <p className="italic text-foreground/90 text-lg leading-relaxed">{BRIT_MISSION_QUOTE}</p>
                 </blockquote>
                 <p className="text-buzz-slate text-sm mb-10">
-                  — Brit Dhillon, Founder
+                  - Brit Dhillon, Founder
                 </p>
               </FadeUp>
               <FadeUp delay={0.3}>

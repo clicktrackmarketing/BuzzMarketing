@@ -20,7 +20,7 @@ const PETALS = Array.from({ length: 6 }, (_, i) => ({
 
 /**
  * Floating organic petal shapes that drift down the page.
- * Subtle feminine touch — thin, transparent, and slow-moving.
+ * Subtle feminine touch - thin, transparent, and slow-moving.
  * Loaded with `dynamic(..., { ssr: false })` from FloatingPetals.tsx.
  * First paint returns null so the client matches the server (no petal markup) before mount.
  */

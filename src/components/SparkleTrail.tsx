@@ -3,7 +3,7 @@
 import { useEffect, useRef, useCallback } from "react";
 
 /**
- * Subtle sparkle cursor trail — adds tiny ✦ particles on mouse move.
+ * Subtle sparkle cursor trail - adds tiny ✦ particles on mouse move.
  * Uses vanilla DOM for performance. Auto-cleans up.
  */
 export function SparkleTrail() {

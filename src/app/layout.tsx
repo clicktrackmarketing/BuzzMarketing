@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Outfit, DM_Sans, Syne } from "next/font/google";
+import { Outfit, DM_Sans, Syne, Space_Grotesk } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
@@ -28,6 +28,13 @@ const syne = Syne({
   display: "swap",
 });
 
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk-var",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: {
     default: "The Buzz Marketing Co | San Diego Social Media Marketing Agency",
@@ -53,7 +60,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${outfit.variable} ${dmSans.variable} ${syne.variable}`}
+      className={`${outfit.variable} ${dmSans.variable} ${syne.variable} ${spaceGrotesk.variable}`}
       suppressHydrationWarning
     >
       <body className="min-h-screen flex flex-col antialiased">

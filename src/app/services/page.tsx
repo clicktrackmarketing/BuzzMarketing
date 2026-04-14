@@ -106,7 +106,7 @@ const SERVICES = [
 const FAQS = [
   {
     q: "What platforms do you manage?",
-    a: "We manage Instagram, Facebook, LinkedIn, TikTok, Google Business Profile, YouTube, X/Twitter, and Pinterest — tailored to where your audience actually spends time.",
+    a: "We manage Instagram, Facebook, LinkedIn, TikTok, Google Business Profile, YouTube, X/Twitter, and Pinterest - tailored to where your audience actually spends time.",
   },
   {
     q: "How much does social media marketing cost?",
@@ -122,7 +122,7 @@ const FAQS = [
   },
   {
     q: "What makes you different from other agencies?",
-    a: "We're boutique and founder-led: selective about clients, obsessed with craft, and allergic to cookie-cutter playbooks — every roadmap is built for your brand.",
+    a: "We're boutique and founder-led: selective about clients, obsessed with craft, and allergic to cookie-cutter playbooks - every roadmap is built for your brand.",
   },
   {
     q: "Do you require long-term contracts?",

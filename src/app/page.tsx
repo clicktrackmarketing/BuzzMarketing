@@ -22,6 +22,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { WordReveal } from "@/components/WordReveal";
+import { HeroTextEffect } from "@/components/HeroTextEffect";
 import { SectionEyebrow } from "@/components/SectionEyebrow";
 import { FadeUp } from "@/components/FadeUp";
 import { Button } from "@/components/Button";
@@ -183,7 +184,7 @@ export default function Home() {
           >
             <span className="h-2 w-2 shrink-0 animate-[pulse-dot_2s_ease-in-out_infinite] rounded-full bg-buzz-coral" />
             <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-white/70 md:text-xs">
-              Women-Founded
+              Women Founded
             </span>
             <span className="h-3 w-px bg-white/15 hidden sm:block" />
             <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-white/70 md:text-xs hidden sm:inline">
@@ -191,20 +192,19 @@ export default function Home() {
             </span>
           </motion.div>
 
-          <h1 className="max-w-4xl font-[family-name:var(--font-syne-var)] text-[28px] font-extrabold leading-[1.1] text-white sm:text-[38px] md:text-[48px] lg:text-[56px]">
-            <WordReveal text="We Make Brands" className="text-white" />{" "}
-            <TextShimmer as="span" className="!text-[inherit]">
-              <WordReveal text="Impossible to Ignore" delay={0.3} className="" />
-            </TextShimmer>
+          <h1 className="max-w-4xl font-[family-name:var(--font-space-grotesk-var)] text-[28px] font-bold leading-[1.1] text-white sm:text-[38px] md:text-[48px] lg:text-[56px]">
+            <WordReveal text="We Make Brands" className="text-white" />
+            <br />
+            <HeroTextEffect text="Impossible to Ignore" delay={0.5} />
           </h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.6 }}
-            className="mt-6 max-w-xl text-base leading-relaxed text-white/60 md:text-lg"
+            className="mt-8 max-w-xl text-base leading-relaxed text-white/65 md:text-lg"
           >
-            San Diego&apos;s boutique social media agency — strategy, content,
+            San Diego&apos;s boutique social media agency, strategy, content,
             and ads that turn scrollers into customers.
           </motion.p>
 
@@ -230,13 +230,16 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 2.2, duration: 0.6 }}
-            className="absolute bottom-8 flex flex-col items-center gap-1.5"
+            transition={{ delay: 2.5, duration: 0.6 }}
+            className="absolute bottom-8 flex flex-col items-center gap-2"
           >
-            <span className="text-white/40 text-[10px] tracking-[0.25em] uppercase font-medium">
+            <span className="text-white/35 text-[10px] tracking-[0.3em] uppercase font-medium">
               Scroll
             </span>
-            <ChevronDown className="w-5 h-5 text-white/40 animate-[bounce-scroll_2s_ease-in-out_infinite]" />
+            <div className="relative flex items-center justify-center">
+              <div className="absolute w-8 h-8 rounded-full border border-white/[0.08] animate-[glow-pulse_4s_ease-in-out_infinite]" />
+              <ChevronDown className="w-5 h-5 text-white/40 animate-[bounce-scroll_2s_ease-in-out_infinite]" />
+            </div>
           </motion.div>
         </div>
       </section>

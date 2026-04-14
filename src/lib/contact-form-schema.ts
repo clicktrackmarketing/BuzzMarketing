@@ -141,7 +141,7 @@ export function buildContactPayload(values: ContactFormValues) {
     successVision: values.successVision,
     service: values.service,
     optionalMessage: values.optionalMessage.trim(),
-    source: "Buzz Marketing — Contact Form",
+    source: "Buzz Marketing - Contact Form",
     submittedAt: new Date().toISOString(),
   };
 }

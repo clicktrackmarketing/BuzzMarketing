@@ -31,7 +31,7 @@ const TESTIMONIALS = [
     name: "Ryan Mitchell",
     title: "Pacific Fitness Co.",
     quote:
-      "The Buzz doesn't just post content — they build brands. In 90 days we gained over 10,000 followers and saw a real impact on member acquisition.",
+      "The Buzz doesn't just post content - they build brands. In 90 days we gained over 10,000 followers and saw a real impact on member acquisition.",
     rating: 5,
   },
   {

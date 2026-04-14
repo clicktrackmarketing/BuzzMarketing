@@ -160,7 +160,7 @@ export function Navbar() {
         />
       </motion.header>
 
-      {/* Mobile menu — full-screen with stagger */}
+      {/* Mobile menu - full-screen with stagger */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div

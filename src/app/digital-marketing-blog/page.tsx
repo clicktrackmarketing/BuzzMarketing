@@ -50,7 +50,7 @@ export default function DigitalMarketingBlogPage() {
           <FadeUp delay={0.16}>
             <p className="mt-6 text-white/50 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
               Actionable tips, San Diego-specific playbooks, and strategy
-              breakdowns you can use this week—not someday.
+              breakdowns you can use this week - not someday.
             </p>
           </FadeUp>
         </div>
@@ -114,7 +114,7 @@ export default function DigitalMarketingBlogPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
             {rest.length === 0 ? (
               <p className="col-span-full text-center text-buzz-slate text-sm md:text-base">
-                More articles are on the way—check back soon.
+                More articles are on the way - check back soon.
               </p>
             ) : null}
             {rest.map((post, i) => (

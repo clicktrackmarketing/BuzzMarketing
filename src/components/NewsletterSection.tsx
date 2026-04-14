@@ -103,7 +103,7 @@ export function NewsletterSection() {
               </FadeUp>
             </div>
 
-            {/* Globe side — anchored left + bottom of column so the full sphere stays in-frame */}
+            {/* Globe side - anchored left + bottom of column so the full sphere stays in-frame */}
             <div className="relative z-0 hidden lg:flex lg:min-h-[420px] lg:items-end lg:justify-start lg:pl-2 lg:pr-8 lg:pb-6 lg:pt-14">
               <div className="w-full max-w-[500px] -translate-x-2 translate-y-3">
                 <div className="aspect-square w-full">

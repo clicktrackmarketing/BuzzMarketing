@@ -26,7 +26,7 @@ const WHY_LOCAL = [
 const FAQS = [
   {
     q: "What social media platforms work best for San Diego businesses?",
-    a: "Instagram and Facebook still dominate for most local brands, while TikTok is growing fast for discovery-driven businesses. We match platforms to your audience—not trends.",
+    a: "Instagram and Facebook still dominate for most local brands, while TikTok is growing fast for discovery-driven businesses. We match platforms to your audience - not trends.",
   },
   {
     q: "How much does social media management cost in San Diego?",
@@ -42,11 +42,11 @@ const FAQS = [
   },
   {
     q: "Can you help with event marketing?",
-    a: "Yes—we've produced 50+ events and can help with promotion, creative, partnerships, and onsite content capture.",
+    a: "Yes - we've produced 50+ events and can help with promotion, creative, partnerships, and onsite content capture.",
   },
   {
     q: "What industries do you specialize in?",
-    a: "Healthcare, legal, fitness, real estate, food & beverage, and beauty—with playbooks tailored to compliance, proof, and trust.",
+    a: "Healthcare, legal, fitness, real estate, food & beverage, and beauty - with playbooks tailored to compliance, proof, and trust.",
   },
   {
     q: "How quickly can you start?",
@@ -58,7 +58,7 @@ const FAQS = [
   },
   {
     q: "What results can I expect?",
-    a: "Many clients see around 3x engagement lifts and roughly 40% more leads within 90 days—varies by offer, market, and starting baseline.",
+    a: "Many clients see around 3x engagement lifts and roughly 40% more leads within 90 days - varies by offer, market, and starting baseline.",
   },
   {
     q: "How do I get started?",
@@ -108,7 +108,7 @@ export default function DigitalMarketingSdPage() {
           <FadeUp delay={0.16}>
             <p className="mt-6 text-white/50 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
               Trusted by 150+ local businesses with strategy, content, and ads
-              built for America&apos;s Finest City—not generic templates.
+              built for America&apos;s Finest City - not generic templates.
             </p>
           </FadeUp>
 
@@ -219,7 +219,7 @@ export default function DigitalMarketingSdPage() {
                     </h3>
                     <p className="text-white/50 mb-8 leading-relaxed">
                       Get a practical audit of your social presence, quick wins,
-                      and a roadmap—no fluff, no pressure.
+                      and a roadmap - no fluff, no pressure.
                     </p>
                     <Button href="/contact" variant="glow" arrow>
                       Book Your Call

@@ -50,6 +50,7 @@
   --font-outfit: var(--font-outfit-var);
   --font-dm-sans: var(--font-dm-sans-var);
   --font-syne: var(--font-syne-var);
+  --font-space-grotesk: var(--font-space-grotesk-var);
 
   --shadow-luxury: 0 4px 60px -12px hsla(14, 100%, 58%, 0.2);
   --shadow-elevated: 0 20px 60px -20px hsla(0, 0%, 0%, 0.25);
@@ -66,6 +67,7 @@
   --animate-float: float 6s ease-in-out infinite;
   --animate-glow-pulse: glow-pulse 4s ease-in-out infinite;
   --animate-border-rotate: border-rotate 4s linear infinite;
+  --animate-aurora: aurora-shift 8s ease-in-out infinite;
 }
 
 /* ─── Keyframes ─── */
@@ -87,11 +89,15 @@
 
 @keyframes marquee {
   0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
+  100% {
+    transform: translateX(calc(-100% / var(--marquee-segments, 6)));
+  }
 }
 
 @keyframes marquee-reverse {
-  0% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(calc(-100% / var(--marquee-segments, 6)));
+  }
   100% { transform: translateX(0%); }
 }
 
@@ -109,6 +115,25 @@
 @keyframes border-rotate {
   0% { --angle: 0deg; }
   100% { --angle: 360deg; }
+}
+
+@keyframes aurora-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+    filter: drop-shadow(0 0 30px hsla(14, 100%, 58%, 0.3));
+  }
+  25% {
+    background-position: 50% 50%;
+    filter: drop-shadow(0 0 35px hsla(270, 60%, 55%, 0.35));
+  }
+  50% {
+    background-position: 100% 50%;
+    filter: drop-shadow(0 0 30px hsla(330, 70%, 60%, 0.3));
+  }
+  75% {
+    background-position: 50% 50%;
+    filter: drop-shadow(0 0 35px hsla(14, 100%, 65%, 0.35));
+  }
 }
 
 @keyframes grain {
@@ -163,6 +188,28 @@ body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: shimmer 3s linear infinite;
+}
+
+.text-aurora {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--buzz-coral)) 0%,
+    hsl(var(--coral-glow)) 15%,
+    hsl(var(--buzz-violet)) 35%,
+    hsl(var(--buzz-rose)) 55%,
+    hsl(var(--coral-glow)) 75%,
+    hsl(var(--buzz-coral)) 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: aurora-shift 8s ease-in-out infinite;
+}
+
+.text-aurora-glow {
+  text-shadow: 0 0 40px hsla(14, 100%, 58%, 0.25),
+               0 0 80px hsla(270, 60%, 55%, 0.15);
 }
 
 .bg-gradient-coral {

@@ -92,7 +92,7 @@ export default function TestimonialsResultsRoiPage() {
 
           <FadeUp delay={0.16}>
             <p className="mt-6 text-white/50 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-              Real case studies, real metrics—so you know what "success" looks
+              Real case studies, real metrics - so you know what "success" looks
               like before you ever sign.
             </p>
           </FadeUp>
