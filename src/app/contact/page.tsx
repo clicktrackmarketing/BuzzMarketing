@@ -204,7 +204,7 @@ export default function ContactPage() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] as const }}
-                className="glass-card rounded-2xl p-5 sm:p-8 md:p-10 shadow-elevated"
+                className="bg-black rounded-2xl p-5 sm:p-8 md:p-10 shadow-elevated"
               >
                 <header className="mb-8">
                   <SectionEyebrow light pulse>Discovery Survey</SectionEyebrow>

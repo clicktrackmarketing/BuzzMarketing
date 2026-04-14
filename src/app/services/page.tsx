@@ -282,29 +282,9 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* APPROACH */}
-      <section className="py-16 md:py-20 bg-warm-gray border-y border-black/[0.06]">
-        <div className="max-w-[900px] mx-auto px-6 md:px-8 text-center">
-          <FadeUp>
-            <h2 className="font-[family-name:var(--font-syne-var)] text-2xl md:text-3xl font-bold text-foreground">
-              Our Approach: Search Everywhere Optimization
-            </h2>
-          </FadeUp>
-          <FadeUp delay={0.06}>
-            <p className="mt-4 text-buzz-slate leading-relaxed">
-              People don&apos;t discover businesses in one place anymore. They find you on
-              Instagram, validate you on Google, learn from you on YouTube, check
-              reviews and conversations, and even ask AI what to believe. If your
-              brand isn&apos;t aligned across all of it, you lose trust before you ever
-              get the call. We make sure you show up everywhere with clarity,
-              credibility, and consistency.
-            </p>
-          </FadeUp>
-        </div>
-      </section>
-
+  
       {/* SERVICES DETAIL */}
-      <section id="services-detail" className="scroll-mt-28 py-28 md:py-36 bg-warm-gray">
+      <section id="services-detail" className="scroll-mt-20 py-28 md:py-20 bg-warm-gray">
         <div className="max-w-[1400px] mx-auto px-6 md:px-8">
           <div className="text-center mb-16 md:mb-20">
             <SectionEyebrow center>What We Do</SectionEyebrow>
@@ -580,48 +560,9 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* WHO THIS IS FOR */}
-      <section className="py-20 md:py-28 bg-buzz-dark relative overflow-hidden">
-        <div className="dot-grid absolute inset-0 pointer-events-none opacity-60" />
-        <div className="relative z-10 max-w-[900px] mx-auto px-6 md:px-8 text-center">
-          <SectionEyebrow light center>
-            Who This Is For
-          </SectionEyebrow>
-          <FadeUp>
-            <h2 className="font-[family-name:var(--font-syne-var)] text-2xl md:text-3xl font-bold text-white mt-3 mb-8">
-              We work best with
-            </h2>
-          </FadeUp>
-          <ul className="text-left max-w-lg mx-auto space-y-4">
-            {WHO_FOR.map((line) => (
-              <FadeUp key={line}>
-                <li className="flex items-start gap-3 text-white/80">
-                  <span className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-buzz-coral/20 text-buzz-coral">
-                    <Check className="w-3.5 h-3.5" strokeWidth={2.5} />
-                  </span>
-                  <span>
-                    {line === "Businesses ready to scale with intention" ? (
-                      <strong className="text-white font-semibold">
-                        Businesses ready to scale with intention
-                      </strong>
-                    ) : (
-                      line
-                    )}
-                  </span>
-                </li>
-              </FadeUp>
-            ))}
-          </ul>
-          <FadeUp delay={0.12}>
-            <p className="mt-10 text-white/45 text-sm">
-              We stay selective so we can deliver at a higher level.
-            </p>
-          </FadeUp>
-        </div>
-      </section>
-
+      
       {/* FAQ */}
-      <section className="py-28 md:py-36 bg-warm-gray relative overflow-hidden">
+      <section className="py-28 md:py-20 bg-warm-gray relative overflow-hidden">
         <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-8">
           <div className="text-center mb-14">
             <SectionEyebrow center>FAQ</SectionEyebrow>

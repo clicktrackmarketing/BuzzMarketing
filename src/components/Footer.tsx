@@ -63,8 +63,16 @@ function YtIcon({ className }: { className?: string }) {
 }
 
 const SOCIAL_LINKS = [
-  { href: "https://instagram.com", label: "Instagram", icon: IgIcon },
-  { href: "https://facebook.com", label: "Facebook", icon: FbIcon },
+  {
+    href: "https://www.instagram.com/thebuzzmarketingco",
+    label: "Instagram",
+    icon: IgIcon,
+  },
+  {
+    href: "https://www.facebook.com/660987293768723",
+    label: "Facebook",
+    icon: FbIcon,
+  },
   { href: "https://linkedin.com", label: "LinkedIn", icon: LiIcon },
   { href: "https://youtube.com", label: "YouTube", icon: YtIcon },
 ];

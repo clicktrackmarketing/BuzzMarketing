@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About Us",
+  title: "About The Buzz Marketing Co",
   description:
-    "Meet The Buzz Marketing Co - a boutique San Diego agency where strategy meets buzz-worthy content, built on decades of marketing experience and genuine partnerships.",
+    "Where strategy meets buzz-worthy content. Boutique, high-touch marketing: Search Everywhere, platform-native creative, and real relationships - from the founder behind The Buzz Marketing Co.",
 };
 
 export default function AboutLayout({

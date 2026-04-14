@@ -68,27 +68,38 @@ export const TypewriterEffect = ({
       </motion.div>
     );
   };
+
+  const fullText = words.map((w) => w.text).join(" ");
+
   return (
     <div
       className={cn(
-        "text-base sm:text-xl md:text-3xl lg:text-5xl font-bold text-center",
+        "grid [grid-template-areas:'stack'] text-base sm:text-xl md:text-3xl lg:text-5xl font-bold text-center",
         className
       )}
     >
-      {renderWords()}
-      <motion.span
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{
-          duration: 0.8,
-          repeat: Infinity,
-          repeatType: "reverse",
-        }}
-        className={cn(
-          "inline-block rounded-sm w-[4px] h-4 md:h-6 lg:h-10 bg-buzz-coral",
-          cursorClassName
-        )}
-      ></motion.span>
+      <p
+        className="[grid-area:stack] invisible pointer-events-none select-none w-full max-w-full m-0 [font:inherit] leading-[inherit]"
+        aria-hidden="true"
+      >
+        {fullText}
+      </p>
+      <div className="[grid-area:stack] w-full text-center [font:inherit] leading-[inherit]">
+        {renderWords()}
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            duration: 0.8,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+          className={cn(
+            "inline-block rounded-sm w-[4px] h-4 md:h-6 lg:h-10 bg-buzz-coral",
+            cursorClassName
+          )}
+        />
+      </div>
     </div>
   );
 };
