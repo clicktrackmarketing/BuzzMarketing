@@ -9,6 +9,18 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/free-analysis",
   },
+  openGraph: {
+    title: "Free Digital Analysis — See How Your Business Shows Up Online",
+    description:
+      "Complimentary $500 analysis: website review, Google presence, social audit, competitor comparison, visibility score & action plan.",
+    url: "https://thebuzzmarketingco.com/free-analysis",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Digital Analysis — See How Your Business Shows Up Online",
+    description:
+      "Complimentary $500 analysis: website review, Google presence, social audit, competitor comparison, visibility score & action plan.",
+  },
 };
 
 export default function FreeAnalysisLayout({
