@@ -14,6 +14,7 @@ import {
   Check,
   ChevronDown,
 } from "lucide-react";
+import Link from "next/link";
 import { SectionEyebrow } from "@/components/SectionEyebrow";
 import { FadeUp } from "@/components/FadeUp";
 import { Button } from "@/components/Button";
@@ -560,7 +561,26 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      
+      {/* CROSS-LINKS */}
+      <section className="py-16 bg-surface-light border-y border-buzz-border">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-sm">
+            <span className="text-buzz-slate font-medium">Explore more:</span>
+            <Link href="/digital-marketing-sd" className="text-buzz-coral font-semibold hover:underline">
+              See Our San Diego Results
+            </Link>
+            <span className="hidden md:inline text-buzz-border">|</span>
+            <Link href="/free-analysis" className="text-buzz-coral font-semibold hover:underline">
+              Get a Free Digital Analysis
+            </Link>
+            <span className="hidden md:inline text-buzz-border">|</span>
+            <Link href="/about" className="text-buzz-coral font-semibold hover:underline">
+              About The Buzz Marketing Co
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
       <section className="py-28 md:py-20 bg-warm-gray relative overflow-hidden">
         <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-8">

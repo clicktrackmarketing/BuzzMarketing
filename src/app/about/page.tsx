@@ -8,6 +8,7 @@ import {
   useTransform,
   useReducedMotion,
 } from "framer-motion";
+import Link from "next/link";
 import {
   Search,
   Layers,
@@ -333,6 +334,30 @@ export default function AboutPage() {
               </p>
             </div>
           </FadeUp>
+        </div>
+      </section>
+
+      {/* CROSS-LINKS */}
+      <section className="py-16 bg-warm-gray border-t border-buzz-border">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-sm">
+            <span className="text-buzz-slate font-medium">Explore more:</span>
+            <Link href="/services" className="text-buzz-coral font-semibold hover:underline">
+              Our Services & Pricing
+            </Link>
+            <span className="hidden md:inline text-buzz-border">|</span>
+            <Link href="/free-analysis" className="text-buzz-coral font-semibold hover:underline">
+              Free Digital Analysis
+            </Link>
+            <span className="hidden md:inline text-buzz-border">|</span>
+            <Link href="/digital-marketing-blog" className="text-buzz-coral font-semibold hover:underline">
+              Marketing Blog
+            </Link>
+            <span className="hidden md:inline text-buzz-border">|</span>
+            <Link href="/events" className="text-buzz-coral font-semibold hover:underline">
+              Upcoming Events
+            </Link>
+          </div>
         </div>
       </section>
 

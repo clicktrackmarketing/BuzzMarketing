@@ -505,6 +505,30 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ─── FREE ANALYSIS BANNER ─── */}
+      <section className="py-16 bg-surface-dark-alt border-y border-white/[0.06]">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-buzz-coral mb-2">
+              Free — Usually $500
+            </p>
+            <h3 className="font-[family-name:var(--font-syne-var)] text-xl md:text-2xl font-bold text-white">
+              See how your business actually shows up online
+            </h3>
+            <p className="text-white/40 text-sm mt-1">
+              Website, Google, social media, competitors — we analyze everything.
+            </p>
+          </div>
+          <Link
+            href="/free-analysis"
+            className="shrink-0 group inline-flex items-center gap-2 px-7 py-3.5 bg-gradient-coral text-white text-sm font-semibold rounded-full shadow-luxury hover:shadow-glow-coral hover:scale-[1.03] active:scale-[0.97] transition-all"
+          >
+            Get Your Free Analysis
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </div>
+      </section>
+
       {/* ─── CTA ─── */}
       <CoralCTA />
 
