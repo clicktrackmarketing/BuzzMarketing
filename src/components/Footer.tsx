@@ -23,6 +23,7 @@ const COMPANY_LINKS = [
 const RESOURCE_LINKS = [
   { href: "/digital-marketing-blog", label: "Blog" },
   { href: "/digital-marketing-sd", label: "Results & San Diego" },
+  { href: "/free-analysis", label: "Free Digital Analysis" },
 ];
 
 function IgIcon({ className }: { className?: string }) {
@@ -200,13 +201,13 @@ export function Footer() {
 
         <div className="coral-divider mb-8" />
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/25">
-          <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/50">
+          <div className="flex flex-wrap items-center gap-4">
             <p>&copy; {new Date().getFullYear()} The Buzz Marketing Co. All rights reserved.</p>
-            <Link href="/privacy" className="hover:text-white/50 transition-colors">
+            <Link href="/privacy" className="hover:text-white/80 transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="hover:text-white/50 transition-colors">
+            <Link href="/terms" className="hover:text-white/80 transition-colors">
               Terms
             </Link>
           </div>
@@ -214,12 +215,23 @@ export function Footer() {
             <p>San Diego, California</p>
             <button
               onClick={scrollToTop}
-              className="w-9 h-9 rounded-xl bg-white/[0.04] flex items-center justify-center text-white/30 hover:text-buzz-coral hover:bg-white/[0.08] transition-all cursor-pointer"
+              className="w-9 h-9 rounded-xl bg-white/[0.06] flex items-center justify-center text-white/40 hover:text-buzz-coral hover:bg-white/[0.10] transition-all cursor-pointer"
               aria-label="Back to top"
             >
               <ArrowUp className="w-4 h-4" />
             </button>
           </div>
+        </div>
+
+        <div className="mt-6 text-center text-xs text-white/40">
+          <a
+            href="https://clicktrackmarketing.com?utm_source=buzz_marketing_co&utm_medium=footer&utm_campaign=client_website"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white/70 transition-colors"
+          >
+            Designed and Built by Click Track Marketing
+          </a>
         </div>
       </div>
     </footer>

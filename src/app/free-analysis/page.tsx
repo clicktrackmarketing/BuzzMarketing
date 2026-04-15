@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -123,6 +123,7 @@ const inputClass =
 /* ─── page ─── */
 
 export default function FreeAnalysisPage() {
+  const [modalOpen, setModalOpen] = useState(false);
   const [form, setForm] = useState<AnalysisFormValues>({
     fullName: "",
     businessName: "",
@@ -133,6 +134,17 @@ export default function FreeAnalysisPage() {
   const [formError, setFormError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    document.body.style.overflow = modalOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [modalOpen]);
+
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => {
+    if (!isSubmitting) setModalOpen(false);
+  };
 
   const update = (field: keyof AnalysisFormValues, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -170,8 +182,206 @@ export default function FreeAnalysisPage() {
     }
   };
 
+  /* ─── shared form JSX ─── */
+  const formContent = (
+    <AnimatePresence mode="wait">
+      {submitted ? (
+        <motion.div
+          key="success"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="text-center py-8"
+        >
+          <div className="w-16 h-16 rounded-full bg-buzz-coral/15 flex items-center justify-center mx-auto mb-6">
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.2, type: "spring", stiffness: 300 }}
+            >
+              <Check className="w-8 h-8 text-buzz-coral" />
+            </motion.div>
+          </div>
+          <h3 className="font-[family-name:var(--font-syne-var)] text-2xl font-bold text-white mb-3">
+            We&apos;re on it!
+          </h3>
+          <p className="text-white/50 max-w-md mx-auto leading-relaxed">
+            Your free digital analysis is being prepared. We&apos;ll be in
+            touch within 24 hours to walk you through everything.
+          </p>
+          <a
+            href="tel:7203639754"
+            className="inline-flex items-center gap-2 mt-6 text-buzz-coral font-medium text-sm hover:underline"
+          >
+            <Phone className="w-4 h-4" />
+            (720) 363-9754
+          </a>
+        </motion.div>
+      ) : (
+        <motion.form
+          key="form"
+          onSubmit={handleSubmit}
+          className="space-y-5"
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label
+                htmlFor="fullName"
+                className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/40"
+              >
+                Full Name
+              </label>
+              <input
+                id="fullName"
+                type="text"
+                placeholder="Jane Smith"
+                className={inputClass}
+                value={form.fullName}
+                onChange={(e) => update("fullName", e.target.value)}
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="businessName"
+                className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/40"
+              >
+                Business Name
+              </label>
+              <input
+                id="businessName"
+                type="text"
+                placeholder="Acme Co"
+                className={inputClass}
+                value={form.businessName}
+                onChange={(e) => update("businessName", e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div>
+            <label
+              htmlFor="email"
+              className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/40"
+            >
+              Email
+            </label>
+            <input
+              id="email"
+              type="email"
+              placeholder="jane@business.com"
+              className={inputClass}
+              value={form.email}
+              onChange={(e) => update("email", e.target.value)}
+            />
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label
+                htmlFor="phone"
+                className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/40"
+              >
+                Phone
+              </label>
+              <input
+                id="phone"
+                type="tel"
+                placeholder="(555) 123-4567"
+                className={inputClass}
+                value={form.phone}
+                onChange={(e) => update("phone", e.target.value)}
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="websiteUrl"
+                className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/40"
+              >
+                Website URL
+              </label>
+              <input
+                id="websiteUrl"
+                type="text"
+                placeholder="www.yourbusiness.com"
+                className={inputClass}
+                value={form.websiteUrl}
+                onChange={(e) => update("websiteUrl", e.target.value)}
+              />
+            </div>
+          </div>
+
+          {formError && (
+            <motion.p
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              role="alert"
+              className="text-sm text-red-400 bg-red-400/10 rounded-xl px-4 py-3"
+            >
+              {formError}
+            </motion.p>
+          )}
+
+          <Button type="submit" variant="glow" arrow disabled={isSubmitting}>
+            {isSubmitting ? "Sending…" : "Get My Free Analysis"}
+          </Button>
+
+          <p className="text-center text-white/25 text-xs">
+            No spam. No obligation. Just clarity.
+          </p>
+        </motion.form>
+      )}
+    </AnimatePresence>
+  );
+
   return (
     <>
+      {/* ─── FORM MODAL ─── */}
+      <AnimatePresence>
+        {modalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-[60] flex items-center justify-center px-4 py-8"
+            onClick={closeModal}
+          >
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-buzz-dark/85 backdrop-blur-sm" />
+
+            {/* Modal */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative z-10 w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-2xl border border-white/[0.08] bg-surface-dark-alt p-6 sm:p-8 shadow-elevated"
+            >
+              {/* Close button */}
+              <button
+                onClick={closeModal}
+                className="absolute top-4 right-4 w-9 h-9 rounded-xl bg-white/[0.04] flex items-center justify-center text-white/40 hover:text-white hover:bg-white/[0.08] transition-all cursor-pointer z-10"
+                aria-label="Close form"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="text-center mb-6">
+                <h2 className="font-[family-name:var(--font-syne-var)] text-2xl md:text-3xl font-bold text-white">
+                  Get Your Free{" "}
+                  <TextShimmer as="span">Analysis</TextShimmer>
+                </h2>
+                <p className="mt-2 text-white/40 text-sm">
+                  Takes 30 seconds. We&apos;ll be in touch within 24 hours.
+                </p>
+              </div>
+
+              {formContent}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* ─── 1. HERO ─── */}
       <section className="relative bg-buzz-dark overflow-hidden">
         <HeroBackdrop />
@@ -211,9 +421,13 @@ export default function FreeAnalysisPage() {
 
           <FadeUp delay={0.22}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
-              <Button href="#analysis-form" variant="glow" arrow>
+              <button
+                onClick={openModal}
+                className="group inline-flex items-center justify-center gap-2 rounded-full font-semibold text-sm px-8 py-4 bg-gradient-coral text-white shadow-glow-coral hover:shadow-[0_0_60px_-8px_hsla(14,100%,58%,0.5)] transition-all cursor-pointer hover:scale-[1.04] active:scale-[0.97]"
+              >
                 Get Your Free Analysis
-              </Button>
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </button>
             </div>
             <p className="mt-4 text-white/35 text-sm">
               Usually $500. Complimentary for a limited time.
@@ -222,7 +436,61 @@ export default function FreeAnalysisPage() {
         </div>
       </section>
 
-      {/* ─── 2. PROBLEM HOOK ─── */}
+      {/* ─── 2. VIDEO AUDIT (moved up) ─── */}
+      <section className="py-28 md:py-36 bg-buzz-dark relative overflow-hidden border-t border-white/[0.06]">
+        <AmbientOrbs
+          orbs={[
+            { color: "violet", size: 350, top: "15%", right: "10%", delay: 0 },
+            { color: "coral", size: 300, bottom: "10%", left: "15%", delay: 2 },
+          ]}
+        />
+        <div className="dot-grid absolute inset-0 pointer-events-none" />
+
+        <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div>
+              <SectionEyebrow light>Bonus</SectionEyebrow>
+              <FadeUp>
+                <h2 className="font-[family-name:var(--font-syne-var)] text-3xl md:text-4xl font-bold text-white mb-6">
+                  <Play className="inline w-8 h-8 text-buzz-coral mr-2" aria-hidden />
+                  Video Audit{" "}
+                  <TextShimmer as="span">Option</TextShimmer>
+                </h2>
+              </FadeUp>
+              <FadeUp delay={0.08}>
+                <p className="text-white/50 text-base md:text-lg leading-relaxed mb-6">
+                  We&apos;ll record your analysis so you can rewatch and share
+                  with your team. No more trying to remember what was said — you
+                  get a clear, visual walkthrough of your entire digital presence.
+                </p>
+              </FadeUp>
+              <FadeUp delay={0.16}>
+                <button
+                  onClick={openModal}
+                  className="group inline-flex items-center justify-center gap-2 rounded-full font-semibold text-sm px-8 py-4 bg-gradient-coral text-white shadow-glow-coral hover:shadow-[0_0_60px_-8px_hsla(14,100%,58%,0.5)] transition-all cursor-pointer hover:scale-[1.04] active:scale-[0.97]"
+                >
+                  Get Your Free Analysis
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </button>
+              </FadeUp>
+            </div>
+
+            <FadeUp delay={0.1}>
+              <div className="relative w-full max-w-[360px] mx-auto aspect-[9/16] rounded-2xl overflow-hidden shadow-elevated border border-white/[0.08]">
+                <iframe
+                  src="https://www.youtube.com/embed/4Jl35Y_NBL0"
+                  title="Video audit walkthrough example"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full"
+                />
+              </div>
+            </FadeUp>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── 3. PROBLEM HOOK ─── */}
       <section className="py-28 md:py-36 bg-warm-gray relative">
         <div className="coral-divider" />
         <div className="max-w-[1400px] mx-auto px-6 md:px-8">
@@ -268,7 +536,7 @@ export default function FreeAnalysisPage() {
         </div>
       </section>
 
-      {/* ─── 3. WHAT THEY GET ─── */}
+      {/* ─── 4. WHAT THEY GET ─── */}
       <section className="py-28 md:py-36 bg-buzz-dark relative overflow-hidden">
         <AmbientOrbs
           orbs={[
@@ -311,7 +579,7 @@ export default function FreeAnalysisPage() {
         </div>
       </section>
 
-      {/* ─── 4. DIFFERENTIATOR ─── */}
+      {/* ─── 5. DIFFERENTIATOR ─── */}
       <section className="py-28 md:py-36 bg-warm-gray relative">
         <div className="coral-divider" />
         <div className="max-w-[1400px] mx-auto px-6 md:px-8">
@@ -347,7 +615,7 @@ export default function FreeAnalysisPage() {
         </div>
       </section>
 
-      {/* ─── 5. PROOF / STATS ─── */}
+      {/* ─── 6. PROOF / STATS ─── */}
       <section className="relative bg-buzz-dark border-y border-white/[0.06]">
         <div className="coral-divider" />
         <div className="max-w-[1400px] mx-auto px-6 md:px-8 py-14 md:py-16">
@@ -367,7 +635,7 @@ export default function FreeAnalysisPage() {
 
       <TestimonialsSection />
 
-      {/* ─── 6. WHO THIS IS FOR ─── */}
+      {/* ─── 7. WHO THIS IS FOR ─── */}
       <section className="py-28 md:py-36 bg-warm-gray relative">
         <div className="max-w-[1400px] mx-auto px-6 md:px-8">
           <div className="text-center mb-14">
@@ -428,7 +696,7 @@ export default function FreeAnalysisPage() {
         </div>
       </section>
 
-      {/* ─── 7. PROCESS ─── */}
+      {/* ─── 8. PROCESS ─── */}
       <section className="py-28 md:py-36 bg-buzz-dark relative overflow-hidden">
         <AmbientOrbs
           orbs={[
@@ -468,187 +736,6 @@ export default function FreeAnalysisPage() {
               </FadeUp>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ─── 8. LEAD CAPTURE FORM ─── */}
-      <section
-        id="analysis-form"
-        className="scroll-mt-20 py-28 md:py-36 bg-surface-dark-alt relative overflow-hidden"
-      >
-        <AmbientOrbs
-          orbs={[
-            { color: "coral", size: 400, top: "5%", left: "10%", delay: 0 },
-          ]}
-        />
-        <div className="dot-grid absolute inset-0 pointer-events-none" />
-
-        <div className="relative z-10 max-w-3xl mx-auto px-6 md:px-8">
-          <div className="text-center mb-12">
-            <SectionEyebrow light center>Get Started</SectionEyebrow>
-            <FadeUp>
-              <h2 className="font-[family-name:var(--font-syne-var)] text-3xl md:text-4xl font-bold text-white">
-                Stop Guessing{" "}
-                <TextShimmer as="span">What&apos;s Working</TextShimmer>
-              </h2>
-            </FadeUp>
-            <FadeUp delay={0.06}>
-              <p className="mt-4 text-white/50 leading-relaxed">
-                Get clarity. Get a plan. Get results.
-              </p>
-            </FadeUp>
-          </div>
-
-          <FadeUp delay={0.1}>
-            <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6 sm:p-8 md:p-10">
-              <AnimatePresence mode="wait">
-                {submitted ? (
-                  <motion.div
-                    key="success"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="text-center py-8"
-                  >
-                    <div className="w-16 h-16 rounded-full bg-buzz-coral/15 flex items-center justify-center mx-auto mb-6">
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ delay: 0.2, type: "spring", stiffness: 300 }}
-                      >
-                        <Check className="w-8 h-8 text-buzz-coral" />
-                      </motion.div>
-                    </div>
-                    <h3 className="font-[family-name:var(--font-syne-var)] text-2xl font-bold text-white mb-3">
-                      We&apos;re on it!
-                    </h3>
-                    <p className="text-white/50 max-w-md mx-auto leading-relaxed">
-                      Your free digital analysis is being prepared. We&apos;ll
-                      be in touch within 24 hours to walk you through everything.
-                    </p>
-                    <a
-                      href="tel:7203639754"
-                      className="inline-flex items-center gap-2 mt-6 text-buzz-coral font-medium text-sm hover:underline"
-                    >
-                      <Phone className="w-4 h-4" />
-                      (720) 363-9754
-                    </a>
-                  </motion.div>
-                ) : (
-                  <motion.form
-                    key="form"
-                    onSubmit={handleSubmit}
-                    className="space-y-5"
-                  >
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <div>
-                        <label
-                          htmlFor="fullName"
-                          className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/40"
-                        >
-                          Full Name
-                        </label>
-                        <input
-                          id="fullName"
-                          type="text"
-                          placeholder="Jane Smith"
-                          className={inputClass}
-                          value={form.fullName}
-                          onChange={(e) => update("fullName", e.target.value)}
-                        />
-                      </div>
-                      <div>
-                        <label
-                          htmlFor="businessName"
-                          className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/40"
-                        >
-                          Business Name
-                        </label>
-                        <input
-                          id="businessName"
-                          type="text"
-                          placeholder="Acme Co"
-                          className={inputClass}
-                          value={form.businessName}
-                          onChange={(e) => update("businessName", e.target.value)}
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label
-                        htmlFor="email"
-                        className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/40"
-                      >
-                        Email
-                      </label>
-                      <input
-                        id="email"
-                        type="email"
-                        placeholder="jane@business.com"
-                        className={inputClass}
-                        value={form.email}
-                        onChange={(e) => update("email", e.target.value)}
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <div>
-                        <label
-                          htmlFor="phone"
-                          className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/40"
-                        >
-                          Phone
-                        </label>
-                        <input
-                          id="phone"
-                          type="tel"
-                          placeholder="(555) 123-4567"
-                          className={inputClass}
-                          value={form.phone}
-                          onChange={(e) => update("phone", e.target.value)}
-                        />
-                      </div>
-                      <div>
-                        <label
-                          htmlFor="websiteUrl"
-                          className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/40"
-                        >
-                          Website URL
-                        </label>
-                        <input
-                          id="websiteUrl"
-                          type="text"
-                          placeholder="www.yourbusiness.com"
-                          className={inputClass}
-                          value={form.websiteUrl}
-                          onChange={(e) => update("websiteUrl", e.target.value)}
-                        />
-                      </div>
-                    </div>
-
-                    {formError && (
-                      <motion.p
-                        initial={{ opacity: 0, y: -4 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        role="alert"
-                        className="text-sm text-red-400 bg-red-400/10 rounded-xl px-4 py-3"
-                      >
-                        {formError}
-                      </motion.p>
-                    )}
-
-                    <Button type="submit" variant="glow" arrow disabled={isSubmitting}>
-                      {isSubmitting ? "Sending…" : "Get My Free Analysis"}
-                    </Button>
-
-                    <p className="text-center text-white/25 text-xs">
-                      No spam. No obligation. Just clarity.
-                    </p>
-                  </motion.form>
-                )}
-              </AnimatePresence>
-            </div>
-          </FadeUp>
         </div>
       </section>
 
@@ -714,56 +801,6 @@ export default function FreeAnalysisPage() {
         </div>
       </section>
 
-      {/* ─── 10. VIDEO AUDIT ─── */}
-      <section className="py-28 md:py-36 bg-buzz-dark relative overflow-hidden">
-        <AmbientOrbs
-          orbs={[
-            { color: "violet", size: 350, top: "15%", right: "10%", delay: 0 },
-            { color: "coral", size: 300, bottom: "10%", left: "15%", delay: 2 },
-          ]}
-        />
-        <div className="dot-grid absolute inset-0 pointer-events-none" />
-
-        <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div>
-              <SectionEyebrow light>Bonus</SectionEyebrow>
-              <FadeUp>
-                <h2 className="font-[family-name:var(--font-syne-var)] text-3xl md:text-4xl font-bold text-white mb-6">
-                  <Play className="inline w-8 h-8 text-buzz-coral mr-2" aria-hidden />
-                  Video Audit{" "}
-                  <TextShimmer as="span">Option</TextShimmer>
-                </h2>
-              </FadeUp>
-              <FadeUp delay={0.08}>
-                <p className="text-white/50 text-base md:text-lg leading-relaxed mb-6">
-                  We&apos;ll record your analysis so you can rewatch and share
-                  with your team. No more trying to remember what was said — you
-                  get a clear, visual walkthrough of your entire digital presence.
-                </p>
-              </FadeUp>
-              <FadeUp delay={0.16}>
-                <Button href="#analysis-form" variant="glow" arrow>
-                  Get Your Free Analysis
-                </Button>
-              </FadeUp>
-            </div>
-
-            <FadeUp delay={0.1}>
-              <div className="relative w-full max-w-[360px] mx-auto aspect-[9/16] rounded-2xl overflow-hidden shadow-elevated border border-white/[0.08]">
-                <iframe
-                  src="https://www.youtube.com/embed/4Jl35Y_NBL0"
-                  title="Video audit walkthrough example"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="absolute inset-0 w-full h-full"
-                />
-              </div>
-            </FadeUp>
-          </div>
-        </div>
-      </section>
-
       {/* ─── FINAL CTA ─── */}
       <section className="relative bg-buzz-dark overflow-hidden">
         <div className="coral-divider" />
@@ -788,9 +825,13 @@ export default function FreeAnalysisPage() {
           </FadeUp>
           <FadeUp delay={0.16}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button href="#analysis-form" variant="glow" arrow>
+              <button
+                onClick={openModal}
+                className="group inline-flex items-center justify-center gap-2 rounded-full font-semibold text-sm px-8 py-4 bg-gradient-coral text-white shadow-glow-coral hover:shadow-[0_0_60px_-8px_hsla(14,100%,58%,0.5)] transition-all cursor-pointer hover:scale-[1.04] active:scale-[0.97]"
+              >
                 Get Your Free Analysis
-              </Button>
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </button>
               <a
                 href="tel:7203639754"
                 className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/20 bg-white/[0.04] text-white text-sm font-semibold rounded-full hover:bg-white/[0.08] transition-all"
