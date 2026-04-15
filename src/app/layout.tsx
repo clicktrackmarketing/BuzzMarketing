@@ -95,6 +95,11 @@ export default function RootLayout({
             gtag('config', 'G-CT9KHYS5SC');
           `}
         </Script>
+        {/* PearlDiver visitor identification */}
+        <Script
+          src="https://tag.clicktrackmarketing.io/ldc.js?pid=1cca4737c771f3757afbe5c4644eb68a&aid=16de03f2"
+          strategy="afterInteractive"
+        />
       </head>
       <body className="min-h-screen flex flex-col antialiased">
         <JsonLd
