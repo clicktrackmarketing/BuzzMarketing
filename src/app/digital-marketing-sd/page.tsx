@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { MapPin, Check, ChevronDown, Star } from "lucide-react";
 import { SectionEyebrow } from "@/components/SectionEyebrow";
@@ -402,6 +403,30 @@ export default function DigitalMarketingSdPage() {
               .
             </p>
           </FadeUp>
+        </div>
+      </section>
+
+      {/* CROSS-LINKS */}
+      <section className="py-16 bg-warm-gray border-y border-buzz-border">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-sm">
+            <span className="text-buzz-slate font-medium">Explore more:</span>
+            <Link href="/services" className="text-buzz-coral font-semibold hover:underline">
+              Services & Pricing
+            </Link>
+            <span className="hidden md:inline text-buzz-border">|</span>
+            <Link href="/free-analysis" className="text-buzz-coral font-semibold hover:underline">
+              Free Digital Analysis
+            </Link>
+            <span className="hidden md:inline text-buzz-border">|</span>
+            <Link href="/about" className="text-buzz-coral font-semibold hover:underline">
+              About Us
+            </Link>
+            <span className="hidden md:inline text-buzz-border">|</span>
+            <Link href="/digital-marketing-blog" className="text-buzz-coral font-semibold hover:underline">
+              Marketing Blog
+            </Link>
+          </div>
         </div>
       </section>
 
