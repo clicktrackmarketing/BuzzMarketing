@@ -97,7 +97,7 @@ export default function RootLayout({
         </Script>
         {/* PearlDiver visitor identification */}
         <Script
-          src="https://tag.clicktrackmarketing.io/ldc.js?pid=1cca4737c771f3757afbe5c4644eb68a&aid=16de03f2"
+          src="https://tag.clicktrackmarketing.com/ldc.js?pid=1cca4737c771f3757afbe5c4644eb68a&aid=16de03f2"
           strategy="afterInteractive"
         />
       </head>
