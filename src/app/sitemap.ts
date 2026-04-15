@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/contact",
     "/digital-marketing-sd",
     "/events",
+    "/free-analysis",
     "/digital-marketing-blog",
   ];
 
