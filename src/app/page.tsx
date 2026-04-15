@@ -42,47 +42,53 @@ const SERVICES = [
     icon: Compass,
     image: "/service-brand.jpg",
     title: "Strategy + Creative Direction",
+    alt: "Marketing strategy and creative direction session in San Diego",
     desc: "Brand clarity, messaging, content direction, and a clear plan so you're not guessing.",
   },
   {
     icon: Megaphone,
     image: "/service-social.jpg",
     title: "Social Media Management",
+    alt: "Social media management for San Diego businesses",
     desc: "Intentional posting and packages from Starter Buzz ($750/mo) through custom campaigns.",
   },
   {
     icon: Camera,
     image: "/service-content.jpg",
     title: "Signature Content Shoot",
+    alt: "Professional content shoot for brand photography and video",
     desc: "Two-day high-end photo and video with travel included - assets that last for months.",
   },
   {
     icon: LayoutTemplate,
     image: "/service-ads.jpg",
     title: "Website + Conversion Optimization",
+    alt: "Website conversion optimization and design",
     desc: "Messaging, layout, trust signals, and UX so visitors take action on your site.",
   },
   {
     icon: MapPinned,
     image: "/service-seo.jpg",
     title: "Google + Local Presence",
+    alt: "Google Business Profile and local SEO optimization",
     desc: "Visuals, reviews strategy, and credibility so you stand out where decisions are made.",
   },
   {
     icon: Palette,
     image: "/service-email.jpg",
     title: "Branding + Positioning",
+    alt: "Brand identity and positioning strategy",
     desc: "Voice, visual direction, content strategy, and platform positioning with clarity.",
   },
 ];
 
 const PORTFOLIO = [
-  { label: "Brand Campaign", sub: "Creative Studio", image: "/portfolio-1.jpg" },
-  { label: "Content Strategy", sub: "Social Launch", image: "/portfolio-2.jpg" },
-  { label: "Visual Identity", sub: "Rebrand Project", image: "/portfolio-3.jpg" },
-  { label: "Social Campaign", sub: "Growth Strategy", image: "/portfolio-4.jpg" },
-  { label: "Product Launch", sub: "Digital Marketing", image: "/portfolio-5.jpg" },
-  { label: "Event Branding", sub: "Experiential", image: "/portfolio-6.jpg" },
+  { label: "Brand Campaign", sub: "Creative Studio", image: "/portfolio-1.jpg", alt: "Brand campaign creative studio project by The Buzz Marketing Co" },
+  { label: "Content Strategy", sub: "Social Launch", image: "/portfolio-2.jpg", alt: "Content strategy and social media launch project" },
+  { label: "Visual Identity", sub: "Rebrand Project", image: "/portfolio-3.jpg", alt: "Visual identity rebrand project for San Diego business" },
+  { label: "Social Campaign", sub: "Growth Strategy", image: "/portfolio-4.jpg", alt: "Social media campaign and growth strategy results" },
+  { label: "Product Launch", sub: "Digital Marketing", image: "/portfolio-5.jpg", alt: "Product launch digital marketing campaign" },
+  { label: "Event Branding", sub: "Experiential", image: "/portfolio-6.jpg", alt: "Event branding and experiential marketing in San Diego" },
 ];
 
 const STATS = [
@@ -175,12 +181,12 @@ export default function Home() {
           ]}
         />
 
-        <div className="relative z-20 flex h-full min-h-0 flex-col items-center justify-center px-6 pt-28 pb-32 text-center md:pt-32">
+        <div className="relative z-20 flex h-full min-h-0 flex-col items-center justify-center px-6 pt-20 pb-20 text-center md:pt-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="mb-6 inline-flex items-center gap-2 sm:gap-3 rounded-full border border-white/[0.08] bg-white/[0.04] px-4 py-2 sm:px-5 sm:py-2.5 glass-subtle"
+            className="mb-4 inline-flex items-center gap-2 sm:gap-3 rounded-full border border-white/[0.08] bg-white/[0.04] px-4 py-2 sm:px-5 sm:py-2.5 glass-subtle"
           >
             <span className="h-2 w-2 shrink-0 animate-[pulse-dot_2s_ease-in-out_infinite] rounded-full bg-buzz-coral" />
             <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-white/70 md:text-xs">
@@ -192,7 +198,7 @@ export default function Home() {
             </span>
           </motion.div>
 
-          <h1 className="max-w-4xl font-[family-name:var(--font-space-grotesk-var)] text-[28px] font-bold leading-[1.1] text-white sm:text-[38px] md:text-[48px] lg:text-[56px]">
+          <h1 className="max-w-5xl font-[family-name:var(--font-space-grotesk-var)] text-[36px] font-bold leading-[1.05] text-white sm:text-[48px] md:text-[64px] lg:text-[80px]">
             <WordReveal text="We Make Brands" className="text-white" />
             <br />
             <HeroTextEffect text="Impossible to Ignore" delay={0.5} />
@@ -202,7 +208,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.6 }}
-            className="mt-8 max-w-xl text-base leading-relaxed text-white/65 md:text-lg"
+            className="mt-6 max-w-2xl text-lg leading-relaxed text-white/65 md:text-xl"
           >
             San Diego&apos;s boutique social media agency, strategy, content,
             and ads that turn scrollers into customers.
@@ -212,7 +218,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.5, duration: 0.6 }}
-            className="flex flex-col sm:flex-row items-center gap-4 mt-8"
+            className="flex flex-col sm:flex-row items-center gap-4 mt-6"
           >
             <Button href="/contact" variant="glow" arrow>
               Book a Discovery Call
@@ -285,7 +291,7 @@ export default function Home() {
                   <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden">
                     <Image
                       src={s.image}
-                      alt=""
+                      alt={s.alt}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -347,7 +353,7 @@ export default function Home() {
                 <div className="group relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer">
                   <Image
                     src={p.image}
-                    alt=""
+                    alt={p.alt}
                     fill
                     className="object-cover transition-all duration-700 group-hover:scale-[1.05] grayscale group-hover:grayscale-0"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -532,7 +538,7 @@ export default function Home() {
                   <div className="relative aspect-[16/10] overflow-hidden">
                     <Image
                       src={post.image}
-                      alt=""
+                      alt={post.title}
                       fill
                       className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-[1.05]"
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"

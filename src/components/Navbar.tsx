@@ -10,7 +10,7 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import { Menu, X, ArrowUpRight, Sparkles } from "lucide-react";
+import { Menu, X, ArrowUpRight, Sparkles, Phone } from "lucide-react";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -107,7 +107,15 @@ export function Navbar() {
             })}
           </nav>
 
-          <div className="hidden lg:block">
+          <div className="hidden lg:flex items-center gap-3">
+            <a
+              href="tel:7203639754"
+              className="inline-flex items-center gap-1.5 text-white/55 hover:text-white text-xs font-medium transition-colors"
+              aria-label="Call (720) 363-9754"
+            >
+              <Phone className="w-3.5 h-3.5" />
+              (720) 363-9754
+            </a>
             <Link
               href="/contact"
               className="group inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-coral text-white text-sm font-semibold rounded-full shadow-luxury cursor-pointer transition-all hover:shadow-glow-coral hover:scale-[1.03] active:scale-[0.97]"

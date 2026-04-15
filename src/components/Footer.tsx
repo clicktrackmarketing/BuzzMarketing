@@ -201,7 +201,15 @@ export function Footer() {
         <div className="coral-divider mb-8" />
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/25">
-          <p>&copy; {new Date().getFullYear()} The Buzz Marketing Co. All rights reserved.</p>
+          <div className="flex items-center gap-4">
+            <p>&copy; {new Date().getFullYear()} The Buzz Marketing Co. All rights reserved.</p>
+            <Link href="/privacy" className="hover:text-white/50 transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="hover:text-white/50 transition-colors">
+              Terms
+            </Link>
+          </div>
           <div className="flex items-center gap-4">
             <p>San Diego, California</p>
             <button
