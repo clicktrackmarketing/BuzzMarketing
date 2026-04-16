@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { JsonLd } from "@/components/JsonLd";
+import { buildBreadcrumbs } from "@/lib/breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Free Digital Analysis | See How You Show Up Online",
@@ -31,16 +32,16 @@ export default function FreeAnalysisLayout({
   return (
     <>
       <JsonLd
+        data={buildBreadcrumbs([
+          { name: "Free Analysis", path: "/free-analysis" },
+        ])}
+      />
+      <JsonLd
         data={{
           "@context": "https://schema.org",
           "@type": "Service",
           serviceType: "Free Digital Marketing Analysis",
-          provider: {
-            "@type": "LocalBusiness",
-            name: "The Buzz Marketing Co",
-            telephone: "+17203639754",
-            url: "https://thebuzzmarketingco.com",
-          },
+          provider: { "@id": "https://thebuzzmarketingco.com/#organization" },
           areaServed: { "@type": "City", name: "San Diego" },
           description:
             "Complimentary digital analysis covering website review, Google presence, social media audit, competitor comparison, visibility score, and a clear action plan.",

@@ -122,6 +122,7 @@ const BLOG_POSTS = [
       "The digital landscape has shifted. Here's why having a strategy matters more than ever for local businesses.",
     date: "Mar 15, 2026",
     image: "/portfolio-1.jpg",
+    imageAlt: "San Diego social media marketing strategy article cover",
   },
   {
     category: "SEO",
@@ -131,6 +132,7 @@ const BLOG_POSTS = [
       "Forget the generic advice. These are the tactics that move the needle for San Diego businesses.",
     date: "Mar 8, 2026",
     image: "/portfolio-2.jpg",
+    imageAlt: "Local SEO guide for small businesses article cover",
   },
   {
     category: "Content",
@@ -140,6 +142,7 @@ const BLOG_POSTS = [
       "You don't need a massive budget to create content that converts. Here's how to do it right.",
     date: "Feb 28, 2026",
     image: "/portfolio-3.jpg",
+    imageAlt: "Budget content creation tips article cover",
   },
 ];
 
@@ -239,12 +242,12 @@ export default function Home() {
             transition={{ delay: 2.5, duration: 0.6 }}
             className="absolute bottom-8 flex flex-col items-center gap-2"
           >
-            <span className="text-white/35 text-[10px] tracking-[0.3em] uppercase font-medium">
+            <span className="text-white/65 text-[10px] tracking-[0.3em] uppercase font-medium">
               Scroll
             </span>
             <div className="relative flex items-center justify-center">
               <div className="absolute w-8 h-8 rounded-full border border-white/[0.08] animate-[glow-pulse_4s_ease-in-out_infinite]" />
-              <ChevronDown className="w-5 h-5 text-white/40 animate-[bounce-scroll_2s_ease-in-out_infinite]" />
+              <ChevronDown className="w-5 h-5 text-white/65 animate-[bounce-scroll_2s_ease-in-out_infinite]" />
             </div>
           </motion.div>
         </div>
@@ -261,7 +264,7 @@ export default function Home() {
                   <span className="font-[family-name:var(--font-syne-var)] text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
                     <AnimatedCounter target={s.value} suffix={s.suffix} />
                   </span>
-                  <span className="text-white/30 text-sm whitespace-nowrap">{s.label}</span>
+                  <span className="text-white/65 text-sm whitespace-nowrap">{s.label}</span>
                 </div>
               ))}
               <div className="w-px h-8 bg-white/[0.06] shrink-0" />
@@ -340,7 +343,7 @@ export default function Home() {
               </FadeUp>
             </div>
             <FadeUp delay={0.1}>
-              <p className="text-white/40 text-sm max-w-xs mt-4 lg:mt-0 lg:text-right">
+              <p className="text-white/65 text-sm max-w-xs mt-4 lg:mt-0 lg:text-right">
                 Every project gets the white-glove treatment. Hover to see the
                 work come alive.
               </p>
@@ -363,7 +366,7 @@ export default function Home() {
                     <p className="text-white font-semibold text-sm">
                       {p.label}
                     </p>
-                    <p className="text-white/40 text-xs">{p.sub}</p>
+                    <p className="text-white/65 text-xs">{p.sub}</p>
                   </div>
                 </div>
               </FadeUp>
@@ -459,7 +462,7 @@ export default function Home() {
                 </h2>
               </FadeUp>
               <FadeUp delay={0.1}>
-                <p className="text-white/40 leading-relaxed mb-8">
+                <p className="text-white/65 leading-relaxed mb-8">
                   From intimate mixers to full-scale summits, our events connect
                   you with the people and strategies that accelerate growth.
                 </p>
@@ -484,14 +487,14 @@ export default function Home() {
                       <span className="inline-block px-4 py-1.5 bg-gradient-coral text-white text-xs font-bold rounded-lg mb-3">
                         {e.date}
                       </span>
-                      <div className="flex items-center gap-2 text-white/30 text-xs mb-2">
+                      <div className="flex items-center gap-2 text-white/65 text-xs mb-2">
                         <MapPin className="w-3 h-3" />
                         {e.location}
                       </div>
                       <h3 className="font-[family-name:var(--font-outfit-var)] text-white font-bold mb-2">
                         {e.title}
                       </h3>
-                      <p className="text-white/40 text-sm mb-4">{e.desc}</p>
+                      <p className="text-white/65 text-sm mb-4">{e.desc}</p>
                       <span className="inline-flex items-center gap-1 text-buzz-coral text-sm font-medium cursor-pointer group">
                         Reserve Your Spot
                         <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -515,7 +518,7 @@ export default function Home() {
             <h3 className="font-[family-name:var(--font-syne-var)] text-xl md:text-2xl font-bold text-white">
               See how your business actually shows up online
             </h3>
-            <p className="text-white/40 text-sm mt-1">
+            <p className="text-white/65 text-sm mt-1">
               Website, Google, social media, competitors — we analyze everything.
             </p>
           </div>
@@ -562,7 +565,7 @@ export default function Home() {
                   <div className="relative aspect-[16/10] overflow-hidden">
                     <Image
                       src={post.image}
-                      alt={post.title}
+                      alt={post.imageAlt}
                       fill
                       className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-[1.05]"
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"

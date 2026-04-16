@@ -173,7 +173,7 @@ export default function EventsPage() {
                     <h3 className="font-[family-name:var(--font-outfit-var)] font-bold text-white mb-2 text-sm md:text-base leading-snug">
                       {ev.title}
                     </h3>
-                    <p className="text-white/40 text-sm mb-1">{ev.date}</p>
+                    <p className="text-white/65 text-sm mb-1">{ev.date}</p>
                     <p className="text-buzz-coral font-semibold text-sm">
                       {ev.attendees} attendees
                     </p>

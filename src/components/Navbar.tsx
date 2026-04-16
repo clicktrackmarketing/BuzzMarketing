@@ -77,7 +77,7 @@ export function Navbar() {
             </span>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-0.5">
+          <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-0.5">
             {NAV_LINKS.map((link) => {
               const active = pathname === link.href;
               return (
@@ -130,6 +130,8 @@ export function Navbar() {
             onClick={() => setMobileOpen(!mobileOpen)}
             className="lg:hidden relative z-50 w-10 h-10 flex items-center justify-center cursor-pointer text-white"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav"
           >
             <AnimatePresence mode="wait" initial={false}>
               {mobileOpen ? (
@@ -177,7 +179,11 @@ export function Navbar() {
             <div className="ambient-glow-coral top-10 -left-20 opacity-20" />
             <div className="ambient-glow-violet bottom-20 -right-10 opacity-15" />
 
-            <nav className="relative z-10 flex flex-col items-start gap-2 px-8 pt-24 pb-8 flex-1">
+            <nav
+              id="mobile-nav"
+              aria-label="Mobile navigation"
+              className="relative z-10 flex flex-col items-start gap-2 px-8 pt-24 pb-8 flex-1"
+            >
               {NAV_LINKS.map((link, i) => (
                 <motion.div
                   key={link.href}
@@ -219,7 +225,7 @@ export function Navbar() {
                   Book a Discovery Call
                   <ArrowUpRight className="w-5 h-5" />
                 </Link>
-                <p className="text-center text-white/30 text-xs mt-4">
+                <p className="text-center text-white/65 text-xs mt-4">
                   Women-Founded · San Diego&apos;s Premier Agency
                 </p>
               </motion.div>

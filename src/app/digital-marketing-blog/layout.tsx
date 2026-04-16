@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/JsonLd";
+import { buildBreadcrumbs } from "@/lib/breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Marketing Blog | Tips & Strategy",
@@ -7,6 +9,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/digital-marketing-blog",
   },
+  openGraph: {
+    title: "Marketing Blog | The Buzz Marketing Co",
+    description:
+      "Social media, SEO, content, and growth strategy insights from the team behind San Diego's premier social media marketing agency.",
+    url: "https://thebuzzmarketingco.com/digital-marketing-blog",
+  },
 };
 
 export default function DigitalMarketingBlogLayout({
@@ -14,5 +22,12 @@ export default function DigitalMarketingBlogLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return (
+    <>
+      <JsonLd
+        data={buildBreadcrumbs([{ name: "Blog", path: "/digital-marketing-blog" }])}
+      />
+      {children}
+    </>
+  );
 }

@@ -3,9 +3,7 @@ import {
   buildContactPayload,
   contactFormSchema,
 } from "@/lib/contact-form-schema";
-
-const GHL_WEBHOOK_URL =
-  "https://services.leadconnectorhq.com/hooks/A4GV6zKNQKT5XMvVrKIu/webhook-trigger/8900d39e-111d-4117-b898-31d8b13ff3d6";
+import { forwardToGhl, isHoneypotTriggered } from "@/lib/ghl-webhook";
 
 function log(
   level: "info" | "warn" | "error",
@@ -41,6 +39,13 @@ export async function POST(request: Request) {
     );
   }
 
+  // Honeypot — silently accept but drop. Returning 2xx prevents bots from
+  // retrying or inferring the trap.
+  if (isHoneypotTriggered(body)) {
+    log("warn", "Honeypot triggered; dropping submission", { requestId });
+    return NextResponse.json({ ok: true as const });
+  }
+
   const bodyKeys =
     typeof body === "object" && body !== null ? Object.keys(body) : [];
   log("info", "Parsed request body", { requestId, fields: bodyKeys });
@@ -74,42 +79,8 @@ export async function POST(request: Request) {
     payloadKeys: Object.keys(payload),
   });
 
-  try {
-    const res = await fetch(GHL_WEBHOOK_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-
-    const responseText = await res.text().catch(() => "<unreadable>");
-
-    if (!res.ok) {
-      log("error", "GHL webhook returned error", {
-        requestId,
-        status: res.status,
-        response: responseText.slice(0, 500),
-      });
-      return NextResponse.json(
-        {
-          message:
-            "We could not send your message. Please try again in a moment or call (720) 363-9754.",
-        },
-        { status: 502 },
-      );
-    }
-
-    log("info", "GHL webhook accepted", {
-      requestId,
-      status: res.status,
-      response: responseText.slice(0, 300),
-    });
-
-    return NextResponse.json({ ok: true as const });
-  } catch (err) {
-    log("error", "GHL webhook request failed (network)", {
-      requestId,
-      error: String(err),
-    });
+  const result = await forwardToGhl(payload, log, requestId);
+  if (!result.ok) {
     return NextResponse.json(
       {
         message:
@@ -118,4 +89,6 @@ export async function POST(request: Request) {
       { status: 502 },
     );
   }
+
+  return NextResponse.json({ ok: true as const });
 }

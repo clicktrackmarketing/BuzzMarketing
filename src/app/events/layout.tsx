@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/JsonLd";
+import { buildBreadcrumbs } from "@/lib/breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Events | Networking & Marketing Summits",
@@ -7,6 +9,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/events",
   },
+  openGraph: {
+    title: "Events | The Buzz Marketing Co",
+    description:
+      "Networking mixers, social media summits, and community events hosted by San Diego's premier social media marketing agency.",
+    url: "https://thebuzzmarketingco.com/events",
+  },
 };
 
 export default function EventsLayout({
@@ -14,5 +22,10 @@ export default function EventsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return (
+    <>
+      <JsonLd data={buildBreadcrumbs([{ name: "Events", path: "/events" }])} />
+      {children}
+    </>
+  );
 }

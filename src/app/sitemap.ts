@@ -13,6 +13,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/events",
     "/free-analysis",
     "/digital-marketing-blog",
+    "/privacy",
+    "/terms",
   ];
 
   const staticEntries: MetadataRoute.Sitemap = routes.map((route) => ({

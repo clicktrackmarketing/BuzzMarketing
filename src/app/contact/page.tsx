@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   motion,
   AnimatePresence,
@@ -22,7 +22,7 @@ import {
 } from "@/lib/contact-form-schema";
 
 const inputClass =
-  "w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-sm text-white placeholder:text-white/30 focus:border-buzz-coral focus:outline-none focus:ring-2 focus:ring-buzz-coral/20 transition-all";
+  "w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-sm text-white placeholder:text-white/65 focus:border-buzz-coral focus:outline-none focus:ring-2 focus:ring-buzz-coral/20 transition-all";
 
 export default function ContactPage() {
   const prefersReduced = useReducedMotion();
@@ -42,6 +42,15 @@ export default function ContactPage() {
   const [successVision, setSuccessVision] = useState("");
   const [service, setService] = useState("");
   const [optionalMessage, setOptionalMessage] = useState("");
+  const [honeypot, setHoneypot] = useState("");
+
+  const successHeadingRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    if (submitted) {
+      successHeadingRef.current?.focus();
+    }
+  }, [submitted]);
 
   const pct = Math.round((currentStep / 5) * 100);
 
@@ -117,7 +126,7 @@ export default function ContactPage() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(full.data),
+        body: JSON.stringify({ ...full.data, website_url_confirm: honeypot }),
       });
       const data: unknown = await res.json().catch(() => ({}));
       if (!res.ok) {
@@ -130,6 +139,23 @@ export default function ContactPage() {
             : "Something went wrong. Please try again.";
         setFormError(msg);
         return;
+      }
+      // Fire conversion events
+      if (typeof window !== "undefined") {
+        const w = window as unknown as {
+          gtag?: (...args: unknown[]) => void;
+          clarity?: (...args: unknown[]) => void;
+          dataLayer?: unknown[];
+        };
+        w.gtag?.("event", "generate_lead", {
+          event_category: "lead",
+          event_label: "contact_form",
+          service: full.data.service,
+          value: 1,
+          currency: "USD",
+        });
+        w.clarity?.("event", "lead_submitted_contact");
+        w.dataLayer?.push({ event: "lead_submitted", form: "contact" });
       }
       setSubmitted(true);
     } catch {
@@ -162,6 +188,9 @@ export default function ContactPage() {
             {submitted ? (
               <motion.div
                 key="success"
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}
@@ -183,13 +212,17 @@ export default function ContactPage() {
                     <Check
                       className="h-12 w-12 text-white"
                       strokeWidth={2.5}
-                      aria-hidden
+                      aria-hidden="true"
                     />
                   </motion.div>
-                  <h2 className="font-[family-name:var(--font-syne-var)] text-3xl font-extrabold text-white md:text-4xl">
+                  <h2
+                    ref={successHeadingRef}
+                    tabIndex={-1}
+                    className="font-[family-name:var(--font-syne-var)] text-3xl font-extrabold text-white md:text-4xl outline-none"
+                  >
                     We&apos;re on it!
                   </h2>
-                  <p className="mt-4 max-w-md text-white/50 leading-relaxed">
+                  <p className="mt-4 max-w-md text-white/70 leading-relaxed">
                     Thanks for reaching out. We&apos;ll review your responses and
                     get back to you within 24 hours.
                   </p>
@@ -219,7 +252,7 @@ export default function ContactPage() {
                 </header>
 
                 <div className="mb-8">
-                  <div className="mb-2 flex items-center justify-between text-xs font-medium text-white/40">
+                  <div className="mb-2 flex items-center justify-between text-xs font-medium text-white/65">
                     <span>
                       Step {currentStep} of 5
                     </span>
@@ -238,11 +271,27 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <form onSubmit={handleSubmit} aria-busy={isSubmitting}>
+                <form onSubmit={handleSubmit} aria-busy={isSubmitting} noValidate>
+                  {/* Honeypot — hidden from humans, catches bots */}
+                  <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+                    <label htmlFor="website_url_confirm">Do not fill this field</label>
+                    <input
+                      id="website_url_confirm"
+                      name="website_url_confirm"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={honeypot}
+                      onChange={(e) => setHoneypot(e.target.value)}
+                    />
+                  </div>
+
                   {formError ? (
                     <p
-                      className="mb-6 rounded-xl border border-red-500/25 bg-red-500/10 px-4 py-3 text-sm text-red-200"
+                      id="contact-form-error"
+                      className="mb-6 rounded-xl border border-red-500/40 bg-red-500/15 px-4 py-3 text-sm text-red-200"
                       role="alert"
+                      aria-live="assertive"
                     >
                       {formError}
                     </p>
@@ -272,7 +321,7 @@ export default function ContactPage() {
                             <div>
                               <label
                                 htmlFor="firstName"
-                                className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/40"
+                                className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/65"
                               >
                                 First name
                               </label>
@@ -289,7 +338,7 @@ export default function ContactPage() {
                             <div>
                               <label
                                 htmlFor="lastName"
-                                className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/40"
+                                className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/65"
                               >
                                 Last name
                               </label>
@@ -307,7 +356,7 @@ export default function ContactPage() {
                           <div>
                             <label
                               htmlFor="email"
-                              className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/40"
+                              className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/65"
                             >
                               Email
                             </label>
@@ -325,7 +374,7 @@ export default function ContactPage() {
                           <div>
                             <label
                               htmlFor="phone"
-                              className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/40"
+                              className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/65"
                             >
                               Phone
                             </label>
@@ -343,7 +392,7 @@ export default function ContactPage() {
                           <div>
                             <label
                               htmlFor="businessName"
-                              className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/40"
+                              className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/65"
                             >
                               Business name
                             </label>
@@ -551,7 +600,7 @@ export default function ContactPage() {
                             type="button"
                             onClick={goBack}
                             disabled={isSubmitting}
-                            className="cursor-pointer text-sm font-medium text-white/40 underline-offset-4 transition-colors hover:text-buzz-coral hover:underline disabled:cursor-not-allowed disabled:opacity-40"
+                            className="cursor-pointer text-sm font-medium text-white/65 underline-offset-4 transition-colors hover:text-buzz-coral hover:underline disabled:cursor-not-allowed disabled:opacity-40"
                           >
                             Back
                           </button>
@@ -578,13 +627,24 @@ export default function ContactPage() {
                         </Button>
                       )}
                     </div>
-                    <p className="text-center text-sm text-white/35">
+                    <p className="text-center text-sm text-white/65">
                       Prefer to talk? Call us at{" "}
                       <a
                         href="tel:+17203639754"
                         className="cursor-pointer font-medium text-buzz-coral underline-offset-2 hover:underline"
                       >
                         (720) 363-9754
+                      </a>
+                    </p>
+                    <p className="text-center text-xs text-white/65">
+                      San Diego, CA 92101 &middot;{" "}
+                      <a
+                        href="https://www.google.com/maps/dir/?api=1&destination=The+Buzz+Marketing+Co%2C+San+Diego%2C+CA+92101"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="cursor-pointer font-medium text-buzz-coral underline-offset-2 hover:underline"
+                      >
+                        Get directions
                       </a>
                     </p>
                   </div>

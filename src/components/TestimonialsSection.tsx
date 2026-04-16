@@ -112,7 +112,7 @@ export function TestimonialsSection() {
                   </p>
                   <div className="mt-auto shrink-0 border-t border-white/[0.06] pt-4">
                     <p className="text-sm font-semibold text-white">{t.name}</p>
-                    <p className="text-xs text-white/40">{t.title}</p>
+                    <p className="text-xs text-white/65">{t.title}</p>
                   </div>
                 </div>
               </GlowCard>

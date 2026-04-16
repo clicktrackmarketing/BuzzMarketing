@@ -83,6 +83,7 @@ type ServiceBlock = {
   id: string;
   icon: typeof Compass;
   image: string;
+  imageAlt: string;
   title: string;
   description: string;
   bullets: readonly string[];
@@ -94,6 +95,7 @@ const SERVICE_BLOCKS: ServiceBlock[] = [
     id: "strategy",
     icon: Compass,
     image: "/service-brand.jpg",
+    imageAlt: "Marketing strategy and creative direction session in San Diego",
     title: "Strategy + Creative Direction",
     description:
       "We build the foundation. If you feel scattered or stuck, this is where we fix it.",
@@ -108,6 +110,7 @@ const SERVICE_BLOCKS: ServiceBlock[] = [
     id: "social",
     icon: Megaphone,
     image: "/service-social.jpg",
+    imageAlt: "Social media management for San Diego high-trust brands",
     title: "Social Media Management",
     description:
       "We don't post just to post. Everything is intentional. Our focus: positioning you as the authority, attracting higher-value clients or patients, and creating content that builds trust and drives action.",
@@ -117,6 +120,7 @@ const SERVICE_BLOCKS: ServiceBlock[] = [
     id: "shoot",
     icon: Camera,
     image: "/service-content.jpg",
+    imageAlt: "Signature two-day content shoot with photo and video production",
     title: "Signature Content Shoot",
     description:
       "Two full days of high-end content creation. This is for brands ready to elevate their image fast.",
@@ -131,6 +135,7 @@ const SERVICE_BLOCKS: ServiceBlock[] = [
     id: "website",
     icon: LayoutTemplate,
     image: "/service-ads.jpg",
+    imageAlt: "Website conversion rate optimization and layout planning",
     title: "Website + Conversion Optimization",
     description:
       "A good-looking site isn't enough. It needs to convert. So when people land on your site, they take action.",
@@ -145,6 +150,7 @@ const SERVICE_BLOCKS: ServiceBlock[] = [
     id: "google",
     icon: MapPinned,
     image: "/service-seo.jpg",
+    imageAlt: "Google Business Profile and local SEO optimization for San Diego",
     title: "Google + Local Presence",
     description:
       "Your Google profile is often the final decision point. So you don't just show up, you stand out.",
@@ -159,6 +165,7 @@ const SERVICE_BLOCKS: ServiceBlock[] = [
     id: "branding",
     icon: Palette,
     image: "/service-email.jpg",
+    imageAlt: "Brand identity and positioning strategy workspace",
     title: "Branding + Positioning",
     description:
       "If your brand feels unclear, your marketing will too. Clarity here changes everything.",
@@ -345,7 +352,7 @@ export default function ServicesPage() {
                         >
                           <Image
                             src={service.image}
-                            alt={service.title}
+                            alt={service.imageAlt}
                             fill
                             className="object-cover transition-all duration-700 group-hover:scale-[1.03]"
                             sizes="(max-width: 1024px) 100vw, 50vw"
@@ -608,6 +615,8 @@ export default function ServicesPage() {
                     <button
                       type="button"
                       onClick={() => toggleFaq(i)}
+                      aria-expanded={isOpen}
+                      aria-controls={`faq-panel-${i}`}
                       className="cursor-pointer w-full flex items-center justify-between gap-4 text-left p-5 md:p-6"
                     >
                       <span className="font-[family-name:var(--font-outfit-var)] font-semibold text-foreground pr-2">
@@ -624,6 +633,8 @@ export default function ServicesPage() {
                     <AnimatePresence initial={false}>
                       {isOpen && (
                         <motion.div
+                          id={`faq-panel-${i}`}
+                          role="region"
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { JsonLd } from "@/components/JsonLd";
+import { buildBreadcrumbs } from "@/lib/breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Best Social Media Marketing Company in San Diego",
@@ -71,6 +72,11 @@ export default function DigitalMarketingSdLayout({
 }) {
   return (
     <>
+      <JsonLd
+        data={buildBreadcrumbs([
+          { name: "San Diego Results", path: "/digital-marketing-sd" },
+        ])}
+      />
       <JsonLd
         data={{
           "@context": "https://schema.org",

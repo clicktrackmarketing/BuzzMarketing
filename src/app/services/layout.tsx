@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { JsonLd } from "@/components/JsonLd";
+import { buildBreadcrumbs } from "@/lib/breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Marketing Services | Social Media, SEO & Branding",
@@ -15,10 +16,7 @@ const SERVICES_SCHEMA = [
   {
     "@type": "Service",
     serviceType: "Social Media Management",
-    provider: {
-      "@type": "LocalBusiness",
-      name: "The Buzz Marketing Co",
-    },
+    provider: { "@id": "https://thebuzzmarketingco.com/#organization" },
     areaServed: { "@type": "City", name: "San Diego" },
     description:
       "Monthly social media management packages from Starter Buzz ($750/mo) to Custom Campaigns ($5,000+/mo) including content planning, caption writing, and page management.",
@@ -26,10 +24,7 @@ const SERVICES_SCHEMA = [
   {
     "@type": "Service",
     serviceType: "Strategy + Creative Direction",
-    provider: {
-      "@type": "LocalBusiness",
-      name: "The Buzz Marketing Co",
-    },
+    provider: { "@id": "https://thebuzzmarketingco.com/#organization" },
     areaServed: { "@type": "City", name: "San Diego" },
     description:
       "Brand clarity, messaging, content direction, and actionable marketing plans for high-trust brands.",
@@ -37,10 +32,7 @@ const SERVICES_SCHEMA = [
   {
     "@type": "Service",
     serviceType: "Signature Content Shoot",
-    provider: {
-      "@type": "LocalBusiness",
-      name: "The Buzz Marketing Co",
-    },
+    provider: { "@id": "https://thebuzzmarketingco.com/#organization" },
     areaServed: { "@type": "City", name: "San Diego" },
     description:
       "Two-day high-end photo and video content production ($5,000) with travel included. Assets designed to last months.",
@@ -48,10 +40,7 @@ const SERVICES_SCHEMA = [
   {
     "@type": "Service",
     serviceType: "Website + Conversion Optimization",
-    provider: {
-      "@type": "LocalBusiness",
-      name: "The Buzz Marketing Co",
-    },
+    provider: { "@id": "https://thebuzzmarketingco.com/#organization" },
     areaServed: { "@type": "City", name: "San Diego" },
     description:
       "Messaging, layout, trust signals, and UX optimization so website visitors take action.",
@@ -59,10 +48,7 @@ const SERVICES_SCHEMA = [
   {
     "@type": "Service",
     serviceType: "Google + Local Presence",
-    provider: {
-      "@type": "LocalBusiness",
-      name: "The Buzz Marketing Co",
-    },
+    provider: { "@id": "https://thebuzzmarketingco.com/#organization" },
     areaServed: { "@type": "City", name: "San Diego" },
     description:
       "Google Business Profile optimization, reviews strategy, local citations, and credibility signals for local search visibility.",
@@ -70,10 +56,7 @@ const SERVICES_SCHEMA = [
   {
     "@type": "Service",
     serviceType: "Branding + Positioning",
-    provider: {
-      "@type": "LocalBusiness",
-      name: "The Buzz Marketing Co",
-    },
+    provider: { "@id": "https://thebuzzmarketingco.com/#organization" },
     areaServed: { "@type": "City", name: "San Diego" },
     description:
       "Voice, visual direction, content strategy, and platform positioning with clarity.",
@@ -130,6 +113,9 @@ export default function ServicesLayout({
 }>) {
   return (
     <>
+      <JsonLd
+        data={buildBreadcrumbs([{ name: "Services", path: "/services" }])}
+      />
       <JsonLd
         data={{
           "@context": "https://schema.org",

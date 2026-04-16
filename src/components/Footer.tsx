@@ -127,7 +127,7 @@ export function Footer() {
           </FadeUp>
 
           <FadeUp variant="up" delay={0.1}>
-            <h4 className="font-[family-name:var(--font-dm-sans-var)] text-[0.7rem] font-semibold tracking-[0.18em] uppercase text-white/30 mb-5">
+            <h4 className="font-[family-name:var(--font-dm-sans-var)] text-[0.7rem] font-semibold tracking-[0.18em] uppercase text-white/65 mb-5">
               Services
             </h4>
             <ul className="space-y-3">
@@ -145,7 +145,7 @@ export function Footer() {
           </FadeUp>
 
           <FadeUp variant="up" delay={0.15}>
-            <h4 className="font-[family-name:var(--font-dm-sans-var)] text-[0.7rem] font-semibold tracking-[0.18em] uppercase text-white/30 mb-5">
+            <h4 className="font-[family-name:var(--font-dm-sans-var)] text-[0.7rem] font-semibold tracking-[0.18em] uppercase text-white/65 mb-5">
               Company
             </h4>
             <ul className="space-y-3">
@@ -163,7 +163,7 @@ export function Footer() {
           </FadeUp>
 
           <FadeUp variant="up" delay={0.2}>
-            <h4 className="font-[family-name:var(--font-dm-sans-var)] text-[0.7rem] font-semibold tracking-[0.18em] uppercase text-white/30 mb-5">
+            <h4 className="font-[family-name:var(--font-dm-sans-var)] text-[0.7rem] font-semibold tracking-[0.18em] uppercase text-white/65 mb-5">
               Resources
             </h4>
             <ul className="space-y-3">
@@ -179,7 +179,7 @@ export function Footer() {
               ))}
             </ul>
 
-            <h4 className="font-[family-name:var(--font-dm-sans-var)] text-[0.7rem] font-semibold tracking-[0.18em] uppercase text-white/30 mb-5 mt-8">
+            <h4 className="font-[family-name:var(--font-dm-sans-var)] text-[0.7rem] font-semibold tracking-[0.18em] uppercase text-white/65 mb-5 mt-8">
               Connect
             </h4>
             <div className="flex items-center gap-3">
@@ -190,7 +190,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={link.label}
-                  className="w-10 h-10 rounded-xl bg-white/[0.04] flex items-center justify-center text-white/35 hover:text-buzz-coral hover:bg-white/[0.08] transition-all cursor-pointer"
+                  className="w-10 h-10 rounded-xl bg-white/[0.04] flex items-center justify-center text-white/65 hover:text-buzz-coral hover:bg-white/[0.08] transition-all cursor-pointer"
                 >
                   <link.icon className="w-4 h-4" />
                 </a>
@@ -215,7 +215,7 @@ export function Footer() {
             <p>San Diego, California</p>
             <button
               onClick={scrollToTop}
-              className="w-9 h-9 rounded-xl bg-white/[0.06] flex items-center justify-center text-white/40 hover:text-buzz-coral hover:bg-white/[0.10] transition-all cursor-pointer"
+              className="w-9 h-9 rounded-xl bg-white/[0.06] flex items-center justify-center text-white/65 hover:text-buzz-coral hover:bg-white/[0.10] transition-all cursor-pointer"
               aria-label="Back to top"
             >
               <ArrowUp className="w-4 h-4" />
@@ -223,7 +223,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-6 text-center text-xs text-white/40">
+        <div className="mt-6 text-center text-xs text-white/65">
           <a
             href="https://clicktrackmarketing.com?utm_source=buzz_marketing_co&utm_medium=footer&utm_campaign=client_website"
             target="_blank"

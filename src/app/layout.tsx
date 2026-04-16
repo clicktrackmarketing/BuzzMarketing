@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Suspense } from "react";
 import { Outfit, DM_Sans, Syne, Space_Grotesk } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { SparkleTrail } from "@/components/SparkleTrail";
 import { FloatingPetals } from "@/components/FloatingPetals";
+import { MobileCTABar } from "@/components/MobileCTABar";
+import { RouteChangeTracker } from "@/components/RouteChangeTracker";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -38,11 +41,12 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: {
-    default: "The Buzz Marketing Co | San Diego Marketing Agency",
+    default: "Social Media Marketing Agency San Diego | The Buzz Marketing Co",
     template: "%s | The Buzz Marketing Co",
   },
   description:
-    "San Diego's premier social media marketing agency. 150+ clients served, 8+ years of experience. Strategy, content, ads, SEO & more.",
+    "The Buzz Marketing Co is the social media marketing agency San Diego businesses trust. 150+ clients served, 8+ years of experience. Strategy, content, ads, SEO & more.",
+  authors: [{ name: "The Buzz Marketing Co" }],
   metadataBase: new URL("https://thebuzzmarketingco.com"),
   alternates: {
     canonical: "/",
@@ -57,15 +61,15 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "The Buzz Marketing Co — San Diego's Premier Social Media Marketing Agency",
+        alt: "The Buzz Marketing Co — Social Media Marketing Agency San Diego",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "The Buzz Marketing Co | San Diego Marketing Agency",
+    title: "Social Media Marketing Agency San Diego | The Buzz Marketing Co",
     description:
-      "San Diego's premier social media marketing agency. 150+ clients served, 8+ years of experience. Strategy, content, ads, SEO & more.",
+      "The Buzz Marketing Co is the social media marketing agency San Diego businesses trust. 150+ clients served, 8+ years of experience. Strategy, content, ads, SEO & more.",
     images: ["/og-image.jpg"],
   },
 };
@@ -100,62 +104,128 @@ export default function RootLayout({
           src="https://tag.clicktrackmarketing.com/ldc.js?pid=1cca4737c771f3757afbe5c4644eb68a&aid=16de03f2"
           strategy="afterInteractive"
         />
+        {/* Microsoft Clarity */}
+        <Script id="ms-clarity" strategy="afterInteractive">
+          {`
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "wct5lcfcpc");
+          `}
+        </Script>
       </head>
       <body className="min-h-screen flex flex-col antialiased">
         <JsonLd
           data={{
             "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            name: "The Buzz Marketing Co",
-            description:
-              "San Diego's premier social media marketing agency. Building brands, growing audiences, driving revenue.",
-            url: "https://thebuzzmarketingco.com",
-            telephone: "+17203639754",
-            priceRange: "$$",
-            image: "https://thebuzzmarketingco.com/og-image.jpg",
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: "San Diego",
-              addressRegion: "CA",
-              postalCode: "92101",
-              addressCountry: "US",
-            },
-            geo: {
-              "@type": "GeoCoordinates",
-              latitude: 32.7157,
-              longitude: -117.1611,
-            },
-            aggregateRating: {
-              "@type": "AggregateRating",
-              ratingValue: "5.0",
-              reviewCount: "19",
-            },
-            founder: {
-              "@type": "Person",
-              name: "Brit Dhillon",
-            },
-            areaServed: [
-              { "@type": "City", name: "San Diego" },
-              { "@type": "City", name: "La Jolla" },
-              { "@type": "City", name: "Del Mar" },
-              { "@type": "City", name: "Encinitas" },
-              { "@type": "City", name: "Carlsbad" },
-              { "@type": "City", name: "Coronado" },
-              { "@type": "City", name: "Chula Vista" },
-            ],
-            sameAs: [
-              "https://www.instagram.com/thebuzzmarketingco",
-              "https://www.facebook.com/660987293768723",
-              "https://www.linkedin.com/company/the-buzz-marketing-co/",
-              "https://www.youtube.com/@TheBuzzMarketingComany",
+            "@graph": [
+              {
+                "@type": ["Organization", "LocalBusiness"],
+                "@id": "https://thebuzzmarketingco.com/#organization",
+                name: "The Buzz Marketing Co",
+                alternateName: "Social Media Marketing Agency San Diego",
+                description:
+                  "Social Media Marketing Agency San Diego businesses trust. Women-founded boutique agency delivering strategy, content, ads, SEO, and branding for high-trust brands across healthcare, legal, fitness, real estate, beauty, and luxury lifestyle.",
+                url: "https://thebuzzmarketingco.com",
+                telephone: "+17203639754",
+                priceRange: "$$",
+                image: "https://thebuzzmarketingco.com/og-image.jpg",
+                logo: "https://thebuzzmarketingco.com/logo.png",
+                knowsAbout: [
+                  "Social Media Marketing",
+                  "Social Media Management",
+                  "Instagram Marketing",
+                  "TikTok Marketing",
+                  "Content Strategy",
+                  "Brand Strategy",
+                  "Creative Direction",
+                  "Paid Social Advertising",
+                  "Local SEO",
+                  "Google Business Profile Optimization",
+                  "Conversion Rate Optimization",
+                  "Influencer Marketing",
+                  "Event Marketing",
+                  "Photography and Video Production",
+                  "San Diego Digital Marketing",
+                ],
+                address: {
+                  "@type": "PostalAddress",
+                  addressLocality: "San Diego",
+                  addressRegion: "CA",
+                  postalCode: "92101",
+                  addressCountry: "US",
+                },
+                geo: {
+                  "@type": "GeoCoordinates",
+                  latitude: 32.7157,
+                  longitude: -117.1611,
+                },
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: "5.0",
+                  reviewCount: "19",
+                },
+                founder: { "@id": "https://thebuzzmarketingco.com/#brit-dhillon" },
+                areaServed: [
+                  { "@type": "City", name: "San Diego" },
+                  { "@type": "City", name: "La Jolla" },
+                  { "@type": "City", name: "Del Mar" },
+                  { "@type": "City", name: "Encinitas" },
+                  { "@type": "City", name: "Carlsbad" },
+                  { "@type": "City", name: "Coronado" },
+                  { "@type": "City", name: "Chula Vista" },
+                ],
+                sameAs: [
+                  "https://www.instagram.com/thebuzzmarketingco",
+                  "https://www.facebook.com/660987293768723",
+                  "https://www.linkedin.com/company/the-buzz-marketing-co/",
+                  "https://www.youtube.com/@TheBuzzMarketingComany",
+                ],
+              },
+              {
+                "@type": "Person",
+                "@id": "https://thebuzzmarketingco.com/#brit-dhillon",
+                name: "Brit Dhillon",
+                jobTitle: "Founder & CEO",
+                worksFor: { "@id": "https://thebuzzmarketingco.com/#organization" },
+                knowsAbout: [
+                  "Social Media Marketing",
+                  "Brand Strategy",
+                  "Content Direction",
+                  "Event Marketing",
+                ],
+                image: "https://thebuzzmarketingco.com/founder.jpg",
+                url: "https://thebuzzmarketingco.com/about",
+              },
+              {
+                "@type": "WebSite",
+                "@id": "https://thebuzzmarketingco.com/#website",
+                url: "https://thebuzzmarketingco.com",
+                name: "The Buzz Marketing Co",
+                publisher: { "@id": "https://thebuzzmarketingco.com/#organization" },
+                inLanguage: "en-US",
+              },
             ],
           }}
         />
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-lg focus:bg-buzz-coral focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white focus:shadow-luxury focus:outline-none focus:ring-2 focus:ring-white/80"
+        >
+          Skip to main content
+        </a>
         <Navbar />
         <SparkleTrail />
         <FloatingPetals />
-        <main className="flex-1">{children}</main>
+        <Suspense fallback={null}>
+          <RouteChangeTracker />
+        </Suspense>
+        <main id="main-content" tabIndex={-1} className="flex-1 outline-none">{children}</main>
         <Footer />
+        <MobileCTABar />
+        {/* Spacer so the fixed MobileCTABar doesn't cover footer/content on mobile */}
+        <div className="h-14 md:hidden" aria-hidden="true" />
       </body>
     </html>
   );

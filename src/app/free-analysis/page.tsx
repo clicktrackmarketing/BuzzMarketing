@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -135,11 +135,65 @@ export default function FreeAnalysisPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  // Lock body scroll when modal is open
+  const modalRef = useRef<HTMLDivElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const lastFocusedRef = useRef<HTMLElement | null>(null);
+  const successHeadingRef = useRef<HTMLHeadingElement>(null);
+
+  // Lock body scroll + move focus into modal + install ESC / focus trap
   useEffect(() => {
-    document.body.style.overflow = modalOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [modalOpen]);
+    if (!modalOpen) {
+      document.body.style.overflow = "";
+      // Restore focus to whatever opened the modal
+      lastFocusedRef.current?.focus?.();
+      return;
+    }
+
+    lastFocusedRef.current = document.activeElement as HTMLElement | null;
+    document.body.style.overflow = "hidden";
+
+    // Move focus to the close button after mount
+    const rafId = requestAnimationFrame(() => {
+      closeBtnRef.current?.focus();
+    });
+
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && !isSubmitting) {
+        e.preventDefault();
+        setModalOpen(false);
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const root = modalRef.current;
+      if (!root) return;
+      const focusables = root.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", handleKey);
+    return () => {
+      document.removeEventListener("keydown", handleKey);
+      cancelAnimationFrame(rafId);
+      document.body.style.overflow = "";
+    };
+  }, [modalOpen, isSubmitting]);
+
+  // Move focus to success heading when submission completes (announces to SR)
+  useEffect(() => {
+    if (submitted) {
+      successHeadingRef.current?.focus();
+    }
+  }, [submitted]);
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => {
@@ -166,10 +220,30 @@ export default function FreeAnalysisPage() {
       const res = await fetch("/api/free-analysis", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(parsed.data),
+        body: JSON.stringify({
+          ...parsed.data,
+          // Honeypot — real users never fill this hidden field
+          website_url_confirm: (form as unknown as { website_url_confirm?: string }).website_url_confirm ?? "",
+        }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Something went wrong");
+      // Fire conversion events
+      if (typeof window !== "undefined") {
+        const w = window as unknown as {
+          gtag?: (...args: unknown[]) => void;
+          clarity?: (...args: unknown[]) => void;
+          dataLayer?: unknown[];
+        };
+        w.gtag?.("event", "generate_lead", {
+          event_category: "lead",
+          event_label: "free_analysis",
+          value: 500,
+          currency: "USD",
+        });
+        w.clarity?.("event", "lead_submitted_free_analysis");
+        w.dataLayer?.push({ event: "lead_submitted", form: "free_analysis" });
+      }
       setSubmitted(true);
     } catch (err) {
       setFormError(
@@ -188,6 +262,9 @@ export default function FreeAnalysisPage() {
       {submitted ? (
         <motion.div
           key="success"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           className="text-center py-8"
@@ -198,21 +275,25 @@ export default function FreeAnalysisPage() {
               animate={{ scale: 1 }}
               transition={{ delay: 0.2, type: "spring", stiffness: 300 }}
             >
-              <Check className="w-8 h-8 text-buzz-coral" />
+              <Check className="w-8 h-8 text-buzz-coral" aria-hidden="true" />
             </motion.div>
           </div>
-          <h3 className="font-[family-name:var(--font-syne-var)] text-2xl font-bold text-white mb-3">
+          <h3
+            ref={successHeadingRef}
+            tabIndex={-1}
+            className="font-[family-name:var(--font-syne-var)] text-2xl font-bold text-white mb-3 outline-none"
+          >
             We&apos;re on it!
           </h3>
-          <p className="text-white/50 max-w-md mx-auto leading-relaxed">
+          <p className="text-white/65 max-w-md mx-auto leading-relaxed">
             Your free digital analysis is being prepared. We&apos;ll be in
             touch within 24 hours to walk you through everything.
           </p>
           <a
-            href="tel:7203639754"
-            className="inline-flex items-center gap-2 mt-6 text-buzz-coral font-medium text-sm hover:underline"
+            href="tel:+17203639754"
+            className="inline-flex items-center gap-2 mt-6 text-buzz-coral font-medium text-sm hover:underline outline-none focus-visible:ring-2 focus-visible:ring-buzz-coral/60 rounded"
           >
-            <Phone className="w-4 h-4" />
+            <Phone className="w-4 h-4" aria-hidden="true" />
             (720) 363-9754
           </a>
         </motion.div>
@@ -221,18 +302,43 @@ export default function FreeAnalysisPage() {
           key="form"
           onSubmit={handleSubmit}
           className="space-y-5"
+          aria-busy={isSubmitting}
+          noValidate
         >
+          {/* Honeypot — hidden from humans, catches bots */}
+          <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+            <label htmlFor="website_url_confirm">Do not fill this field</label>
+            <input
+              id="website_url_confirm"
+              name="website_url_confirm"
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+              onChange={(e) =>
+                setForm((prev) => ({
+                  ...(prev as AnalysisFormValues & { website_url_confirm?: string }),
+                  website_url_confirm: e.target.value,
+                }) as AnalysisFormValues)
+              }
+            />
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div>
               <label
                 htmlFor="fullName"
-                className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/40"
+                className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/65"
               >
                 Full Name
               </label>
               <input
                 id="fullName"
                 type="text"
+                required
+                aria-required="true"
+                aria-invalid={!!formError && !form.fullName}
+                aria-describedby={formError ? "free-analysis-error" : undefined}
+                autoComplete="name"
                 placeholder="Jane Smith"
                 className={inputClass}
                 value={form.fullName}
@@ -242,13 +348,18 @@ export default function FreeAnalysisPage() {
             <div>
               <label
                 htmlFor="businessName"
-                className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/40"
+                className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/65"
               >
                 Business Name
               </label>
               <input
                 id="businessName"
                 type="text"
+                required
+                aria-required="true"
+                aria-invalid={!!formError && !form.businessName}
+                aria-describedby={formError ? "free-analysis-error" : undefined}
+                autoComplete="organization"
                 placeholder="Acme Co"
                 className={inputClass}
                 value={form.businessName}
@@ -260,13 +371,18 @@ export default function FreeAnalysisPage() {
           <div>
             <label
               htmlFor="email"
-              className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/40"
+              className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/65"
             >
               Email
             </label>
             <input
               id="email"
               type="email"
+              required
+              aria-required="true"
+              aria-invalid={!!formError && !form.email}
+              aria-describedby={formError ? "free-analysis-error" : undefined}
+              autoComplete="email"
               placeholder="jane@business.com"
               className={inputClass}
               value={form.email}
@@ -278,13 +394,18 @@ export default function FreeAnalysisPage() {
             <div>
               <label
                 htmlFor="phone"
-                className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/40"
+                className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/65"
               >
                 Phone
               </label>
               <input
                 id="phone"
                 type="tel"
+                required
+                aria-required="true"
+                aria-invalid={!!formError && !form.phone}
+                aria-describedby={formError ? "free-analysis-error" : undefined}
+                autoComplete="tel"
                 placeholder="(555) 123-4567"
                 className={inputClass}
                 value={form.phone}
@@ -294,13 +415,18 @@ export default function FreeAnalysisPage() {
             <div>
               <label
                 htmlFor="websiteUrl"
-                className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/40"
+                className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-white/65"
               >
                 Website URL
               </label>
               <input
                 id="websiteUrl"
-                type="text"
+                type="url"
+                required
+                aria-required="true"
+                aria-invalid={!!formError && !form.websiteUrl}
+                aria-describedby={formError ? "free-analysis-error" : undefined}
+                autoComplete="url"
                 placeholder="www.yourbusiness.com"
                 className={inputClass}
                 value={form.websiteUrl}
@@ -311,10 +437,12 @@ export default function FreeAnalysisPage() {
 
           {formError && (
             <motion.p
+              id="free-analysis-error"
               initial={{ opacity: 0, y: -4 }}
               animate={{ opacity: 1, y: 0 }}
               role="alert"
-              className="text-sm text-red-400 bg-red-400/10 rounded-xl px-4 py-3"
+              aria-live="assertive"
+              className="text-sm text-red-300 bg-red-500/15 rounded-xl px-4 py-3 border border-red-500/30"
             >
               {formError}
             </motion.p>
@@ -324,7 +452,7 @@ export default function FreeAnalysisPage() {
             {isSubmitting ? "Sending…" : "Get My Free Analysis"}
           </Button>
 
-          <p className="text-center text-white/25 text-xs">
+          <p className="text-center text-white/65 text-xs">
             No spam. No obligation. Just clarity.
           </p>
         </motion.form>
@@ -346,10 +474,15 @@ export default function FreeAnalysisPage() {
             onClick={closeModal}
           >
             {/* Backdrop */}
-            <div className="absolute inset-0 bg-buzz-dark/85 backdrop-blur-sm" />
+            <div className="absolute inset-0 bg-buzz-dark/85 backdrop-blur-sm" aria-hidden="true" />
 
             {/* Modal */}
             <motion.div
+              ref={modalRef}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="free-analysis-modal-title"
+              aria-describedby="free-analysis-modal-subtitle"
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -359,19 +492,20 @@ export default function FreeAnalysisPage() {
             >
               {/* Close button */}
               <button
+                ref={closeBtnRef}
                 onClick={closeModal}
-                className="absolute top-4 right-4 w-9 h-9 rounded-xl bg-white/[0.04] flex items-center justify-center text-white/40 hover:text-white hover:bg-white/[0.08] transition-all cursor-pointer z-10"
+                className="absolute top-4 right-4 w-9 h-9 rounded-xl bg-white/[0.04] flex items-center justify-center text-white/60 hover:text-white hover:bg-white/[0.08] transition-all cursor-pointer z-10 outline-none focus-visible:ring-2 focus-visible:ring-buzz-coral/60"
                 aria-label="Close form"
               >
-                <X className="w-5 h-5" />
+                <X className="w-5 h-5" aria-hidden="true" />
               </button>
 
               <div className="text-center mb-6">
-                <h2 className="font-[family-name:var(--font-syne-var)] text-2xl md:text-3xl font-bold text-white">
+                <h2 id="free-analysis-modal-title" className="font-[family-name:var(--font-syne-var)] text-2xl md:text-3xl font-bold text-white">
                   Get Your Free{" "}
                   <TextShimmer as="span">Analysis</TextShimmer>
                 </h2>
-                <p className="mt-2 text-white/40 text-sm">
+                <p id="free-analysis-modal-subtitle" className="mt-2 text-white/65 text-sm">
                   Takes 30 seconds. We&apos;ll be in touch within 24 hours.
                 </p>
               </div>
@@ -429,7 +563,7 @@ export default function FreeAnalysisPage() {
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
             </div>
-            <p className="mt-4 text-white/35 text-sm">
+            <p className="mt-4 text-white/65 text-sm">
               Usually $500. Complimentary for a limited time.
             </p>
           </FadeUp>
@@ -625,7 +759,7 @@ export default function FreeAnalysisPage() {
                 <div className="font-[family-name:var(--font-syne-var)] text-3xl md:text-4xl font-bold text-white">
                   <AnimatedCounter target={s.value} suffix={s.suffix} />
                 </div>
-                <p className="mt-2 text-sm text-white/40">{s.label}</p>
+                <p className="mt-2 text-sm text-white/65">{s.label}</p>
               </FadeUp>
             ))}
           </div>
@@ -728,7 +862,7 @@ export default function FreeAnalysisPage() {
                     <h3 className="font-[family-name:var(--font-outfit-var)] text-lg font-bold text-white mb-2">
                       {step.title}
                     </h3>
-                    <p className="text-white/40 text-sm leading-relaxed">
+                    <p className="text-white/65 text-sm leading-relaxed">
                       {step.desc}
                     </p>
                   </div>

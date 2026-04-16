@@ -8,6 +8,8 @@ import { getAllBlogSlugs, getBlogPostRecord } from "@/lib/blog-post-record";
 import { resolveBlogSlug } from "@/lib/resolve-blog-slug";
 import { AmbientOrbs } from "@/components/AmbientOrbs";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { JsonLd } from "@/components/JsonLd";
+import { buildBreadcrumbs } from "@/lib/breadcrumbs";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -25,11 +27,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description: post.excerpt,
+    alternates: {
+      canonical: `/digital-marketing-blog/${encodeURIComponent(slug)}`,
+    },
     openGraph: {
       title: post.title,
       description: post.excerpt,
       type: "article",
       publishedTime: record.publishedDate,
+      url: `https://thebuzzmarketingco.com/digital-marketing-blog/${encodeURIComponent(slug)}`,
       images: [{ url: post.image, alt: post.imageAlt }],
     },
   };
@@ -50,8 +56,30 @@ export default async function BlogPostPage({ params }: Props) {
       ? `${record.excerpt.slice(0, 177)}…`
       : record.excerpt;
 
+  const postUrl = `https://thebuzzmarketingco.com/digital-marketing-blog/${encodeURIComponent(slug)}`;
+
   return (
     <>
+      <JsonLd
+        data={buildBreadcrumbs([
+          { name: "Blog", path: "/digital-marketing-blog" },
+          { name: meta.title, path: `/digital-marketing-blog/${encodeURIComponent(slug)}` },
+        ])}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: meta.title,
+          description: meta.excerpt,
+          image: `https://thebuzzmarketingco.com${meta.image}`,
+          datePublished: record.publishedDate,
+          dateModified: record.publishedDate,
+          mainEntityOfPage: { "@type": "WebPage", "@id": postUrl },
+          author: { "@id": "https://thebuzzmarketingco.com/#brit-dhillon" },
+          publisher: { "@id": "https://thebuzzmarketingco.com/#organization" },
+        }}
+      />
       <section className="relative bg-buzz-dark overflow-hidden">
         <HeroBackdrop />
         <AmbientOrbs
@@ -84,7 +112,7 @@ export default async function BlogPostPage({ params }: Props) {
           <p className="mt-4 text-lg text-white/55 md:text-xl max-w-2xl mx-auto leading-relaxed">
             {subtitle}
           </p>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-sm text-white/40">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-sm text-white/65">
             <time dateTime={meta.dateIso}>{meta.date}</time>
             <span aria-hidden>&middot;</span>
             <span className="inline-flex items-center gap-1">

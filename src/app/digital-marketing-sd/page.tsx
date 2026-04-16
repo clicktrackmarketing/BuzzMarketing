@@ -196,25 +196,25 @@ export default function DigitalMarketingSdPage() {
               <div className="font-[family-name:var(--font-syne-var)] text-3xl md:text-4xl font-bold text-white">
                 <AnimatedCounter target={150} suffix="+" />
               </div>
-              <p className="mt-2 text-sm text-white/40">San Diego Clients</p>
+              <p className="mt-2 text-sm text-white/65">San Diego Clients</p>
             </FadeUp>
             <FadeUp delay={0.06}>
               <div className="font-[family-name:var(--font-syne-var)] text-3xl md:text-4xl font-bold text-white">
                 <AnimatedCounter target={8} suffix="+" />
               </div>
-              <p className="mt-2 text-sm text-white/40">Years in Business</p>
+              <p className="mt-2 text-sm text-white/65">Years in Business</p>
             </FadeUp>
             <FadeUp delay={0.12}>
               <div className="font-[family-name:var(--font-syne-var)] text-3xl md:text-4xl font-bold text-white">
                 5.0
               </div>
-              <p className="mt-2 text-sm text-white/40">Google Rating</p>
+              <p className="mt-2 text-sm text-white/65">Google Rating</p>
             </FadeUp>
             <FadeUp delay={0.18}>
               <div className="font-[family-name:var(--font-syne-var)] text-3xl md:text-4xl font-bold text-white">
                 <AnimatedCounter target={3} suffix="x" />
               </div>
-              <p className="mt-2 text-sm text-white/40">Avg. Engagement Lift</p>
+              <p className="mt-2 text-sm text-white/65">Avg. Engagement Lift</p>
             </FadeUp>
           </div>
         </div>
@@ -357,6 +357,8 @@ export default function DigitalMarketingSdPage() {
                     <button
                       type="button"
                       onClick={() => toggleFaq(i)}
+                      aria-expanded={isOpen}
+                      aria-controls={`sd-faq-panel-${i}`}
                       className="cursor-pointer w-full flex items-center justify-between gap-4 text-left p-5 md:p-6"
                     >
                       <span className="font-[family-name:var(--font-outfit-var)] font-semibold text-white pr-2 text-sm md:text-base">
@@ -373,6 +375,8 @@ export default function DigitalMarketingSdPage() {
                     <AnimatePresence initial={false}>
                       {isOpen && (
                         <motion.div
+                          id={`sd-faq-panel-${i}`}
+                          role="region"
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
@@ -392,7 +396,7 @@ export default function DigitalMarketingSdPage() {
           </div>
 
           <FadeUp delay={0.2}>
-            <p className="text-center mt-10 text-white/30 text-sm">
+            <p className="text-center mt-10 text-white/65 text-sm">
               Ready to talk?{" "}
               <Link
                 href="/contact"
