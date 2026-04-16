@@ -198,7 +198,7 @@ export default function Home() {
             </span>
           </motion.div>
 
-          <h1 className="max-w-5xl font-[family-name:var(--font-space-grotesk-var)] text-[36px] font-bold leading-[1.05] text-white sm:text-[48px] md:text-[64px] lg:text-[80px]">
+          <h1 className="max-w-5xl font-[family-name:var(--font-space-grotesk-var)] text-[32px] font-bold leading-[1.05] text-white sm:text-[48px] md:text-[64px] lg:text-[80px]">
             <WordReveal text="We Make Brands" className="text-white" />
             <br />
             <HeroTextEffect text="Impossible to Ignore" delay={0.5} />
