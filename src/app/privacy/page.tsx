@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default function PrivacyPage() {
-  const effective = "April 16, 2026";
+  const effective = "April 17, 2026";
 
   return (
     <>
@@ -135,9 +135,68 @@ export default function PrivacyPage() {
             </p>
           </section>
 
+          <section id="sms-terms">
+            <h2 className="font-[family-name:var(--font-syne-var)] text-2xl font-bold text-foreground mb-3">
+              6. SMS / Text Messaging Program Terms (A2P 10DLC)
+            </h2>
+            <p className="mb-3">
+              When you provide your mobile number and check the SMS consent
+              box on one of our forms, you expressly consent to receive
+              marketing and informational text messages from{" "}
+              <strong>The Buzz Marketing Co</strong> at the number you
+              provided, including messages sent via autodialer. Consent is
+              not a condition of any purchase.
+            </p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>
+                <strong>Program name:</strong> The Buzz Marketing Co customer
+                and prospect notifications.
+              </li>
+              <li>
+                <strong>Types of messages:</strong> appointment and discovery
+                call confirmations, follow-ups to inquiries you initiated,
+                service updates, promotional offers, and event invitations.
+              </li>
+              <li>
+                <strong>Message frequency:</strong> varies based on your
+                engagement — typically 2–8 messages per month.
+              </li>
+              <li>
+                <strong>Cost:</strong> message and data rates may apply
+                depending on your wireless carrier and plan.
+              </li>
+              <li>
+                <strong>Opt-out:</strong> reply <strong>STOP</strong> to any
+                message to unsubscribe at any time. You will receive one
+                confirmation message and no further SMS.
+              </li>
+              <li>
+                <strong>Help:</strong> reply <strong>HELP</strong> for
+                assistance, or contact us at{" "}
+                <a
+                  href="tel:+17203639754"
+                  className="text-buzz-coral hover:underline"
+                >
+                  (720) 363-9754
+                </a>
+                .
+              </li>
+              <li>
+                <strong>Carrier disclaimer:</strong> carriers are not liable
+                for delayed or undelivered messages.
+              </li>
+              <li>
+                <strong>No sharing of mobile opt-in data:</strong> your
+                mobile phone number and SMS opt-in information will not be
+                shared with third parties or affiliates for marketing
+                purposes.
+              </li>
+            </ul>
+          </section>
+
           <section>
             <h2 className="font-[family-name:var(--font-syne-var)] text-2xl font-bold text-foreground mb-3">
-              6. Your Rights (CCPA / GDPR)
+              7. Your Rights (CCPA / GDPR)
             </h2>
             <p>
               Depending on your jurisdiction, you may have the right to access,
@@ -150,7 +209,7 @@ export default function PrivacyPage() {
 
           <section>
             <h2 className="font-[family-name:var(--font-syne-var)] text-2xl font-bold text-foreground mb-3">
-              7. Data Retention & Security
+              8. Data Retention & Security
             </h2>
             <p>
               We retain information for as long as necessary to fulfill the
@@ -162,7 +221,7 @@ export default function PrivacyPage() {
 
           <section>
             <h2 className="font-[family-name:var(--font-syne-var)] text-2xl font-bold text-foreground mb-3">
-              8. Contact Us
+              9. Contact Us
             </h2>
             <p>
               The Buzz Marketing Co<br />
@@ -181,7 +240,7 @@ export default function PrivacyPage() {
 
           <section>
             <h2 className="font-[family-name:var(--font-syne-var)] text-2xl font-bold text-foreground mb-3">
-              9. Changes to This Policy
+              10. Changes to This Policy
             </h2>
             <p>
               We may update this Privacy Policy from time to time. The

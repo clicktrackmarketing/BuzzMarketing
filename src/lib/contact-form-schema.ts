@@ -1,4 +1,8 @@
 import { z } from "zod";
+import {
+  buildConsentRecord,
+  type SmsConsentRecord,
+} from "@/lib/sms-consent";
 
 export const GOALS = [
   "Generate More Leads",
@@ -75,6 +79,10 @@ export const contactFormSchema = z.object({
     .min(20, "Please share a bit more (at least 20 characters)"),
   service: serviceEnum,
   optionalMessage: z.string().max(2000, "Message is too long"),
+  // A2P 10DLC — must default false; unchecked submissions are allowed but
+  // the lead will not receive SMS. Stored boolean is used by GHL to gate
+  // SMS automations.
+  smsConsent: z.boolean().default(false),
 });
 
 export type ContactFormValues = z.infer<typeof contactFormSchema>;
@@ -126,7 +134,10 @@ export function validateContactStep(
   return { ok: true };
 }
 
-export function buildContactPayload(values: ContactFormValues) {
+export function buildContactPayload(
+  values: ContactFormValues,
+  consent: SmsConsentRecord = buildConsentRecord(false),
+) {
   return {
     firstName: values.firstName,
     lastName: values.lastName,
@@ -143,5 +154,6 @@ export function buildContactPayload(values: ContactFormValues) {
     optionalMessage: values.optionalMessage.trim(),
     source: "Buzz Marketing - Contact Form",
     submittedAt: new Date().toISOString(),
+    ...consent,
   };
 }

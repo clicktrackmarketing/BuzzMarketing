@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import {
   motion,
   AnimatePresence,
@@ -42,6 +43,7 @@ export default function ContactPage() {
   const [successVision, setSuccessVision] = useState("");
   const [service, setService] = useState("");
   const [optionalMessage, setOptionalMessage] = useState("");
+  const [smsConsent, setSmsConsent] = useState(false);
   const [honeypot, setHoneypot] = useState("");
 
   const successHeadingRef = useRef<HTMLHeadingElement>(null);
@@ -81,6 +83,7 @@ export default function ContactPage() {
       successVision,
       service,
       optionalMessage,
+      smsConsent,
     }) as ContactFormValues;
 
   const toggleGoal = (g: string) => {
@@ -405,6 +408,46 @@ export default function ContactPage() {
                               className={inputClass}
                               autoComplete="organization"
                             />
+                          </div>
+
+                          {/* A2P 10DLC SMS opt-in */}
+                          <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4">
+                            <label
+                              htmlFor="smsConsent"
+                              className="flex cursor-pointer items-start gap-3"
+                            >
+                              <input
+                                id="smsConsent"
+                                name="smsConsent"
+                                type="checkbox"
+                                checked={smsConsent}
+                                onChange={(e) => setSmsConsent(e.target.checked)}
+                                className="mt-1 h-4 w-4 shrink-0 cursor-pointer rounded border-white/20 bg-white/[0.04] accent-buzz-coral outline-none focus-visible:ring-2 focus-visible:ring-buzz-coral/60"
+                              />
+                              <span className="text-xs leading-relaxed text-white/70">
+                                I agree to receive marketing and informational
+                                SMS/text messages from The Buzz Marketing Co at
+                                the phone number provided, including messages
+                                sent by autodialer. Consent is not a condition
+                                of any purchase. Message frequency varies.
+                                Message and data rates may apply. Reply STOP to
+                                unsubscribe or HELP for help. View our{" "}
+                                <Link
+                                  href="/privacy"
+                                  className="text-buzz-coral underline-offset-2 hover:underline"
+                                >
+                                  Privacy Policy
+                                </Link>{" "}
+                                and{" "}
+                                <Link
+                                  href="/terms"
+                                  className="text-buzz-coral underline-offset-2 hover:underline"
+                                >
+                                  Terms of Service
+                                </Link>
+                                .
+                              </span>
+                            </label>
                           </div>
                         </motion.div>
                       )}

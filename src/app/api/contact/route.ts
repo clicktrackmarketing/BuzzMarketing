@@ -4,6 +4,7 @@ import {
   contactFormSchema,
 } from "@/lib/contact-form-schema";
 import { forwardToGhl, isHoneypotTriggered } from "@/lib/ghl-webhook";
+import { buildConsentRecord, extractClientIp } from "@/lib/sms-consent";
 
 function log(
   level: "info" | "warn" | "error",
@@ -72,7 +73,11 @@ export async function POST(request: Request) {
     service: parsed.data.service,
   });
 
-  const payload = buildContactPayload(parsed.data);
+  const consent = buildConsentRecord(parsed.data.smsConsent, {
+    ip: extractClientIp(request.headers),
+    userAgent: request.headers.get("user-agent"),
+  });
+  const payload = buildContactPayload(parsed.data, consent);
 
   log("info", "Built GHL payload, sending to webhook", {
     requestId,
