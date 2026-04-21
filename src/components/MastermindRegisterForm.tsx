@@ -70,7 +70,7 @@ export function MastermindRegisterForm() {
 
   if (status === "success") {
     return (
-      <div className="bg-buzz-dark rounded-2xl p-8 md:p-10 text-center relative overflow-hidden">
+      <div className="bg-buzz-dark rounded-2xl p-6 md:p-10 text-center relative overflow-hidden">
         <div className="relative z-10">
           <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-buzz-coral/15 border border-buzz-coral/40 mb-5">
             <Check className="w-6 h-6 text-buzz-coral" strokeWidth={2.5} />
@@ -97,7 +97,7 @@ export function MastermindRegisterForm() {
     "block text-[11px] font-bold text-white/70 uppercase tracking-[0.08em] mb-2";
 
   return (
-    <div className="bg-buzz-dark rounded-2xl p-8 md:p-10 relative overflow-hidden">
+    <div className="bg-buzz-dark rounded-2xl p-6 md:p-10 relative overflow-hidden">
       <div className="relative z-10">
         <p className="text-[11px] font-bold text-buzz-coral uppercase tracking-[0.1em] mb-2">
           Reserve Your Seat
@@ -213,7 +213,7 @@ export function MastermindRegisterForm() {
           <button
             type="submit"
             disabled={status === "submitting"}
-            className="group w-full inline-flex items-center justify-center gap-2 px-7 py-4 bg-gradient-coral text-white text-sm font-semibold rounded-full shadow-luxury cursor-pointer transition-all hover:shadow-glow-coral hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60 disabled:pointer-events-none"
+            className="group w-full inline-flex items-center justify-center gap-2 px-5 sm:px-7 py-4 bg-gradient-coral text-white text-sm font-semibold whitespace-nowrap rounded-full shadow-luxury cursor-pointer transition-all hover:shadow-glow-coral hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60 disabled:pointer-events-none"
           >
             {status === "submitting" ? (
               <>

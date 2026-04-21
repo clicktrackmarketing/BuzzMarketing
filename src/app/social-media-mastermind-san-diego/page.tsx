@@ -312,7 +312,7 @@ export default function MastermindSanDiegoPage() {
             <FadeUp delay={0.08}>
               <div className="lg:sticky lg:top-24">
                 <GlowCard variant="light">
-                  <div className="bg-buzz-dark rounded-2xl p-8 md:p-10 relative overflow-hidden">
+                  <div className="bg-buzz-dark rounded-2xl p-6 md:p-10 relative overflow-hidden">
                     <div className="dot-grid absolute inset-0 pointer-events-none" />
                     <AmbientOrbs
                       orbs={[
@@ -363,14 +363,13 @@ export default function MastermindSanDiegoPage() {
                         </div>
                       </div>
 
-                      <Button
+                      <Link
                         href="#reserve"
-                        variant="primary"
-                        arrow
-                        className="w-full"
+                        className="group w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-coral text-white text-sm font-semibold whitespace-nowrap rounded-full shadow-luxury cursor-pointer transition-all hover:shadow-glow-coral hover:scale-[1.02] active:scale-[0.98]"
                       >
                         Claim Your Seat
-                      </Button>
+                        <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                      </Link>
                     </div>
                   </div>
                 </GlowCard>
@@ -401,11 +400,11 @@ export default function MastermindSanDiegoPage() {
             {TOPICS.map((t, i) => (
               <FadeUp key={t.num} delay={i * 0.06}>
                 <GlowCard variant="light" className="h-full">
-                  <div className="p-8 md:p-9 h-full flex flex-col">
-                    <p className="font-[family-name:var(--font-syne-var)] text-5xl font-extrabold text-buzz-coral/20 leading-none mb-5">
+                  <div className="p-6 md:p-9 h-full flex flex-col">
+                    <p className="font-[family-name:var(--font-syne-var)] text-4xl md:text-5xl font-extrabold text-buzz-coral/20 leading-none mb-3 md:mb-5">
                       {t.num}
                     </p>
-                    <h3 className="font-[family-name:var(--font-syne-var)] text-lg md:text-xl font-bold text-foreground mb-3 leading-snug">
+                    <h3 className="font-[family-name:var(--font-syne-var)] text-lg md:text-xl font-bold text-foreground mb-2 md:mb-3 leading-snug">
                       {t.title}
                     </h3>
                     <p className="text-buzz-slate text-sm leading-relaxed">
@@ -478,7 +477,7 @@ export default function MastermindSanDiegoPage() {
             <FadeUp delay={0.08}>
               <div className="space-y-6">
                 <GlowCard variant="dark">
-                  <div className="bg-gradient-coral rounded-2xl p-8 md:p-9">
+                  <div className="bg-gradient-coral rounded-2xl p-6 md:p-9">
                     <h3 className="font-[family-name:var(--font-syne-var)] text-xl md:text-2xl font-bold text-white mb-5 leading-tight">
                       What your team walks away with:
                     </h3>
@@ -499,7 +498,7 @@ export default function MastermindSanDiegoPage() {
                   </div>
                 </GlowCard>
 
-                <div className="rounded-2xl bg-white/[0.04] border border-white/[0.1] p-7 md:p-8">
+                <div className="rounded-2xl bg-white/[0.04] border border-white/[0.1] p-6 md:p-8">
                   <h4 className="font-[family-name:var(--font-syne-var)] text-lg font-bold text-white mb-5">
                     Team bundle pricing
                   </h4>
@@ -558,7 +557,7 @@ export default function MastermindSanDiegoPage() {
 
           <FadeUp>
             <GlowCard variant="light">
-              <div className="bg-white rounded-2xl p-8 md:p-12 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14">
+              <div className="bg-white rounded-2xl p-6 md:p-12 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14">
                 <div>
                   <ul className="space-y-6">
                     {EVENT_DETAILS.map(({ icon: Icon, label, value, sub }) => (

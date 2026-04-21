@@ -17,6 +17,12 @@ export const metadata: Metadata = {
     url: "https://thebuzzmarketingco.com/social-media-mastermind-san-diego",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Social Media Marketing Mastermind San Diego | The Buzz Marketing Co",
+    description:
+      "Half-day mastermind for San Diego owners and teams. Tactical social, Google, and AI search systems you can run starting Monday. Seats from $250.",
+  },
 };
 
 const MASTERMIND_FAQS = [
