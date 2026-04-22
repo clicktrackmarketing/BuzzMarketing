@@ -3,9 +3,11 @@
 import { useState, type FormEvent } from "react";
 import { ArrowRight, Check, Loader2 } from "lucide-react";
 import { mastermindFormSchema } from "@/lib/mastermind-form-schema";
+import { getAttributionData } from "@/lib/attribution";
+import { normalizePhoneE164, postWithRetry } from "@/lib/form-utils";
 
-// TODO: Replace with the real Stripe payment link once the client provides it.
-const STRIPE_CHECKOUT_URL = "";
+const SQUARE_CHECKOUT_URL =
+  "https://checkout.square.site/merchant/MLYBDJ7NWR0F5/checkout/W6TQ2UA3RFMMBHGHQBBBUBBJ";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -34,32 +36,47 @@ export function MastermindRegisterForm() {
       return;
     }
 
+    // Honeypot — silently drop bot submissions
+    if (honeypot.trim().length > 0) {
+      setStatus("success");
+      return;
+    }
+
     setStatus("submitting");
+
+    // Build PIT-compatible payload: standard fields use snake_case to match
+    // the /api/mastermind-register route + GHL fieldKeys. Attribution data
+    // is spread in — keys already match GHL fieldKeys 1:1.
+    const attribution = getAttributionData();
+    const payload = {
+      first_name: parsed.data.firstName,
+      last_name: parsed.data.lastName,
+      email: parsed.data.email,
+      phone: normalizePhoneE164(parsed.data.phone),
+      ...attribution,
+      form_page_url:
+        typeof window !== "undefined" ? window.location.href : undefined,
+    };
+
     try {
-      const res = await fetch("/api/mastermind-register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...parsed.data, website_url_confirm: honeypot }),
-      });
+      const res = await postWithRetry("/api/mastermind-register", payload);
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
         setStatus("error");
         setMessage(
-          data?.message ??
+          data?.error ??
             "Something went wrong. Please try again or call (720) 363-9754.",
         );
         return;
       }
 
       setStatus("success");
-
-      if (STRIPE_CHECKOUT_URL) {
-        // Brief pause so user sees the success state before redirect.
-        setTimeout(() => {
-          window.location.href = STRIPE_CHECKOUT_URL;
-        }, 900);
-      }
+      // Redirect to Square checkout after a short pause so the user sees the
+      // confirmation state.
+      setTimeout(() => {
+        window.location.href = SQUARE_CHECKOUT_URL;
+      }, 900);
     } catch {
       setStatus("error");
       setMessage(
@@ -79,13 +96,20 @@ export function MastermindRegisterForm() {
             You&apos;re in.
           </h3>
           <p className="text-white/55 text-sm md:text-base leading-relaxed mb-6">
-            {STRIPE_CHECKOUT_URL
-              ? "Redirecting you to secure checkout to complete your seat reservation..."
-              : "We got your info. Someone from The Buzz team will be in touch shortly to confirm your seat and payment."}
+            Redirecting you to secure checkout to complete your seat
+            reservation...
           </p>
-          {STRIPE_CHECKOUT_URL && (
-            <Loader2 className="w-5 h-5 text-buzz-coral animate-spin mx-auto" />
-          )}
+          <Loader2 className="w-5 h-5 text-buzz-coral animate-spin mx-auto" />
+          <p className="text-white/40 text-xs mt-4">
+            Didn&apos;t redirect?{" "}
+            <a
+              href={SQUARE_CHECKOUT_URL}
+              className="text-buzz-coral hover:underline"
+            >
+              Click here to continue to checkout
+            </a>
+            .
+          </p>
         </div>
       </div>
     );
@@ -106,9 +130,8 @@ export function MastermindRegisterForm() {
           Secure your spot.
         </h3>
         <p className="text-white/50 text-sm mb-6">
-          Starting at{" "}
-          <span className="text-white font-semibold">$250 / seat</span>. Team
-          bundles from $750.
+          <span className="text-white font-semibold">$1,795 / seat</span> · Oct
+          16, 2026 · Limited seats.
         </p>
 
         <form onSubmit={onSubmit} noValidate className="space-y-4">

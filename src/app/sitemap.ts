@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/about",
     "/contact",
     "/digital-marketing-sd",
-    "/social-media-mastermind-san-diego",
+    "/social-media-mastermind",
     "/events",
     "/free-analysis",
     "/digital-marketing-blog",

@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
 export const alt =
-  "Social Media Marketing Mastermind San Diego — The Buzz Marketing Co";
+  "Shoot Like a Pro · Photography Workshop · Oct 16-18, 2026 — The Buzz Marketing Co";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -107,7 +107,7 @@ export default async function OGImage() {
                 color: "white",
               }}
             >
-              San Diego Marketing Mastermind
+              Shoot Like a Pro · Oct 16-18, 2026 · Roseville, CA
             </span>
           </div>
 
@@ -157,7 +157,7 @@ export default async function OGImage() {
                 color: "#FF8A6A",
               }}
             >
-              Seats from $250 · Team bundles from $750
+              $1,795 per seat · Only 15 spots
             </span>
           </div>
         </div>

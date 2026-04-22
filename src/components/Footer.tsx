@@ -17,7 +17,7 @@ const SERVICE_LINKS = [
 const COMPANY_LINKS = [
   { href: "/about", label: "About Us" },
   { href: "/events", label: "Events" },
-  { href: "/social-media-mastermind-san-diego", label: "Marketing Mastermind SD" },
+  { href: "/social-media-mastermind", label: "Marketing Mastermind" },
   { href: "/contact", label: "Contact" },
 ];
 

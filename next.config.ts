@@ -12,6 +12,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/social-media-mastermind-san-diego",
+        destination: "/social-media-mastermind",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

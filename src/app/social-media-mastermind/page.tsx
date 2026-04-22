@@ -36,27 +36,27 @@ const BUZZ_PHONE_TEL = "7203639754";
 const WHO_ITS_FOR = [
   {
     icon: Building2,
-    title: "Business owners who want real marketing systems that work",
-    sub: "Not theory - hands-on frameworks you implement the same week.",
+    title: "Practice owners who want world-class in-house photography",
+    sub: "Stop paying outside photographers. Own the skill and the systems.",
   },
   {
     icon: TrendingUp,
-    title: "Marketing managers responsible for growth and performance",
-    sub: "Get the playbooks, tools, and benchmarks that move the needle.",
+    title: "Marketing managers responsible for brand and content",
+    sub: "Get the gear list, lighting setup, and workflows that deliver consistent quality.",
   },
   {
     icon: FolderKanban,
-    title: "Office managers and admins running day-to-day marketing",
+    title: "Office managers leading day-to-day content and social",
     sub: "Build the structure and consistency your brand has been missing.",
   },
   {
     icon: Zap,
-    title: "Teams who need structure, consistency, and better results",
-    sub: "Align your team on one strategy - stop reinventing the wheel.",
+    title: "Teams who need repeatable systems, not one-off shoots",
+    sub: "Align your team on one workflow - stop reinventing the wheel.",
   },
   {
     icon: Rocket,
-    title: "Companies who want their internal team executing at a higher level",
+    title: "Practices who want their internal team executing at a higher level",
     sub: "Leave with a clear roadmap your team can run without you.",
   },
 ];
@@ -64,109 +64,109 @@ const WHO_ITS_FOR = [
 const TOPICS = [
   {
     num: "01",
-    title: "Social Media That Converts",
+    title: "Camera Setup & Intraoral Photography",
     desc:
-      "Content calendars, platform strategy, and the posting systems that build audiences and drive real leads - not just likes.",
+      "Master the fundamentals - camera bodies, lenses, flash setup, and positioning for crisp clinical photography your whole team can repeat.",
   },
   {
     num: "02",
-    title: "Google Search Dominance",
+    title: "Lighting, Positioning & Team Workflows",
     desc:
-      "Local SEO fundamentals, Google Business Profile optimization, and on-page tactics that get San Diego customers finding you first.",
+      "Dial in consistent lighting and positioning across every operatory. Build the SOPs that keep quality high when you're not in the room.",
   },
   {
     num: "03",
-    title: "AI Search Visibility",
+    title: "Portrait Branding Photography",
     desc:
-      "How to get cited by ChatGPT, Perplexity, and Google AI Overviews before your competitors even know this is a thing.",
+      "Shoot high-converting team portraits and branded content that stand out on websites, social, and marketing collateral.",
   },
   {
     num: "04",
-    title: "Paid Ads That Actually Work",
+    title: "Before-and-After Photography",
     desc:
-      "Meta, Instagram, and Google Ads fundamentals. Targeting, creative strategy, and budget allocation without wasting money.",
+      "Capture clinical transformations that actually convert. Framing, color consistency, and cross-polarization techniques.",
   },
   {
     num: "05",
-    title: "Content Systems & Repurposing",
+    title: "Editing & Post-Production",
     desc:
-      "Build a content engine that runs without you. Shoot once, publish everywhere. Templates, batching, and delegation frameworks.",
+      "Efficient editing workflows, presets, and the quick-turn pipeline that keeps content flowing without becoming a full-time job.",
   },
   {
     num: "06",
-    title: "Measuring What Matters",
+    title: "Content Strategy That Grows Practices",
     desc:
-      "The KPIs that actually predict revenue. Monthly reporting, attribution basics, and how to know what's working before you spend more.",
+      "Turn your shoots into a social, Google, and AI search content engine. Systems for batching, repurposing, and measuring what works.",
   },
 ];
 
 const TEAM_ROLES = [
   "Office Manager",
   "Marketing Coordinator",
-  "Admin Team",
+  "Clinical Team Lead",
   "Social Media Manager",
-  "Anyone responsible for growth",
+  "Anyone who takes photos",
 ];
 
 const TEAM_OUTCOMES = [
-  "A unified strategy everyone understands",
-  "Clear roles - who owns what, and when",
-  "Systems ready to implement immediately",
-  "No more miscommunication or dropped balls",
-  "Clear strategy and execution across your entire team",
+  "A unified photography workflow everyone follows",
+  "Clear roles - who shoots what, and when",
+  "Gear setup and settings ready to implement immediately",
+  "No more inconsistent clinical or branded photos",
+  "A content engine your whole team can run",
 ];
 
 const EVENT_DETAILS = [
   {
-    icon: MapPin,
-    label: "Location",
-    value: "San Diego, CA",
-    sub: "Exact venue shared with registered attendees",
+    icon: Calendar,
+    label: "Dates",
+    value: "October 16-18, 2026",
+    sub: "Thursday 3:30 PM through Sunday 12:00 AM PT",
   },
   {
-    icon: Calendar,
-    label: "Format",
-    value: "Half-day intensive",
-    sub: "Morning session with live Q&A and action planning",
+    icon: MapPin,
+    label: "Location",
+    value: "Roseville, CA",
+    sub: "1418 Blue Oaks Blvd, Roseville, CA 95747",
   },
   {
     icon: Users,
     label: "Group Size",
-    value: "Intentionally limited",
+    value: "15 seats total",
     sub: "Small group ensures personalized feedback for every attendee",
   },
   {
     icon: Gift,
     label: "What's Included",
-    value: "Workbook, templates, and follow-up resources",
+    value: "Two-day hands-on workshop, templates, and follow-up resources",
     sub: "Plus access to the Buzz community network",
   },
 ];
 
 const FAQS = [
   {
-    q: "Who is the mastermind designed for?",
-    a: "Business owners, marketing managers, office managers, and entire marketing teams in San Diego who want proven systems for social media, Google, and AI search. It is ideal for companies that want their internal team executing at a higher level - with or without a dedicated marketing hire.",
+    q: "Who is Shoot Like a Pro designed for?",
+    a: "Dental practice owners, office managers, marketing coordinators, and team members who want to capture professional-quality clinical and branded content in-house. Ideal for practices that want consistent photography without paying for an outside photographer every time.",
   },
   {
     q: "Can I bring my whole team?",
-    a: "Yes - team attendance is strongly encouraged. Bringing your office manager, marketing coordinator, social media manager, and admin team ensures everyone leaves aligned and ready to implement immediately. Team bundle pricing is available starting at $750 for 3 to 5 seats with priority seating included.",
+    a: "Yes - team attendance is strongly encouraged. Bringing your office manager, marketing coordinator, and clinical team ensures everyone leaves aligned and ready to implement immediately. Each seat is $1,795. Contact The Buzz Marketing Co directly for group arrangements.",
   },
   {
     q: "What will we learn?",
-    a: "You will learn the exact systems, tools, and strategies used by The Buzz Marketing Co to grow businesses across social media platforms, Google search, and AI-powered discovery tools like ChatGPT and Perplexity. Every topic comes with a template or framework you can use the same week.",
+    a: "Day 1 covers camera setup, intraoral clinical photography, lighting, positioning, and team workflows. Day 2 covers portrait branding photography, before-and-after techniques, cross-polarization, editing, and content strategy. Every topic comes with a template or framework you can use the same week.",
   },
   {
     q: "Where is it held?",
-    a: "The mastermind is held in San Diego, CA. Exact venue details are shared with registered attendees after booking. Sessions are designed specifically for local San Diego business owners and teams who want to grow in this market.",
+    a: "The workshop is held at 1418 Blue Oaks Blvd, Roseville, CA 95747. The Buzz Marketing Co is a San Diego-based agency and we host events across California. Venue details and arrival instructions are shared with registered attendees.",
   },
   {
     q: "How much does it cost?",
-    a: "Individual seats are $250. Team bundles for groups of 3 to 5 people start at $750 and include priority seating. For teams larger than 5, contact The Buzz Marketing Co directly to discuss group options.",
+    a: "Each seat is $1,795. The workshop runs from October 16 at 3:30 PM through October 18 at 12:00 AM PT, with 15 seats available. Registration is first-come, first-served and seats do sell out.",
   },
   {
-    q: "Is this right for a non-marketing business owner?",
-    a: "Absolutely. The mastermind is built for business owners who are not marketers - it gives you the frameworks and vocabulary to lead your marketing efforts confidently, delegate effectively, and hold your team accountable to real results.",
+    q: "Is this right for someone without photography experience?",
+    a: "Absolutely. The workshop is built for practice owners and team members who aren't photographers - it gives you the exact gear list, camera settings, workflows, and templates to produce professional-quality photography from day one.",
   },
 ];
 
@@ -192,8 +192,8 @@ export default function MastermindSanDiegoPage() {
             <div className="flex justify-center">
               <SectionEyebrow light center>
                 <span className="inline-flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-buzz-coral shrink-0" aria-hidden />
-                  San Diego Marketing Mastermind
+                  <Calendar className="w-4 h-4 text-buzz-coral shrink-0" aria-hidden />
+                  Shoot Like a Pro · Oct 16-18, 2026 · Roseville, CA
                 </span>
               </SectionEyebrow>
             </div>
@@ -209,8 +209,9 @@ export default function MastermindSanDiegoPage() {
 
           <FadeUp delay={0.16}>
             <p className="mt-6 text-white/50 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-              Learn the exact systems, tools, and strategies you and your team
-              need to grow across social, Google, and AI search.
+              A hands-on, two-day workshop teaching your team the exact camera,
+              lighting, and content systems to shoot clinical and branded
+              photography in-house - hosted by The Buzz Marketing Co.
             </p>
           </FadeUp>
 
@@ -231,7 +232,7 @@ export default function MastermindSanDiegoPage() {
           <FadeUp delay={0.3}>
             <div className="mt-8 inline-flex items-center gap-2 rounded-full bg-buzz-coral/10 border border-buzz-coral/25 px-4 py-2 text-xs font-semibold text-buzz-coral uppercase tracking-wider">
               <Zap className="w-3.5 h-3.5" />
-              Team bundles available - bring your whole crew
+              Only 15 seats available - bring your whole team
             </div>
           </FadeUp>
         </div>
@@ -244,27 +245,27 @@ export default function MastermindSanDiegoPage() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6 text-center">
             <FadeUp>
               <div className="font-[family-name:var(--font-syne-var)] text-3xl md:text-4xl font-bold text-white">
-                <AnimatedCounter target={150} suffix="+" />
+                <AnimatedCounter target={2} suffix=" days" />
               </div>
-              <p className="mt-2 text-sm text-white/65">San Diego Clients</p>
+              <p className="mt-2 text-sm text-white/65">Hands-On Workshop</p>
             </FadeUp>
             <FadeUp delay={0.06}>
               <div className="font-[family-name:var(--font-syne-var)] text-3xl md:text-4xl font-bold text-white">
-                <AnimatedCounter target={8} suffix=" yrs" />
+                <AnimatedCounter target={15} suffix="" />
               </div>
-              <p className="mt-2 text-sm text-white/65">In the Market</p>
+              <p className="mt-2 text-sm text-white/65">Seats Available</p>
             </FadeUp>
             <FadeUp delay={0.12}>
               <div className="font-[family-name:var(--font-syne-var)] text-3xl md:text-4xl font-bold text-white">
-                <AnimatedCounter target={50} suffix="+" />
+                <AnimatedCounter target={6} suffix="" />
               </div>
-              <p className="mt-2 text-sm text-white/65">Events Hosted</p>
+              <p className="mt-2 text-sm text-white/65">Core Modules</p>
             </FadeUp>
             <FadeUp delay={0.18}>
               <div className="font-[family-name:var(--font-syne-var)] text-3xl md:text-4xl font-bold text-white">
-                Sold Out
+                $1,795
               </div>
-              <p className="mt-2 text-sm text-white/65">Past Sessions</p>
+              <p className="mt-2 text-sm text-white/65">Per Seat</p>
             </FadeUp>
           </div>
         </div>
@@ -338,27 +339,27 @@ export default function MastermindSanDiegoPage() {
                         <div className="flex items-center justify-between rounded-xl bg-white/[0.05] border border-white/[0.08] px-4 py-3">
                           <div>
                             <p className="text-white text-sm font-semibold">
-                              Single Seat
+                              Per Seat
                             </p>
                             <p className="text-white/45 text-xs">
-                              Individual attendee
+                              Oct 16-18, 2026 · Roseville, CA
                             </p>
                           </div>
                           <p className="font-[family-name:var(--font-syne-var)] text-xl font-bold text-white">
-                            $250
+                            $1,795
                           </p>
                         </div>
                         <div className="flex items-center justify-between rounded-xl bg-buzz-coral/15 border border-buzz-coral/40 px-4 py-3">
                           <div>
                             <p className="text-white text-sm font-semibold">
-                              Team Bundle
+                              Seats Remaining
                             </p>
                             <p className="text-white/60 text-xs">
-                              3-5 seats - Best value
+                              Only 15 total - first come, first served
                             </p>
                           </div>
                           <p className="font-[family-name:var(--font-syne-var)] text-xl font-bold text-buzz-coral">
-                            $750+
+                            Limited
                           </p>
                         </div>
                       </div>
@@ -389,7 +390,7 @@ export default function MastermindSanDiegoPage() {
             <SectionEyebrow center>What We Cover</SectionEyebrow>
             <FadeUp>
               <h2 className="font-[family-name:var(--font-syne-var)] text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
-                Six sessions.
+                Six modules.
                 <br />
                 <TextShimmer as="span">Zero fluff.</TextShimmer>
               </h2>
@@ -443,14 +444,15 @@ export default function MastermindSanDiegoPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
             <FadeUp>
               <div className="space-y-5 text-white/55 leading-relaxed">
-                <p>This isn&apos;t just for business owners.</p>
+                <p>This isn&apos;t just for practice owners.</p>
                 <p className="text-white font-semibold text-lg">
-                  Your marketing is only as strong as the team executing it.
+                  Your content is only as strong as the team capturing it.
                 </p>
                 <p>
-                  When the whole team attends together, the strategy actually
-                  gets implemented. No more going back and explaining
-                  everything. No more miscommunication. No more guessing.
+                  When the whole team attends together, the photography
+                  workflow actually gets implemented. No more going back and
+                  explaining the settings. No more inconsistent shots. No more
+                  guessing.
                 </p>
                 <p className="text-white/80">Bring your:</p>
 
@@ -500,31 +502,33 @@ export default function MastermindSanDiegoPage() {
 
                 <div className="rounded-2xl bg-white/[0.04] border border-white/[0.1] p-6 md:p-8">
                   <h4 className="font-[family-name:var(--font-syne-var)] text-lg font-bold text-white mb-5">
-                    Team bundle pricing
+                    Team registration
                   </h4>
                   <div className="space-y-3 mb-5">
                     <div className="flex items-center justify-between rounded-xl bg-white/[0.05] px-4 py-3">
                       <div>
                         <p className="text-white/85 text-sm font-medium">
-                          1 seat
+                          Per seat
                         </p>
-                        <p className="text-white/45 text-xs">Individual</p>
+                        <p className="text-white/45 text-xs">
+                          Two-day hands-on workshop
+                        </p>
                       </div>
                       <p className="font-[family-name:var(--font-syne-var)] text-lg font-bold text-white">
-                        $250
+                        $1,795
                       </p>
                     </div>
                     <div className="flex items-center justify-between rounded-xl bg-buzz-coral/15 border border-buzz-coral/30 px-4 py-3">
                       <div>
                         <p className="text-white text-sm font-semibold">
-                          3-5 seats
+                          Team of 3+
                         </p>
                         <p className="text-white/55 text-xs">
-                          Best value - priority seating
+                          Call for group arrangements
                         </p>
                       </div>
                       <p className="font-[family-name:var(--font-syne-var)] text-lg font-bold text-buzz-coral">
-                        $750-1,250
+                        Contact us
                       </p>
                     </div>
                   </div>
@@ -756,23 +760,23 @@ export default function MastermindSanDiegoPage() {
           <FadeUp>
             <h2 className="font-[family-name:var(--font-syne-var)] text-3xl sm:text-4xl md:text-5xl lg:text-[56px] font-extrabold text-white leading-tight mb-6">
               Your team deserves
-              <br />a <TextShimmer as="span">real strategy.</TextShimmer>
+              <br />a <TextShimmer as="span">real system.</TextShimmer>
             </h2>
           </FadeUp>
           <FadeUp delay={0.1}>
             <p className="text-white/50 text-base md:text-lg max-w-xl mx-auto mb-10 leading-relaxed">
-              Stop piecing it together from YouTube. Come to one session and
-              leave with a system your whole team can execute - starting
-              Monday.
+              Stop piecing it together from YouTube. Come to Roseville Oct
+              16-18 and leave with a photography system your whole team can
+              execute - starting Monday.
             </p>
           </FadeUp>
           <FadeUp delay={0.2}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                href={`tel:${BUZZ_PHONE_TEL}`}
+                href="#reserve"
                 className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-coral text-white text-base font-semibold rounded-full shadow-luxury cursor-pointer transition-all hover:shadow-glow-coral hover:scale-[1.03] active:scale-[0.97]"
               >
-                Reserve Your Seat - $250
+                Reserve Your Seat - $1,795
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
               <Link

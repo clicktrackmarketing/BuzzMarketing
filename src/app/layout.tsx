@@ -9,6 +9,7 @@ import { SparkleTrail } from "@/components/SparkleTrail";
 import { FloatingPetals } from "@/components/FloatingPetals";
 import { MobileCTABar } from "@/components/MobileCTABar";
 import { RouteChangeTracker } from "@/components/RouteChangeTracker";
+import AttributionCapture from "@/components/AttributionCapture";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -116,6 +117,7 @@ export default function RootLayout({
         </Script>
       </head>
       <body className="min-h-screen flex flex-col antialiased">
+        <AttributionCapture />
         <JsonLd
           data={{
             "@context": "https://schema.org",
