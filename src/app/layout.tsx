@@ -10,6 +10,7 @@ import { FloatingPetals } from "@/components/FloatingPetals";
 import { MobileCTABar } from "@/components/MobileCTABar";
 import { RouteChangeTracker } from "@/components/RouteChangeTracker";
 import AttributionCapture from "@/components/AttributionCapture";
+import { ConsentManager } from "@/components/ConsentManager";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -88,6 +89,27 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        {/*
+          Google Consent Mode v2 defaults — MUST load before GA4.
+          All consent categories default to "denied" so GA4 only sends
+          cookieless pings until the user accepts via <ConsentManager />.
+          This is the GDPR/CCPA-compliant pattern recommended by Google.
+        */}
+        <Script id="consent-mode-default" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('consent', 'default', {
+              ad_storage: 'denied',
+              ad_user_data: 'denied',
+              ad_personalization: 'denied',
+              analytics_storage: 'denied',
+              functionality_storage: 'denied',
+              personalization_storage: 'denied',
+              security_storage: 'granted'
+            });
+          `}
+        </Script>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-CT9KHYS5SC"
           strategy="afterInteractive"
@@ -100,21 +122,11 @@ export default function RootLayout({
             gtag('config', 'G-CT9KHYS5SC');
           `}
         </Script>
-        {/* PearlDiver visitor identification */}
-        <Script
-          src="https://tag.clicktrackmarketing.com/ldc.js?pid=1cca4737c771f3757afbe5c4644eb68a&aid=16de03f2"
-          strategy="afterInteractive"
-        />
-        {/* Microsoft Clarity */}
-        <Script id="ms-clarity" strategy="afterInteractive">
-          {`
-            (function(c,l,a,r,i,t,y){
-                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-            })(window, document, "clarity", "script", "wct5lcfcpc");
-          `}
-        </Script>
+        {/*
+          Microsoft Clarity and PearlDiver visitor identification are
+          loaded by <ConsentManager /> only after the user accepts
+          non-essential cookies. They are NOT loaded here.
+        */}
       </head>
       <body className="min-h-screen flex flex-col antialiased">
         <AttributionCapture />
@@ -228,6 +240,7 @@ export default function RootLayout({
         <MobileCTABar />
         {/* Spacer so the fixed MobileCTABar doesn't cover footer/content on mobile */}
         <div className="h-14 md:hidden" aria-hidden="true" />
+        <ConsentManager />
       </body>
     </html>
   );

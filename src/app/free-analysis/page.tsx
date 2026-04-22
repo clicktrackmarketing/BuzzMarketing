@@ -29,6 +29,7 @@ import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { AnimatedCounter } from "@/components/AnimatedCounter";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { analysisFormSchema, type AnalysisFormValues } from "@/lib/analysis-form-schema";
+import { getAttributionData } from "@/lib/attribution";
 
 /* ─── constants ─── */
 
@@ -222,11 +223,14 @@ export default function FreeAnalysisPage() {
 
     setIsSubmitting(true);
     try {
+      const attribution = getAttributionData();
       const res = await fetch("/api/free-analysis", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...parsed.data,
+          ...attribution,
+          form_page_url: window.location.href,
           // Honeypot — real users never fill this hidden field
           website_url_confirm: (form as unknown as { website_url_confirm?: string }).website_url_confirm ?? "",
         }),

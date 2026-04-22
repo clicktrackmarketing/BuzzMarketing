@@ -134,26 +134,42 @@ export function validateContactStep(
   return { ok: true };
 }
 
+/**
+ * Build the payload sent to /api/contact, which proxies to the GHL
+ * Contacts API via Private Integration Token.
+ *
+ * Keys MUST match either STANDARD_FIELDS in ghl-contact-upsert.ts (for
+ * top-level contact fields) or GHL custom field fieldKeys exactly
+ * (for custom fields). Unknown keys are dropped silently by the route.
+ *
+ * Attribution fields are NOT added here — the client spreads
+ * getAttributionData() into the outgoing request so the 14 Group A
+ * fieldKeys populate automatically.
+ */
 export function buildContactPayload(
   values: ContactFormValues,
   consent: SmsConsentRecord = buildConsentRecord(false),
-) {
+): Record<string, unknown> {
   return {
-    firstName: values.firstName,
-    lastName: values.lastName,
-    name: `${values.firstName} ${values.lastName}`,
+    // Top-level standard fields
+    first_name: values.firstName,
+    last_name: values.lastName,
     email: values.email,
     phone: values.phone,
-    companyName: values.businessName,
-    businessName: values.businessName,
-    goals: values.selectedGoals,
-    goalsText: values.selectedGoals.join("; "),
-    currentStrategy: values.currentStrategy,
-    successVision: values.successVision,
-    service: values.service,
-    optionalMessage: values.optionalMessage.trim(),
-    source: "Buzz Marketing - Contact Form",
-    submittedAt: new Date().toISOString(),
-    ...consent,
+    company_name: values.businessName,
+
+    // Custom fields — fieldKeys from GHL Settings → Custom Fields
+    what_are_your_top_goals_select_all_that_apply: values.selectedGoals,
+    how_are_you_currently_generating_customers: values.currentStrategy,
+    if_we_knocked_it_out_of_the_park_what_would_that_mean_for_your_business_in_612_months:
+      values.successVision,
+    which_service_are_you_most_interested_in: values.service,
+    anything_else_we_should_know_optional: values.optionalMessage.trim(),
+
+    // SMS consent audit trail (consent_url is existing TEXT custom field;
+    // we store the disclosure text + timestamp + IP as one auditable blob)
+    consent_url: consent.smsConsent
+      ? `consented=true; ts=${consent.smsConsentTimestamp}; ip=${consent.smsConsentIp ?? "unknown"}; ua=${consent.smsConsentUserAgent ?? "unknown"}`
+      : "",
   };
 }

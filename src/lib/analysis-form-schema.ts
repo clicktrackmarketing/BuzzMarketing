@@ -40,25 +40,34 @@ export const analysisFormSchema = z.object({
 
 export type AnalysisFormValues = z.infer<typeof analysisFormSchema>;
 
+/**
+ * Build the payload sent to /api/free-analysis, which proxies to the GHL
+ * Contacts API via Private Integration Token.
+ *
+ * Keys match either STANDARD_FIELDS in ghl-contact-upsert.ts (top-level
+ * contact fields) or GHL custom field fieldKeys. Attribution is spread
+ * in separately by the client via getAttributionData().
+ */
 export function buildAnalysisPayload(
   values: AnalysisFormValues,
   consent: SmsConsentRecord = buildConsentRecord(false),
-) {
+): Record<string, unknown> {
   const nameParts = values.fullName.trim().split(/\s+/);
   const firstName = nameParts[0] ?? "";
   const lastName = nameParts.slice(1).join(" ") || "";
 
   return {
-    firstName,
-    lastName,
-    name: values.fullName,
+    // Top-level standard fields
+    first_name: firstName,
+    last_name: lastName,
     email: values.email,
     phone: values.phone,
-    companyName: values.businessName,
-    businessName: values.businessName,
+    company_name: values.businessName,
     website: values.websiteUrl,
-    source: "Buzz Marketing - Free Digital Analysis",
-    submittedAt: new Date().toISOString(),
-    ...consent,
+
+    // SMS consent audit trail on the existing consent_url custom field
+    consent_url: consent.smsConsent
+      ? `consented=true; ts=${consent.smsConsentTimestamp}; ip=${consent.smsConsentIp ?? "unknown"}; ua=${consent.smsConsentUserAgent ?? "unknown"}`
+      : "",
   };
 }

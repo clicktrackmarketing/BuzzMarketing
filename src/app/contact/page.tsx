@@ -21,6 +21,7 @@ import {
   validateContactStep,
   type ContactFormValues,
 } from "@/lib/contact-form-schema";
+import { getAttributionData } from "@/lib/attribution";
 
 const inputClass =
   "w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-sm text-white placeholder:text-white/65 focus:border-buzz-coral focus:outline-none focus:ring-2 focus:ring-buzz-coral/20 transition-all";
@@ -126,10 +127,16 @@ export default function ContactPage() {
 
     setIsSubmitting(true);
     try {
+      const attribution = getAttributionData();
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...full.data, website_url_confirm: honeypot }),
+        body: JSON.stringify({
+          ...full.data,
+          ...attribution,
+          form_page_url: window.location.href,
+          website_url_confirm: honeypot,
+        }),
       });
       const data: unknown = await res.json().catch(() => ({}));
       if (!res.ok) {

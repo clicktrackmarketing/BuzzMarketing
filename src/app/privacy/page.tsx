@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default function PrivacyPage() {
-  const effective = "April 17, 2026";
+  const effective = "April 22, 2026";
 
   return (
     <>
@@ -89,26 +89,50 @@ export default function PrivacyPage() {
             <p className="mb-3">We use the following third-party technologies on this Site:</p>
             <ul className="list-disc pl-6 space-y-2">
               <li>
-                <strong>Google Analytics 4 (GA4):</strong> traffic and behavior
-                analytics. GA4 may set cookies and process pseudonymous
-                identifiers.
+                <strong>Google Analytics 4 (GA4):</strong> aggregate traffic
+                and behavior analytics. GA4 is loaded with{" "}
+                <em>Google Consent Mode v2</em> set to{" "}
+                <em>denied</em> by default — it only sends cookieless pings
+                until you accept via our cookie banner. When you accept, GA4
+                sets cookies and processes pseudonymous identifiers to
+                measure pageviews and events.
               </li>
               <li>
-                <strong>Google Tag Manager:</strong> container for loading
-                marketing and analytics tags.
+                <strong>Microsoft Clarity:</strong> session recordings and
+                heatmaps that help us understand how visitors interact with
+                the Site. Clarity is only loaded after you accept non-essential
+                cookies. It captures mouse movement, clicks, scrolls, and
+                anonymized interactions — never passwords, credit card
+                numbers, or other sensitive form fields.
               </li>
               <li>
                 <strong>PearlDiver / Click Track visitor identification:</strong>{" "}
                 resolves a portion of anonymous site visitors to business
-                contact data for marketing follow-up. You can request removal
-                at any time (see Section 8).
+                contact data for marketing follow-up. Only loaded after you
+                accept non-essential cookies. You can request removal at any
+                time (see Section 8).
+              </li>
+              <li>
+                <strong>First-party attribution capture:</strong> we store a
+                small JSON record in your browser&apos;s local storage
+                (<code>buzz_attribution_v1</code>) that classifies where you
+                came from (e.g., Direct, Paid Social, Organic Search) so we
+                can attribute form submissions to marketing channels. This is
+                a first-party essential function and is always active.
               </li>
               <li>
                 <strong>Meta Pixel, Google Ads remarketing, and similar
                 advertising tags:</strong> used only when active advertising
-                campaigns are running.
+                campaigns are running. Gated behind cookie consent when enabled.
               </li>
             </ul>
+            <p className="mt-4">
+              You can change your cookie preferences at any time by clearing
+              your browser&apos;s local storage for this Site — the cookie
+              banner will reappear on your next visit. When you Reject, we
+              store no Clarity or PearlDiver data and GA4 remains in
+              cookieless mode.
+            </p>
           </section>
 
           <section>
