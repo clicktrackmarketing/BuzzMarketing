@@ -309,27 +309,25 @@ export default function DentalPhotographyPage() {
         <div className="max-w-[1400px] mx-auto px-6 md:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-14 items-center">
             <FadeUp variant="left" className="lg:col-span-2">
-              {/* Photo placeholder — replace src with /milos.jpg once photos are in */}
-              <div className="relative aspect-[4/5] w-full max-w-md mx-auto lg:mx-0 rounded-2xl overflow-hidden bg-gradient-to-br from-buzz-coral/20 via-buzz-dark/90 to-violet-900/30 border border-buzz-border shadow-luxury">
-                <div className="absolute inset-0 dot-grid opacity-60" />
-                <AmbientOrbs
-                  orbs={[
-                    { color: "coral", size: 300, top: "20%", left: "20%", delay: 0 },
-                  ]}
+              <div className="relative aspect-[5/6] w-full max-w-md mx-auto lg:mx-0 rounded-2xl overflow-hidden bg-buzz-dark border border-buzz-border shadow-luxury">
+                <Image
+                  src="/milos.jpg"
+                  alt="Milos Miladinov - dental photographer and educator, holding a camera rig"
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 1024px) 100vw, 28rem"
+                  priority
                 />
-                <div className="relative z-10 w-full h-full flex flex-col items-center justify-center p-8 text-center">
-                  <div className="w-24 h-24 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mb-5">
-                    <span className="font-[family-name:var(--font-syne-var)] text-3xl font-extrabold text-white">
-                      MM
-                    </span>
-                  </div>
-                  <p className="text-white/80 text-xs uppercase tracking-[0.2em] font-semibold mb-2">
+                {/* Bottom gradient + caption overlay */}
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-buzz-dark via-buzz-dark/75 to-transparent pointer-events-none" />
+                <div className="absolute inset-x-0 bottom-0 p-6 md:p-7">
+                  <p className="text-[10px] md:text-[11px] font-bold text-buzz-coral uppercase tracking-[0.18em] mb-2">
                     Your Instructor
                   </p>
-                  <p className="font-[family-name:var(--font-syne-var)] text-2xl md:text-3xl font-bold text-white">
+                  <p className="font-[family-name:var(--font-syne-var)] text-2xl md:text-3xl font-bold text-white leading-tight">
                     Milos Miladinov
                   </p>
-                  <p className="text-white/50 text-sm mt-3 max-w-xs leading-relaxed">
+                  <p className="text-white/65 text-xs md:text-sm mt-2 leading-relaxed">
                     Dental photography educator · Global faculty · Dental
                     technician
                   </p>
@@ -337,12 +335,13 @@ export default function DentalPhotographyPage() {
                     href="https://dentalpromaster.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-6 inline-flex items-center gap-1.5 text-buzz-coral text-xs font-semibold uppercase tracking-wider hover:underline"
+                    className="mt-4 inline-flex items-center gap-1.5 text-buzz-coral text-xs font-semibold uppercase tracking-wider hover:underline"
                   >
                     dentalpromaster.com
                     <ArrowUpRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-coral" />
               </div>
             </FadeUp>
 
