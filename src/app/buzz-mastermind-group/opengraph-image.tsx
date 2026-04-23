@@ -3,14 +3,14 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
 export const alt =
-  "Shoot Like a Pro · Photography Workshop · Oct 16-18, 2026 — The Buzz Marketing Co";
+  "The Buzz Effect · San Diego Branding & Marketing Mastermind · May 13, 2026 — The Buzz Marketing Co";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function OGImage() {
-  const imagePath = join(process.cwd(), "public", "team-boardwalk.png");
+  const imagePath = join(process.cwd(), "public", "buzz-team-skyline.jpg");
   const imageData = await readFile(imagePath);
-  const imageSrc = `data:image/png;base64,${imageData.toString("base64")}`;
+  const imageSrc = `data:image/jpeg;base64,${imageData.toString("base64")}`;
 
   return new ImageResponse(
     (
@@ -107,7 +107,7 @@ export default async function OGImage() {
                 color: "white",
               }}
             >
-              Shoot Like a Pro · Oct 16-18, 2026 · Roseville, CA
+              The Buzz Effect · May 13 · University Club San Diego
             </span>
           </div>
 
@@ -126,8 +126,8 @@ export default async function OGImage() {
               maxWidth: "1000px",
             }}
           >
-            <span>Stop guessing.&nbsp;</span>
-            <span style={{ color: "#FF8A6A" }}>Start growing.</span>
+            <span>The&nbsp;</span>
+            <span style={{ color: "#FF8A6A" }}>Buzz Effect.</span>
           </h1>
 
           {/* Footer row */}
@@ -157,7 +157,7 @@ export default async function OGImage() {
                 color: "#FF8A6A",
               }}
             >
-              $1,795 per seat · Only 15 spots
+              $250 per guest · Only 28 seats
             </span>
           </div>
         </div>

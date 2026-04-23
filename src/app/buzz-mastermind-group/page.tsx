@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -18,6 +19,9 @@ import {
   Lightbulb,
   Phone,
   ArrowRight,
+  Sparkles,
+  UtensilsCrossed,
+  MessageCircle,
 } from "lucide-react";
 
 import { SectionEyebrow } from "@/components/SectionEyebrow";
@@ -36,27 +40,27 @@ const BUZZ_PHONE_TEL = "7203639754";
 const WHO_ITS_FOR = [
   {
     icon: Building2,
-    title: "Practice owners who want world-class in-house photography",
-    sub: "Stop paying outside photographers. Own the skill and the systems.",
+    title: "Business owners who want real marketing systems that work",
+    sub: "Not theory - hands-on frameworks you implement the same week.",
   },
   {
     icon: TrendingUp,
-    title: "Marketing managers responsible for brand and content",
-    sub: "Get the gear list, lighting setup, and workflows that deliver consistent quality.",
+    title: "Marketing managers responsible for growth and performance",
+    sub: "Get the playbooks, tools, and benchmarks that move the needle.",
   },
   {
     icon: FolderKanban,
-    title: "Office managers leading day-to-day content and social",
+    title: "Office managers and admins running day-to-day marketing",
     sub: "Build the structure and consistency your brand has been missing.",
   },
   {
     icon: Zap,
-    title: "Teams who need repeatable systems, not one-off shoots",
-    sub: "Align your team on one workflow - stop reinventing the wheel.",
+    title: "Teams who need structure, consistency, and better results",
+    sub: "Align your team on one strategy - stop reinventing the wheel.",
   },
   {
     icon: Rocket,
-    title: "Practices who want their internal team executing at a higher level",
+    title: "Companies who want their internal team executing at a higher level",
     sub: "Leave with a clear roadmap your team can run without you.",
   },
 ];
@@ -64,113 +68,140 @@ const WHO_ITS_FOR = [
 const TOPICS = [
   {
     num: "01",
-    title: "Camera Setup & Intraoral Photography",
+    title: "Powerful, Memorable Branding",
     desc:
-      "Master the fundamentals - camera bodies, lenses, flash setup, and positioning for crisp clinical photography your whole team can repeat.",
+      "The foundations of branding that actually stick - voice, visuals, and positioning that make your business impossible to forget.",
   },
   {
     num: "02",
-    title: "Lighting, Positioning & Team Workflows",
+    title: "Content That Converts",
     desc:
-      "Dial in consistent lighting and positioning across every operatory. Build the SOPs that keep quality high when you're not in the room.",
+      "How to create content that gets attention and drives action - not just likes. What's working on social media right now.",
   },
   {
     num: "03",
-    title: "Portrait Branding Photography",
+    title: "Authority-Building Social Strategy",
     desc:
-      "Shoot high-converting team portraits and branded content that stand out on websites, social, and marketing collateral.",
+      "Social media strategies that build trust and establish you as the go-to in your industry - across Instagram, TikTok, and LinkedIn.",
   },
   {
     num: "04",
-    title: "Before-and-After Photography",
+    title: "Positioning & Storytelling",
     desc:
-      "Capture clinical transformations that actually convert. Framing, color consistency, and cross-polarization techniques.",
+      "Use storytelling to attract the right clients and position yourself as the obvious choice in a crowded market.",
   },
   {
     num: "05",
-    title: "Editing & Post-Production",
+    title: "Online Presence Fundamentals",
     desc:
-      "Efficient editing workflows, presets, and the quick-turn pipeline that keeps content flowing without becoming a full-time job.",
+      "Branding, SEO, and website strategy that makes Google and AI search work for you - not against you.",
   },
   {
     num: "06",
-    title: "Content Strategy That Grows Practices",
+    title: "Content Tools & Workflows",
     desc:
-      "Turn your shoots into a social, Google, and AI search content engine. Systems for batching, repurposing, and measuring what works.",
+      "How to use Canva, CapCut, and AI tools to produce polished content efficiently - without a full production team.",
   },
 ];
 
 const TEAM_ROLES = [
   "Office Manager",
   "Marketing Coordinator",
-  "Clinical Team Lead",
+  "Admin Team",
   "Social Media Manager",
-  "Anyone who takes photos",
+  "Anyone responsible for growth",
 ];
 
 const TEAM_OUTCOMES = [
-  "A unified photography workflow everyone follows",
-  "Clear roles - who shoots what, and when",
-  "Gear setup and settings ready to implement immediately",
-  "No more inconsistent clinical or branded photos",
-  "A content engine your whole team can run",
+  "A unified strategy everyone understands",
+  "Clear roles - who owns what, and when",
+  "Systems ready to implement immediately",
+  "No more miscommunication or dropped balls",
+  "Clear strategy and execution across your entire team",
+];
+
+const EXPERIENCE_INCLUDES = [
+  {
+    icon: Building2,
+    label: "Venue",
+    value: "Top Floor · University Club",
+    sub: "Stunning San Diego skyline views at sunset",
+  },
+  {
+    icon: UtensilsCrossed,
+    label: "Elevated Dining",
+    value: "Dinner & drinks included",
+    sub: "Curated menu in an inspiring atmosphere",
+  },
+  {
+    icon: Sparkles,
+    label: "High-Impact Mastermind",
+    value: "Led by industry leaders",
+    sub: "Practical strategies you can apply immediately",
+  },
+  {
+    icon: MessageCircle,
+    label: "Intimate Group",
+    value: "Limited to 28 professionals",
+    sub: "Meaningful, high-level conversation",
+  },
 ];
 
 const EVENT_DETAILS = [
   {
     icon: Calendar,
-    label: "Dates",
-    value: "October 16-18, 2026",
-    sub: "Thursday 3:30 PM through Sunday 12:00 AM PT",
+    label: "Date",
+    value: "Wednesday, May 13, 2026",
+    sub: "Evening event - sunset at the University Club",
   },
   {
     icon: MapPin,
     label: "Location",
-    value: "Roseville, CA",
-    sub: "1418 Blue Oaks Blvd, Roseville, CA 95747",
+    value: "Top Floor · University Club, San Diego",
+    sub: "Exact address shared with confirmed guests",
   },
   {
     icon: Users,
-    label: "Group Size",
-    value: "15 seats total",
-    sub: "Small group ensures personalized feedback for every attendee",
+    label: "Capacity",
+    value: "28 seats total",
+    sub: "Intentionally limited for intimate conversation",
   },
   {
     icon: Gift,
-    label: "What's Included",
-    value: "Two-day hands-on workshop, templates, and follow-up resources",
-    sub: "Plus access to the Buzz community network",
+    label: "Investment",
+    value: "$250 per guest",
+    sub: "Dinner, drinks, and the full mastermind experience",
   },
 ];
 
 const FAQS = [
   {
-    q: "Who is Shoot Like a Pro designed for?",
-    a: "Dental practice owners, office managers, marketing coordinators, and team members who want to capture professional-quality clinical and branded content in-house. Ideal for practices that want consistent photography without paying for an outside photographer every time.",
+    q: "Who is the Buzz Mastermind designed for?",
+    a: "Ambitious business owners, marketing managers, office managers, and entire marketing teams in San Diego who want proven branding, content, and marketing systems. Ideal for companies ready to elevate their brand and surround themselves with others building at a higher level.",
   },
   {
     q: "Can I bring my whole team?",
-    a: "Yes - team attendance is strongly encouraged. Bringing your office manager, marketing coordinator, and clinical team ensures everyone leaves aligned and ready to implement immediately. Each seat is $1,795. Contact The Buzz Marketing Co directly for group arrangements.",
+    a: "Yes - team attendance is strongly encouraged. Bringing your office manager, marketing coordinator, social media manager, and admin team ensures everyone leaves aligned and ready to execute. Each seat is $250 and includes dinner plus the full mastermind experience.",
   },
   {
-    q: "What will we learn?",
-    a: "Day 1 covers camera setup, intraoral clinical photography, lighting, positioning, and team workflows. Day 2 covers portrait branding photography, before-and-after techniques, cross-polarization, editing, and content strategy. Every topic comes with a template or framework you can use the same week.",
+    q: "What will we cover?",
+    a: "The foundations of powerful branding, content that actually converts, social media strategies that build authority, positioning and storytelling, SEO and website fundamentals, and how to use tools like Canva and CapCut to create content efficiently. No fluff, no theory - just strategies you can implement the same week.",
   },
   {
     q: "Where is it held?",
-    a: "The workshop is held at 1418 Blue Oaks Blvd, Roseville, CA 95747. The Buzz Marketing Co is a San Diego-based agency and we host events across California. Venue details and arrival instructions are shared with registered attendees.",
+    a: "The mastermind takes place at the Top Floor of the University Club in San Diego - a stunning venue with sunset skyline views. Exact address and arrival instructions are shared with confirmed guests.",
   },
   {
-    q: "How much does it cost?",
-    a: "Each seat is $1,795. The workshop runs from October 16 at 3:30 PM through October 18 at 12:00 AM PT, with 15 seats available. Registration is first-come, first-served and seats do sell out.",
+    q: "How much does it cost and what's included?",
+    a: "Each seat is $250. That includes elevated dining, drinks, and a high-impact mastermind session led by industry leaders - plus the intimate group of 28 professionals and meaningful networking that extends beyond the room.",
   },
   {
-    q: "Is this right for someone without photography experience?",
-    a: "Absolutely. The workshop is built for practice owners and team members who aren't photographers - it gives you the exact gear list, camera settings, workflows, and templates to produce professional-quality photography from day one.",
+    q: "Why only 28 seats?",
+    a: "Because of the intimate nature of this experience, seating is extremely limited. A smaller room means every attendee gets real conversation, personal feedback, and a chance to build meaningful connections - not another networking event where you leave with a stack of business cards.",
   },
 ];
 
-export default function MastermindSanDiegoPage() {
+export default function BuzzMastermindPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const toggleFaq = (i: number) => setOpenFaq((prev) => (prev === i ? null : i));
 
@@ -192,8 +223,11 @@ export default function MastermindSanDiegoPage() {
             <div className="flex justify-center">
               <SectionEyebrow light center>
                 <span className="inline-flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-buzz-coral shrink-0" aria-hidden />
-                  Shoot Like a Pro · Oct 16-18, 2026 · Roseville, CA
+                  <Calendar
+                    className="w-4 h-4 text-buzz-coral shrink-0"
+                    aria-hidden
+                  />
+                  San Diego Branding & Marketing Mastermind · May 13
                 </span>
               </SectionEyebrow>
             </div>
@@ -201,24 +235,23 @@ export default function MastermindSanDiegoPage() {
 
           <FadeUp delay={0.08}>
             <h1 className="font-[family-name:var(--font-syne-var)] text-[28px] sm:text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold text-white leading-[1.08] max-w-4xl mx-auto">
-              Stop guessing.
-              <br />
-              Start <TextShimmer as="span">growing.</TextShimmer>
+              The <TextShimmer as="span">Buzz Effect</TextShimmer>
             </h1>
           </FadeUp>
 
           <FadeUp delay={0.16}>
             <p className="mt-6 text-white/50 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-              A hands-on, two-day workshop teaching your team the exact camera,
-              lighting, and content systems to shoot clinical and branded
-              photography in-house - hosted by The Buzz Marketing Co.
+              San Diego is full of incredible businesses. Very few truly stand
+              out. The Buzz Mastermind is a curated experience for ambitious
+              owners, operators, and creators ready to build at a higher level -
+              presented by The Buzz Marketing Co.
             </p>
           </FadeUp>
 
           <FadeUp delay={0.22}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
               <Button href="#reserve" variant="glow" arrow>
-                Reserve Your Seat
+                Ready to Get Your Seat?
               </Button>
               <Link
                 href="#what-we-cover"
@@ -232,7 +265,7 @@ export default function MastermindSanDiegoPage() {
           <FadeUp delay={0.3}>
             <div className="mt-8 inline-flex items-center gap-2 rounded-full bg-buzz-coral/10 border border-buzz-coral/25 px-4 py-2 text-xs font-semibold text-buzz-coral uppercase tracking-wider">
               <Zap className="w-3.5 h-3.5" />
-              Only 15 seats available - bring your whole team
+              Only 28 seats · Top Floor · University Club San Diego
             </div>
           </FadeUp>
         </div>
@@ -245,27 +278,27 @@ export default function MastermindSanDiegoPage() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6 text-center">
             <FadeUp>
               <div className="font-[family-name:var(--font-syne-var)] text-3xl md:text-4xl font-bold text-white">
-                <AnimatedCounter target={2} suffix=" days" />
+                <AnimatedCounter target={28} />
               </div>
-              <p className="mt-2 text-sm text-white/65">Hands-On Workshop</p>
+              <p className="mt-2 text-sm text-white/65">Seats Total</p>
             </FadeUp>
             <FadeUp delay={0.06}>
               <div className="font-[family-name:var(--font-syne-var)] text-3xl md:text-4xl font-bold text-white">
-                <AnimatedCounter target={15} suffix="" />
+                $250
               </div>
-              <p className="mt-2 text-sm text-white/65">Seats Available</p>
+              <p className="mt-2 text-sm text-white/65">Per Guest</p>
             </FadeUp>
             <FadeUp delay={0.12}>
               <div className="font-[family-name:var(--font-syne-var)] text-3xl md:text-4xl font-bold text-white">
-                <AnimatedCounter target={6} suffix="" />
+                <AnimatedCounter target={6} />
               </div>
-              <p className="mt-2 text-sm text-white/65">Core Modules</p>
+              <p className="mt-2 text-sm text-white/65">Core Topics</p>
             </FadeUp>
             <FadeUp delay={0.18}>
               <div className="font-[family-name:var(--font-syne-var)] text-3xl md:text-4xl font-bold text-white">
-                $1,795
+                May 13
               </div>
-              <p className="mt-2 text-sm text-white/65">Per Seat</p>
+              <p className="mt-2 text-sm text-white/65">One Night Only</p>
             </FadeUp>
           </div>
         </div>
@@ -317,7 +350,13 @@ export default function MastermindSanDiegoPage() {
                     <div className="dot-grid absolute inset-0 pointer-events-none" />
                     <AmbientOrbs
                       orbs={[
-                        { color: "coral", size: 250, top: "10%", right: "10%", delay: 0 },
+                        {
+                          color: "coral",
+                          size: 250,
+                          top: "10%",
+                          right: "10%",
+                          delay: 0,
+                        },
                       ]}
                     />
                     <div className="relative z-10">
@@ -325,41 +364,41 @@ export default function MastermindSanDiegoPage() {
                         Seats Are Limited
                       </span>
                       <h3 className="font-[family-name:var(--font-syne-var)] text-2xl md:text-3xl font-bold text-white mb-3 leading-tight">
-                        Small group.
+                        Small room.
                         <br />
-                        Big results.
+                        Big conversation.
                       </h3>
                       <p className="text-white/50 text-sm md:text-base leading-relaxed mb-6">
-                        Every session is intentionally capped so every attendee
-                        gets direct feedback and a custom action plan - not a
-                        generic lecture.
+                        Every session is intentionally capped at 28 so every
+                        guest gets direct feedback, meaningful connection, and a
+                        custom action plan - not another networking event.
                       </p>
 
                       <div className="flex flex-col gap-3 mb-6">
                         <div className="flex items-center justify-between rounded-xl bg-white/[0.05] border border-white/[0.08] px-4 py-3">
                           <div>
                             <p className="text-white text-sm font-semibold">
-                              Per Seat
+                              Per Guest
                             </p>
                             <p className="text-white/45 text-xs">
-                              Oct 16-18, 2026 · Roseville, CA
+                              Dinner + mastermind session
                             </p>
                           </div>
                           <p className="font-[family-name:var(--font-syne-var)] text-xl font-bold text-white">
-                            $1,795
+                            $250
                           </p>
                         </div>
                         <div className="flex items-center justify-between rounded-xl bg-buzz-coral/15 border border-buzz-coral/40 px-4 py-3">
                           <div>
                             <p className="text-white text-sm font-semibold">
-                              Seats Remaining
+                              Seats Available
                             </p>
                             <p className="text-white/60 text-xs">
-                              Only 15 total - first come, first served
+                              Extremely limited - registration closes fast
                             </p>
                           </div>
                           <p className="font-[family-name:var(--font-syne-var)] text-xl font-bold text-buzz-coral">
-                            Limited
+                            28 max
                           </p>
                         </div>
                       </div>
@@ -380,6 +419,96 @@ export default function MastermindSanDiegoPage() {
         </div>
       </section>
 
+      {/* MEET YOUR HOSTS */}
+      <section className="py-28 md:py-36 bg-buzz-dark relative overflow-hidden">
+        <AmbientOrbs
+          orbs={[
+            { color: "coral", size: 400, top: "10%", right: "8%", delay: 0 },
+            { color: "violet", size: 320, bottom: "10%", left: "8%", delay: 2 },
+          ]}
+        />
+        <div className="dot-grid absolute inset-0 pointer-events-none" />
+
+        <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <FadeUp variant="left">
+              <div className="relative aspect-[3/4] w-full max-w-md mx-auto lg:mx-0 rounded-2xl overflow-hidden shadow-luxury">
+                <Image
+                  src="/buzz-team-skyline.jpg"
+                  alt="The Buzz Marketing Co team in front of the San Diego skyline"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 28rem"
+                  priority
+                />
+                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-buzz-dark/80 to-transparent pointer-events-none" />
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-coral" />
+              </div>
+            </FadeUp>
+
+            <div>
+              <FadeUp>
+                <SectionEyebrow light>Meet Your Hosts</SectionEyebrow>
+              </FadeUp>
+              <FadeUp delay={0.06}>
+                <h2 className="font-[family-name:var(--font-syne-var)] text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mt-2 mb-6">
+                  The team behind
+                  <br />
+                  <TextShimmer as="span">The Buzz Effect.</TextShimmer>
+                </h2>
+              </FadeUp>
+              <FadeUp delay={0.12}>
+                <p className="text-white/60 text-base md:text-lg leading-relaxed mb-5">
+                  A women-founded, San Diego boutique agency trusted by 150+
+                  local businesses. We live and breathe branding, content,
+                  social media, and the strategy that turns attention into
+                  revenue.
+                </p>
+                <p className="text-white/60 text-base md:text-lg leading-relaxed mb-8">
+                  At this mastermind, you&apos;re not sitting through a
+                  lecture. You&apos;re sitting at the table with the team
+                  building brands that actually perform - and the community of
+                  owners building alongside you.
+                </p>
+              </FadeUp>
+
+              <FadeUp delay={0.2}>
+                <div className="grid grid-cols-3 gap-4 mb-8">
+                  <div className="rounded-xl bg-white/[0.04] border border-white/[0.08] p-4 text-center">
+                    <p className="font-[family-name:var(--font-syne-var)] text-2xl md:text-3xl font-bold text-white">
+                      150+
+                    </p>
+                    <p className="text-xs text-white/55 mt-1">SD Clients</p>
+                  </div>
+                  <div className="rounded-xl bg-white/[0.04] border border-white/[0.08] p-4 text-center">
+                    <p className="font-[family-name:var(--font-syne-var)] text-2xl md:text-3xl font-bold text-white">
+                      8+
+                    </p>
+                    <p className="text-xs text-white/55 mt-1">Years</p>
+                  </div>
+                  <div className="rounded-xl bg-white/[0.04] border border-white/[0.08] p-4 text-center">
+                    <p className="font-[family-name:var(--font-syne-var)] text-2xl md:text-3xl font-bold text-white">
+                      5.0
+                    </p>
+                    <p className="text-xs text-white/55 mt-1">Google Rating</p>
+                  </div>
+                </div>
+              </FadeUp>
+
+              <FadeUp delay={0.26}>
+                <Link
+                  href="/about"
+                  className="inline-flex items-center gap-2 text-buzz-coral font-semibold text-sm hover:underline"
+                >
+                  More about The Buzz Marketing Co
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </FadeUp>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* WHAT WE COVER */}
       <section
         id="what-we-cover"
@@ -390,10 +519,16 @@ export default function MastermindSanDiegoPage() {
             <SectionEyebrow center>What We Cover</SectionEyebrow>
             <FadeUp>
               <h2 className="font-[family-name:var(--font-syne-var)] text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
-                Six modules.
+                Practical strategy.
                 <br />
                 <TextShimmer as="span">Zero fluff.</TextShimmer>
               </h2>
+            </FadeUp>
+            <FadeUp delay={0.06}>
+              <p className="mt-5 text-buzz-slate text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+                Each session is focused on strategies you can immediately apply
+                to your business. No theory. Just what&apos;s working right now.
+              </p>
             </FadeUp>
           </div>
 
@@ -416,6 +551,14 @@ export default function MastermindSanDiegoPage() {
               </FadeUp>
             ))}
           </div>
+
+          <FadeUp delay={0.3}>
+            <p className="text-center mt-12 text-buzz-slate text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
+              You&apos;ll leave with clarity, direction, and a clear
+              understanding of what to do next - along with meaningful
+              connections that extend beyond the room.
+            </p>
+          </FadeUp>
         </div>
       </section>
 
@@ -444,15 +587,14 @@ export default function MastermindSanDiegoPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
             <FadeUp>
               <div className="space-y-5 text-white/55 leading-relaxed">
-                <p>This isn&apos;t just for practice owners.</p>
+                <p>This isn&apos;t just for business owners.</p>
                 <p className="text-white font-semibold text-lg">
-                  Your content is only as strong as the team capturing it.
+                  Your marketing is only as strong as the team executing it.
                 </p>
                 <p>
-                  When the whole team attends together, the photography
-                  workflow actually gets implemented. No more going back and
-                  explaining the settings. No more inconsistent shots. No more
-                  guessing.
+                  When the whole team attends together, the strategy actually
+                  gets implemented. No more going back and explaining
+                  everything. No more miscommunication. No more guessing.
                 </p>
                 <p className="text-white/80">Bring your:</p>
 
@@ -473,75 +615,97 @@ export default function MastermindSanDiegoPage() {
                 <p className="text-white font-semibold pt-2">
                   So everyone leaves aligned, trained, and ready to execute.
                 </p>
+
+                <p>
+                  Learn the exact systems, tools, and strategies you and your
+                  team need to grow across social, Google, and AI search.
+                </p>
               </div>
             </FadeUp>
 
             <FadeUp delay={0.08}>
-              <div className="space-y-6">
-                <GlowCard variant="dark">
-                  <div className="bg-gradient-coral rounded-2xl p-6 md:p-9">
-                    <h3 className="font-[family-name:var(--font-syne-var)] text-xl md:text-2xl font-bold text-white mb-5 leading-tight">
-                      What your team walks away with:
-                    </h3>
-                    <ul className="space-y-3">
-                      {TEAM_OUTCOMES.map((item) => (
-                        <li
-                          key={item}
-                          className="flex items-start gap-3 text-white/95 text-sm md:text-base leading-snug"
-                        >
-                          <Check
-                            className="w-5 h-5 shrink-0 mt-0.5"
-                            strokeWidth={2.5}
-                          />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </GlowCard>
-
-                <div className="rounded-2xl bg-white/[0.04] border border-white/[0.1] p-6 md:p-8">
-                  <h4 className="font-[family-name:var(--font-syne-var)] text-lg font-bold text-white mb-5">
-                    Team registration
-                  </h4>
-                  <div className="space-y-3 mb-5">
-                    <div className="flex items-center justify-between rounded-xl bg-white/[0.05] px-4 py-3">
-                      <div>
-                        <p className="text-white/85 text-sm font-medium">
-                          Per seat
-                        </p>
-                        <p className="text-white/45 text-xs">
-                          Two-day hands-on workshop
-                        </p>
-                      </div>
-                      <p className="font-[family-name:var(--font-syne-var)] text-lg font-bold text-white">
-                        $1,795
-                      </p>
-                    </div>
-                    <div className="flex items-center justify-between rounded-xl bg-buzz-coral/15 border border-buzz-coral/30 px-4 py-3">
-                      <div>
-                        <p className="text-white text-sm font-semibold">
-                          Team of 3+
-                        </p>
-                        <p className="text-white/55 text-xs">
-                          Call for group arrangements
-                        </p>
-                      </div>
-                      <p className="font-[family-name:var(--font-syne-var)] text-lg font-bold text-buzz-coral">
-                        Contact us
-                      </p>
-                    </div>
-                  </div>
-                  <Link
-                    href={`tel:${BUZZ_PHONE_TEL}`}
-                    className="block text-center text-sm text-buzz-coral font-semibold hover:underline"
-                  >
-                    Call {BUZZ_PHONE} to book team seats
-                  </Link>
+              <GlowCard variant="dark">
+                <div className="bg-gradient-coral rounded-2xl p-6 md:p-9">
+                  <h3 className="font-[family-name:var(--font-syne-var)] text-xl md:text-2xl font-bold text-white mb-5 leading-tight">
+                    What your team walks away with:
+                  </h3>
+                  <ul className="space-y-3">
+                    {TEAM_OUTCOMES.map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-start gap-3 text-white/95 text-sm md:text-base leading-snug"
+                      >
+                        <Check
+                          className="w-5 h-5 shrink-0 mt-0.5"
+                          strokeWidth={2.5}
+                        />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </div>
+              </GlowCard>
             </FadeUp>
           </div>
+        </div>
+      </section>
+
+      {/* THE EXPERIENCE */}
+      <section className="py-28 md:py-36 bg-surface-light border-y border-buzz-border">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-8">
+          <div className="text-center mb-14">
+            <SectionEyebrow center>The Experience</SectionEyebrow>
+            <FadeUp>
+              <h2 className="font-[family-name:var(--font-syne-var)] text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
+                Look like a <TextShimmer as="span">social media pro.</TextShimmer>
+              </h2>
+            </FadeUp>
+            <FadeUp delay={0.06}>
+              <p className="mt-5 text-buzz-slate text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+                An unforgettable evening of strategy, inspiration, and
+                connection - all while enjoying the San Diego skyline at
+                sunset.
+              </p>
+            </FadeUp>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {EXPERIENCE_INCLUDES.map(
+              ({ icon: Icon, label, value, sub }, i) => (
+                <FadeUp key={label} delay={i * 0.06}>
+                  <GlowCard variant="light" className="h-full">
+                    <div className="p-6 md:p-7 h-full flex flex-col">
+                      <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-buzz-coral/10 text-buzz-coral mb-4">
+                        <Icon className="w-5 h-5" strokeWidth={2.2} />
+                      </span>
+                      <p className="text-[11px] font-bold text-buzz-coral uppercase tracking-[0.08em] mb-1">
+                        {label}
+                      </p>
+                      <p className="text-foreground font-semibold text-base leading-snug mb-2">
+                        {value}
+                      </p>
+                      <p className="text-buzz-slate text-sm leading-relaxed">
+                        {sub}
+                      </p>
+                    </div>
+                  </GlowCard>
+                </FadeUp>
+              ),
+            )}
+          </div>
+
+          <FadeUp delay={0.3}>
+            <div className="mt-12 text-center">
+              <Button href="#reserve" variant="glow" arrow>
+                Request an Invitation
+              </Button>
+              <p className="mt-6 text-sm text-buzz-slate max-w-xl mx-auto leading-relaxed">
+                Because of the intimate nature of this experience, seating is
+                extremely limited. Once the 28 seats are filled, registration
+                will close.
+              </p>
+            </div>
+          </FadeUp>
         </div>
       </section>
 
@@ -552,9 +716,9 @@ export default function MastermindSanDiegoPage() {
             <SectionEyebrow center>Event Details</SectionEyebrow>
             <FadeUp>
               <h2 className="font-[family-name:var(--font-syne-var)] text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
-                Your next session
+                Reserve your
                 <br />
-                is <TextShimmer as="span">waiting.</TextShimmer>
+                <TextShimmer as="span">seat at the table.</TextShimmer>
               </h2>
             </FadeUp>
           </div>
@@ -585,8 +749,9 @@ export default function MastermindSanDiegoPage() {
                   <div className="mt-8 flex items-start gap-3 rounded-xl bg-buzz-coral/10 border border-buzz-coral/25 p-4">
                     <Lightbulb className="w-5 h-5 text-buzz-coral shrink-0 mt-0.5" />
                     <p className="text-sm text-foreground/85 font-medium leading-relaxed">
-                      Perfect for teams looking to level up together and
-                      implement immediately.
+                      What gets us buzzing? Your growth is our purpose. Helping
+                      you build your dream is how we live - and we love every
+                      second of it.
                     </p>
                   </div>
                 </div>
@@ -633,8 +798,8 @@ export default function MastermindSanDiegoPage() {
             </SectionEyebrow>
             <FadeUp>
               <h2 className="font-[family-name:var(--font-syne-var)] text-3xl md:text-4xl font-bold text-white">
-                Got questions?{" "}
-                <TextShimmer as="span">We&apos;ve got answers.</TextShimmer>
+                What questions{" "}
+                <TextShimmer as="span">do you have?</TextShimmer>
               </h2>
             </FadeUp>
           </div>
@@ -759,15 +924,16 @@ export default function MastermindSanDiegoPage() {
         <div className="relative z-10 max-w-[900px] mx-auto px-6 md:px-8 text-center">
           <FadeUp>
             <h2 className="font-[family-name:var(--font-syne-var)] text-3xl sm:text-4xl md:text-5xl lg:text-[56px] font-extrabold text-white leading-tight mb-6">
-              Your team deserves
-              <br />a <TextShimmer as="span">real system.</TextShimmer>
+              One evening.
+              <br />
+              <TextShimmer as="span">Real results.</TextShimmer>
             </h2>
           </FadeUp>
           <FadeUp delay={0.1}>
             <p className="text-white/50 text-base md:text-lg max-w-xl mx-auto mb-10 leading-relaxed">
-              Stop piecing it together from YouTube. Come to Roseville Oct
-              16-18 and leave with a photography system your whole team can
-              execute - starting Monday.
+              Join us May 13 at the Top Floor of the University Club for an
+              unforgettable evening of strategy, inspiration, and connection -
+              San Diego skyline at sunset included.
             </p>
           </FadeUp>
           <FadeUp delay={0.2}>
@@ -776,7 +942,7 @@ export default function MastermindSanDiegoPage() {
                 href="#reserve"
                 className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-coral text-white text-base font-semibold rounded-full shadow-luxury cursor-pointer transition-all hover:shadow-glow-coral hover:scale-[1.03] active:scale-[0.97]"
               >
-                Reserve Your Seat - $1,795
+                Reserve Your Seat - $250
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
               <Link

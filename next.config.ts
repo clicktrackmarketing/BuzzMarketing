@@ -14,9 +14,15 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Old mastermind paths → new /buzz-mastermind-group
+      {
+        source: "/social-media-mastermind",
+        destination: "/buzz-mastermind-group",
+        permanent: true,
+      },
       {
         source: "/social-media-mastermind-san-diego",
-        destination: "/social-media-mastermind",
+        destination: "/buzz-mastermind-group",
         permanent: true,
       },
     ];

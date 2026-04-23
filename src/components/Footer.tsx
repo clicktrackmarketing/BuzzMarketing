@@ -17,7 +17,8 @@ const SERVICE_LINKS = [
 const COMPANY_LINKS = [
   { href: "/about", label: "About Us" },
   { href: "/events", label: "Events" },
-  { href: "/social-media-mastermind", label: "Marketing Mastermind" },
+  { href: "/buzz-mastermind-group", label: "Buzz Mastermind Group" },
+  { href: "/dental-photography", label: "Dental Photography Course" },
   { href: "/contact", label: "Contact" },
 ];
 

@@ -1,19 +1,20 @@
 /**
- * POST /api/mastermind-register
+ * POST /api/dental-photography-register
  *
- * Mastermind / Shoot Like a Pro registration form.
- * Writes contact directly to GHL via Private Integration Token, applies
- * event-specific tags, then the client redirects to the Square checkout.
+ * "Shoot Like a Pro" dental photography intensive registration form.
+ * Writes contact directly to GHL via Private Integration Token,
+ * applies dental-photography-specific tags, then the client redirects
+ * to the Square checkout for payment.
  */
 
 import { NextResponse } from "next/server";
-import { upsertContact } from "@/lib/ghl-contact-upsert";
+import { pickAttribution, upsertContact } from "@/lib/ghl-contact-upsert";
 
 const BASELINE_TAGS = [
   "website contact form submitted",
-  "mastermind registration",
+  "dental photography registration",
 ];
-const CONTACT_SOURCE = "thebuzzmarketingco.com/buzz-mastermind-group";
+const CONTACT_SOURCE = "thebuzzmarketingco.com/dental-photography";
 
 function log(
   level: "info" | "warn" | "error",
@@ -22,7 +23,7 @@ function log(
 ) {
   const entry = {
     ts: new Date().toISOString(),
-    route: "POST /api/mastermind-register",
+    route: "POST /api/dental-photography-register",
     level,
     message,
     ...data,
@@ -43,26 +44,37 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Server misconfigured" }, { status: 500 });
   }
 
-  let payload: Record<string, unknown>;
+  let body: unknown;
   try {
-    payload = await req.json();
+    body = await req.json();
   } catch {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
+  const rawBody = (body as Record<string, unknown>) || {};
+
   const hasName =
-    (payload.first_name as string)?.toString().trim() ||
-    (payload.full_name as string)?.toString().trim();
+    (rawBody.first_name as string)?.toString().trim() ||
+    (rawBody.full_name as string)?.toString().trim();
   if (
     !hasName ||
-    !(payload.email as string)?.toString().trim() ||
-    !(payload.phone as string)?.toString().trim()
+    !(rawBody.email as string)?.toString().trim() ||
+    !(rawBody.phone as string)?.toString().trim()
   ) {
     return NextResponse.json(
       { error: "Missing name, email, or phone" },
       { status: 400 },
     );
   }
+
+  // Strip out any keys we don't want forwarded to GHL, then merge attribution.
+  const payload = {
+    first_name: rawBody.first_name,
+    last_name: rawBody.last_name,
+    email: rawBody.email,
+    phone: rawBody.phone,
+    ...pickAttribution(rawBody),
+  };
 
   try {
     const result = await upsertContact({
@@ -95,9 +107,6 @@ export async function POST(req: Request) {
       requestId,
       error: err instanceof Error ? err.message : String(err),
     });
-    return NextResponse.json(
-      { error: "Internal error" },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: "Internal error" }, { status: 500 });
   }
 }

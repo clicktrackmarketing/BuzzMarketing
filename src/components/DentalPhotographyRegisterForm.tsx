@@ -6,9 +6,16 @@ import { mastermindFormSchema } from "@/lib/mastermind-form-schema";
 import { getAttributionData } from "@/lib/attribution";
 import { normalizePhoneE164, postWithRetry } from "@/lib/form-utils";
 
+/**
+ * Square checkout URL for the Shoot Like a Pro dental photography
+ * intensive. Update here if the Square product link changes.
+ */
+const SQUARE_CHECKOUT_URL =
+  "https://checkout.square.site/merchant/MLYBDJ7NWR0F5/checkout/W6TQ2UA3RFMMBHGHQBBBUBBJ";
+
 type Status = "idle" | "submitting" | "success" | "error";
 
-export function MastermindRegisterForm() {
+export function DentalPhotographyRegisterForm() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -33,7 +40,7 @@ export function MastermindRegisterForm() {
       return;
     }
 
-    // Honeypot — silently drop bot submissions
+    // Honeypot — silently accept + drop bot submissions
     if (honeypot.trim().length > 0) {
       setStatus("success");
       return;
@@ -41,9 +48,6 @@ export function MastermindRegisterForm() {
 
     setStatus("submitting");
 
-    // Build PIT-compatible payload: standard fields use snake_case to match
-    // the /api/mastermind-register route + GHL fieldKeys. Attribution data
-    // is spread in — keys already match GHL fieldKeys 1:1.
     const attribution = getAttributionData();
     const payload = {
       first_name: parsed.data.firstName,
@@ -56,7 +60,7 @@ export function MastermindRegisterForm() {
     };
 
     try {
-      const res = await postWithRetry("/api/mastermind-register", payload);
+      const res = await postWithRetry("/api/dental-photography-register", payload);
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
@@ -69,6 +73,10 @@ export function MastermindRegisterForm() {
       }
 
       setStatus("success");
+      // Let the success state render briefly, then hop to Square checkout.
+      setTimeout(() => {
+        window.location.href = SQUARE_CHECKOUT_URL;
+      }, 900);
     } catch {
       setStatus("error");
       setMessage(
@@ -88,12 +96,19 @@ export function MastermindRegisterForm() {
             You&apos;re in.
           </h3>
           <p className="text-white/55 text-sm md:text-base leading-relaxed mb-6">
-            Your seat request is in. The Buzz team will reach out shortly with
-            confirmation, payment details, and everything you need to know
-            about May 13 at the University Club.
+            Redirecting you to secure checkout to complete your seat
+            reservation...
           </p>
-          <p className="text-white/40 text-xs">
-            Keep an eye on your inbox (and check spam just in case).
+          <Loader2 className="w-5 h-5 text-buzz-coral animate-spin mx-auto" />
+          <p className="text-white/40 text-xs mt-4">
+            Didn&apos;t redirect?{" "}
+            <a
+              href={SQUARE_CHECKOUT_URL}
+              className="text-buzz-coral hover:underline"
+            >
+              Click here to continue to checkout
+            </a>
+            .
           </p>
         </div>
       </div>
@@ -112,21 +127,21 @@ export function MastermindRegisterForm() {
           Reserve Your Seat
         </p>
         <h3 className="font-[family-name:var(--font-syne-var)] text-2xl md:text-3xl font-bold text-white mb-2 leading-tight">
-          Secure your spot.
+          Lock in your spot.
         </h3>
         <p className="text-white/50 text-sm mb-6">
-          <span className="text-white font-semibold">$250 / guest</span> · May
-          13, 2026 · 28 seats only.
+          <span className="text-white font-semibold">$1,795 general admission</span>{" "}
+          · Oct 16-17, 2026 · Roseville, CA · Limited seats.
         </p>
 
         <form onSubmit={onSubmit} noValidate className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label htmlFor="mm-first" className={labelCls}>
+              <label htmlFor="dp-first" className={labelCls}>
                 First name
               </label>
               <input
-                id="mm-first"
+                id="dp-first"
                 type="text"
                 autoComplete="given-name"
                 value={firstName}
@@ -137,11 +152,11 @@ export function MastermindRegisterForm() {
               />
             </div>
             <div>
-              <label htmlFor="mm-last" className={labelCls}>
+              <label htmlFor="dp-last" className={labelCls}>
                 Last name
               </label>
               <input
-                id="mm-last"
+                id="dp-last"
                 type="text"
                 autoComplete="family-name"
                 value={lastName}
@@ -154,27 +169,27 @@ export function MastermindRegisterForm() {
           </div>
 
           <div>
-            <label htmlFor="mm-email" className={labelCls}>
+            <label htmlFor="dp-email" className={labelCls}>
               Email
             </label>
             <input
-              id="mm-email"
+              id="dp-email"
               type="email"
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
               className={inputCls}
-              placeholder="jane@company.com"
+              placeholder="jane@practice.com"
             />
           </div>
 
           <div>
-            <label htmlFor="mm-phone" className={labelCls}>
+            <label htmlFor="dp-phone" className={labelCls}>
               Phone
             </label>
             <input
-              id="mm-phone"
+              id="dp-phone"
               type="tel"
               autoComplete="tel"
               value={phone}
@@ -196,10 +211,10 @@ export function MastermindRegisterForm() {
               overflow: "hidden",
             }}
           >
-            <label htmlFor="website_url_confirm">
+            <label htmlFor="website_url_confirm_dp">
               Leave this field empty
               <input
-                id="website_url_confirm"
+                id="website_url_confirm_dp"
                 type="text"
                 tabIndex={-1}
                 autoComplete="off"
@@ -230,14 +245,15 @@ export function MastermindRegisterForm() {
               </>
             ) : (
               <>
-                Request Your Seat
+                Continue to Checkout
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </>
             )}
           </button>
 
           <p className="text-center text-xs text-white/40 leading-relaxed">
-            We&apos;ll only use your info to confirm your seat. No spam.
+            We&apos;ll send confirmation, prep details, and a camera-setup
+            review option after payment.
           </p>
         </form>
       </div>
