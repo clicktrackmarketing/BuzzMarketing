@@ -180,7 +180,7 @@ export default function RootLayout({
                   ratingValue: "5.0",
                   reviewCount: "19",
                 },
-                founder: { "@id": "https://thebuzzmarketingco.com/#brit-dhillon" },
+                founder: { "@id": "https://thebuzzmarketingco.com/#brittany-jenkins" },
                 areaServed: [
                   { "@type": "City", name: "San Diego" },
                   { "@type": "City", name: "La Jolla" },
@@ -199,8 +199,8 @@ export default function RootLayout({
               },
               {
                 "@type": "Person",
-                "@id": "https://thebuzzmarketingco.com/#brit-dhillon",
-                name: "Brit Dhillon",
+                "@id": "https://thebuzzmarketingco.com/#brittany-jenkins",
+                name: "Brittany Jenkins",
                 jobTitle: "Founder & CEO",
                 worksFor: { "@id": "https://thebuzzmarketingco.com/#organization" },
                 knowsAbout: [
@@ -209,7 +209,7 @@ export default function RootLayout({
                   "Content Direction",
                   "Event Marketing",
                 ],
-                image: "https://thebuzzmarketingco.com/founder.jpg",
+                image: "https://thebuzzmarketingco.com/britt-jenkins.jpg",
                 url: "https://thebuzzmarketingco.com/about",
               },
               {
