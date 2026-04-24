@@ -930,7 +930,7 @@ export default function FreeAnalysisPage() {
                 <div className="relative aspect-[3/4] w-full">
                   <Image
                     src="/founder.jpg"
-                    alt="Brit Dhillon, founder of The Buzz Marketing Co"
+                    alt="Brittany Jenkins, founder of The Buzz Marketing Co"
                     fill
                     className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-[1.03]"
                     sizes="(max-width: 1024px) 100vw, 50vw"
@@ -951,7 +951,7 @@ export default function FreeAnalysisPage() {
               </FadeUp>
               <FadeUp delay={0.1}>
                 <p className="text-buzz-slate leading-relaxed mb-4 text-base md:text-lg">
-                  Brit Dhillon built The Buzz Marketing Co on a simple belief:
+                  Brittany Jenkins built The Buzz Marketing Co on a simple belief:
                   San Diego businesses deserve marketing that actually moves the
                   needle. Over 8 years and 150+ clients later, that belief has
                   become a track record.

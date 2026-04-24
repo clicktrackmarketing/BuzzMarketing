@@ -76,7 +76,7 @@ export default async function BlogPostPage({ params }: Props) {
           datePublished: record.publishedDate,
           dateModified: record.publishedDate,
           mainEntityOfPage: { "@type": "WebPage", "@id": postUrl },
-          author: { "@id": "https://thebuzzmarketingco.com/#brit-dhillon" },
+          author: { "@id": "https://thebuzzmarketingco.com/#brittany-jenkins" },
           publisher: { "@id": "https://thebuzzmarketingco.com/#organization" },
         }}
       />

@@ -384,7 +384,7 @@ export default function Home() {
                 <div className="relative aspect-[3/4] w-full">
                   <Image
                     src="/founder.jpg"
-                    alt="Brit Dhillon, founder of The Buzz Marketing Co"
+                    alt="Brittany Jenkins, founder of The Buzz Marketing Co"
                     fill
                     className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-[1.03]"
                     sizes="(max-width: 1024px) 100vw, 50vw"

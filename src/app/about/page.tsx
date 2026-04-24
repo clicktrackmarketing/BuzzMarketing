@@ -208,7 +208,7 @@ export default function AboutPage() {
                 <div className="relative aspect-[3/4] w-full">
                   <Image
                     src="/founder.jpg"
-                    alt="Brit Dhillon, founder of The Buzz Marketing Co"
+                    alt="Brittany Jenkins, founder of The Buzz Marketing Co"
                     fill
                     className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 cursor-pointer group-hover:scale-[1.03]"
                     sizes="(max-width: 1024px) 100vw, 28rem"
@@ -256,11 +256,6 @@ export default function AboutPage() {
                 <p className="text-buzz-slate leading-relaxed mb-10 text-base md:text-lg">
                   Every partnership comes with full intention. If I take it on,
                   it&apos;s because I know we can elevate it.
-                </p>
-              </FadeUp>
-              <FadeUp delay={0.26}>
-                <p className="text-buzz-slate text-sm mb-10 font-medium">
-                  - Brit Dhillon, Founder
                 </p>
               </FadeUp>
               <FadeUp delay={0.3}>
